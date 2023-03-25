@@ -1,0 +1,36 @@
+{
+  "name": "concat-ts",
+  "private": false,
+  "version": "0.0.8",
+  "description": "Simple CLI tool to concats exported typescript files.",
+  "keywords": [
+    "typescript",
+    "cli"
+  ],
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "bin": "./dist/cli.js",
+  "files": [
+    "dist/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skulptur/concat-ts.git"
+  },
+  "scripts": {
+    "dev": "ts-node ./src/cli.ts",
+    "clean": "rimraf ./dist/ ./exec/",
+    "build": "npm run clean && tsc",
+    "bundle": "npm run build && pkg . --out-dir ./exec/"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.5",
+    "pkg": "^5.8.1",
+    "rimraf": "^2.6.3",
+    "ts-node": "^10.9.1"
+  },
+  "dependencies": {
+    "commander": "^10.0.0",
+    "typescript": "^5.0.2"
+  }
+}
