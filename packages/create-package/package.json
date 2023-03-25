@@ -26,6 +26,7 @@
     "test:cli": "rm -rf ./test-target && ts-node ./src/cli.ts --template-dir ./templates/typescript-cli --target-dir ./test-target/cli --library-name my-new-cli"
   },
   "devDependencies": {
+    "@types/inquirer": "^9.0.3",
     "@types/node": "^18.15.5",
     "pkg": "^5.8.1",
     "rimraf": "^2.6.3",
@@ -33,6 +34,7 @@
   },
   "dependencies": {
     "commander": "^10.0.0",
+    "enquirer": "^2.3.6",
     "typescript": "^5.0.2"
   }
 }
