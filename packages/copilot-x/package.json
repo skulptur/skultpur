@@ -1,8 +1,8 @@
 {
   "name": "copilot-x",
-  "private": true,
-  "version": "0.0.0",
-  "description": "",
+  "private": false,
+  "version": "0.0.1",
+  "description": "A simple CLI tool where you are the copilot, because it runs on autopilot.",
   "keywords": [
     "typescript",
     "cli"
