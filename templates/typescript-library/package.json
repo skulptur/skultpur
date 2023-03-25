@@ -1,8 +1,17 @@
 {
   "name": "typescript-library",
+  "description": "",
   "private": true,
   "version": "0.0.0",
+  "author": "skulptur",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skulptur/skultpur"
+  },
   "type": "module",
+  "keywords": ["some", "keywords", "to", "describe", "the", "package"],
+  
   "files": [
     "dist"
   ],
@@ -14,12 +23,14 @@
       "require": "./dist/typescript-library.umd.cjs"
     }
   },
+  
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest"
   },
+  
   "devDependencies": {
     "typescript": "^4.9.3",
     "vite": "^4.2.0",
