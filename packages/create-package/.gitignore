@@ -1,6 +1,7 @@
 # Ignore generated directories
 dist/
 exec/
+test-target/
 
 # Logs
 logs

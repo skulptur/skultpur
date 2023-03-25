@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { program } from "commander";
+import { copyTemplateAndInstall } from "./index";
 
 // Parse command line arguments
 program
