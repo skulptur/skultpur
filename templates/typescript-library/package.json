@@ -1,0 +1,32 @@
+{
+  "name": "typescript-library",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/typescript-library.umd.cjs",
+  "module": "./dist/typescript-library.js",
+  "exports": {
+    ".": {
+      "import": "./dist/typescript-library.js",
+      "require": "./dist/typescript-library.umd.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.3",
+    "vite": "^4.2.0",
+    "vitest": "^0.29.7"
+  },
+  "dependencies": {
+    "@types/node": "^18.15.9",
+    "vite-plugin-dts": "^2.1.0"
+  }
+}
