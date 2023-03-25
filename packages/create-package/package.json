@@ -21,7 +21,8 @@
     "dev": "ts-node ./src/cli.ts",
     "clean": "rimraf ./dist/ ./exec/",
     "build": "npm run clean && tsc",
-    "bundle": "npm run build && pkg . --out-dir ./exec/"
+    "bundle": "npm run build && pkg . --out-dir ./exec/",
+    "test-library": "ts-node ./src/cli.ts --template-dir ./templates/typescript-library --target-dir ./test-target --library-name my-new-library"
   },
   "devDependencies": {
     "@types/node": "^18.15.5",
