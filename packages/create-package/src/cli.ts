@@ -39,22 +39,21 @@ async function promptUser() {
       name: "libraryName",
       message: "Enter the new library name:",
     });
-    if (!options.targetDir) {
-      questions.push({
-        type: "input",
-        name: "targetDir",
-        message: "Enter the target directory path:",
-        initial: path.join(
-          process.cwd(),
-          "../",
-          // @ts-ignore
-          options.name || answers.libraryName
-        ),
-      });
-    }
+    // if (!options.targetDir) {
+    //   questions.push({
+    //     type: "input",
+    //     name: "targetDir",
+    //     message: "Enter the target directory path:",
+    //     initial: path.join(process.cwd(), "../", options.name || answers.libraryName),
+    //   });
+    // }
   }
   const answers = await enquirer.prompt(questions);
   const mergedOptions = { ...options, ...answers };
+  mergedOptions.targetDir =
+    mergedOptions.targetDir ||
+    path.join(process.cwd(), "../", mergedOptions.libraryName);
+
   return mergedOptions;
 }
 
