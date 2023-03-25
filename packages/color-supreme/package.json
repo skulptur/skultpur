@@ -1,0 +1,75 @@
+{
+  "name": "color-supreme",
+  "version": "0.1.0",
+  "author": "skulptur",
+  "license": "MIT",
+  "module": "dist/color-supreme.esm.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skulptur/color-supreme"
+  },
+  "keywords": [
+    "functional"
+  ],
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why",
+    "concat": "concat-ts -i ./src/index.ts -o ./src/output.ts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "jsxSingleQuote": true,
+    "arrowParens": "always"
+  },
+  "size-limit": [
+    {
+      "path": "dist/color-supreme.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/color-supreme.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^7.0.8",
+    "@types/sharp": "^0.31.1",
+    "@types/skmeans": "^0.11.4",
+    "concat-ts": "^0.0.8",
+    "husky": "^7.0.4",
+    "sharp": "^0.31.3",
+    "size-limit": "^7.0.8",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.4.0",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "skmeans": "^0.11.3"
+  }
+}
