@@ -1,6 +1,6 @@
 {
   "name": "lightcast",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "author": "skulptur",
   "license": "MIT",
   "module": "dist/library-name-fns.esm.js",
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/skulptur/lightcast.git"
+    "url": "https://github.com/skulptur/skultpur/tree/main/packages/lightcast"
   },
   "scripts": {
     "start": "tsdx watch",

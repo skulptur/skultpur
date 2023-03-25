@@ -1,5 +1,3 @@
-const emptyArray: Array<any> = []
-
 export type SubscribeFn<Payload> = (callback: (payload: Payload) => void) => () => void
 export type DispatchFn<Payload> = (payload: Payload) => void
 export type DisposeFn = () => void
@@ -11,7 +9,7 @@ export type PubSub<Payload> = {
 }
 
 export const createPubSub = <Payload>(): PubSub<Payload> => {
-  let subscriptions: Array<(payload: Payload) => void> = emptyArray
+  let subscriptions: Array<(payload: Payload) => void> = []
 
   const subscribe = (callback: (payload: Payload) => void) => {
     subscriptions.push(callback)
@@ -32,7 +30,7 @@ export const createPubSub = <Payload>(): PubSub<Payload> => {
   }
 
   const dispose = () => {
-    subscriptions = emptyArray
+    subscriptions = []
   }
 
   return {
