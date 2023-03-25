@@ -1,5 +1,5 @@
 {
-  "name": "typescript-library",
+  "name": "<replace-with-package-name>",
   "description": "",
   "private": true,
   "version": "0.0.0",
@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/skulptur/skultpur"
+    "url": "https://github.com/skulptur/skultpur.git"
   },
   "type": "module",
   "keywords": ["some", "keywords", "to", "describe", "the", "package"],
@@ -15,15 +15,14 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/typescript-library.umd.cjs",
-  "module": "./dist/typescript-library.js",
+  "main": "./dist/<replace-with-package-name>.umd.cjs",
+  "module": "./dist/<replace-with-package-name>.js",
   "exports": {
     ".": {
-      "import": "./dist/typescript-library.js",
-      "require": "./dist/typescript-library.umd.cjs"
+      "import": "./dist/<replace-with-package-name>.js",
+      "require": "./dist/<replace-with-package-name>.umd.cjs"
     }
   },
-  
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

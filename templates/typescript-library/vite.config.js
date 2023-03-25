@@ -10,8 +10,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'typescript-library',
-      fileName: 'typescript-library',
+      name: '<replace-with-package-name>',
+      fileName: '<replace-with-package-name>',
     },
   },
   test: {
