@@ -30,11 +30,8 @@ export const loadImage = async (imagePath: string): Promise<BufferWithInfo> => {
     .raw()
     .toBuffer({ resolveWithObject: true })
 
-  const meta = await sharp(imagePath).metadata()
-  // console.log(imagePath, meta)
   return {
     buffer: data,
-    channels: info.channels,
     width: info.width,
     height: info.height,
   }
