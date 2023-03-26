@@ -33,8 +33,9 @@ export function getDominantColors(
 
   const _numberOfColors = Math.min(pixels.length, numberOfColors)
   const result = kmeans(pixels, _numberOfColors, {
-    seed: options.seed || 1,
-    initialization: options.initialization || 'kmeans++',
+    seed: 1,
+    initialization: 'kmeans++',
+    ...options,
   })
 
   // Sort the centroids by cluster size in descending order (most dominant to least dominant)
