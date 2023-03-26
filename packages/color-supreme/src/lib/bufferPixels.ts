@@ -1,4 +1,3 @@
-import { getImageChannelCount } from './getImageChannelCount'
 import { BufferWithInfo, PixelDataWithInfo, RGBColor } from './types'
 
 /**
