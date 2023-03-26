@@ -1,4 +1,4 @@
-# <replace-with-package-name>
+# pixel-paradise
 
 ## Description
 
@@ -11,9 +11,9 @@ TODO
 ## Installation
 
 ```bash
-npm install --save <replace-with-package-name>
+npm install --save pixel-paradise
 # or
-yarn add <replace-with-package-name>
+yarn add pixel-paradise
 ```
 
 ## Usage

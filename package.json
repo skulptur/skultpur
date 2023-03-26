@@ -5,7 +5,8 @@
     "visualize": "npx nx graph",
     "build": "npx lerna run build",
     "test": "npx lerna run test",
-    "publish": "npx lerna publish --no-private"
+    "publish": "npx lerna publish --no-private",
+    "create-package": "lerna exec --scope create-package -- yarn dev"
   },
   "workspaces": [
     "packages/*"

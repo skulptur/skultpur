@@ -1,0 +1,42 @@
+{
+  "name": "pixel-paradise",
+  "description": "",
+  "private": true,
+  "version": "0.0.0",
+  "author": "skulptur",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skulptur/skultpur.git"
+  },
+  "type": "module",
+  "keywords": ["some", "keywords", "to", "describe", "the", "package"],
+  
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/pixel-paradise.umd.cjs",
+  "module": "./dist/pixel-paradise.js",
+  "exports": {
+    ".": {
+      "import": "./dist/pixel-paradise.js",
+      "require": "./dist/pixel-paradise.umd.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  
+  "devDependencies": {
+    "typescript": "^4.9.3",
+    "vite": "^4.2.0",
+    "vitest": "^0.29.7"
+  },
+  "dependencies": {
+    "@types/node": "^18.15.9",
+    "vite-plugin-dts": "^2.1.0"
+  }
+}
