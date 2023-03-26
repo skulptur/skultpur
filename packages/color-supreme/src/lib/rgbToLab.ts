@@ -1,4 +1,4 @@
-import { LabColor, RGBColor } from './types'
+import { LabColor, RGBColor } from 'pixel-paradise'
 
 export function rgbToLab(rgb: RGBColor): LabColor {
   var r = rgb[0] / 255,

@@ -1,5 +1,5 @@
 import { rgbToHex } from './rgbToHex'
-import { RGBColor } from './types'
+import { RGBColor } from 'pixel-paradise'
 
 describe('rgbToHex', () => {
   test('converts RGB color to hex string', () => {

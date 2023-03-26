@@ -1,4 +1,4 @@
-import type { RGBColor } from './types'
+import type { RGBColor } from 'pixel-paradise'
 
 export function rgbToHex([r, g, b]: RGBColor): string {
   const hexR = r.toString(16).padStart(2, '0')

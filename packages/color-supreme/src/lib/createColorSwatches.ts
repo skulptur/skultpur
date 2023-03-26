@@ -1,4 +1,4 @@
-import { BufferWithInfo, RGBColor } from './types'
+import { BufferWithInfo, RGBColor } from 'pixel-paradise'
 
 export function createColorSwatches(
   swatches: RGBColor[],

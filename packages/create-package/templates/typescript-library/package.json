@@ -17,6 +17,7 @@
   ],
   "main": "./dist/replace-with-package-name.umd.cjs",
   "module": "./dist/replace-with-package-name.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/replace-with-package-name.js",
