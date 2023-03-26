@@ -2,7 +2,7 @@
 
 ## Description
 
-TODO
+A library with core functionality for image manipulation
 
 ## Features
 
