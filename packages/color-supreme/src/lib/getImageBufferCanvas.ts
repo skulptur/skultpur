@@ -34,6 +34,6 @@ export const getImageBufferCanvas = async (imageUrl: string): Promise<BufferWith
     buffer: imageData.data,
     width: imageData.width,
     height: imageData.height,
-
+    channels: 4
   }
 }

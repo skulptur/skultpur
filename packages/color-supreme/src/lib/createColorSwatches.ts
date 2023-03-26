@@ -22,6 +22,7 @@ export function createColorSwatches(
 
     for (let y = startY; y < startY + swatchSize; y++) {
       for (let x = startX; x < startX + swatchSize; x++) {
+        // TODO: don't use 4 channels?
         const index = (y * width + x) * 4
         imageData[index] = color[0] // R
         imageData[index + 1] = color[1] // G
@@ -35,5 +36,6 @@ export function createColorSwatches(
     buffer: imageData,
     width,
     height,
+    channels: 4,
   }
 }
