@@ -10,7 +10,6 @@ export type ChannelCount = 1 | 2 | 3 | 4
 export type ImageInfo = {
   width: number
   height: number
-  channels: ChannelCount
 }
 
 export type BufferWithInfo = ImageInfo & {

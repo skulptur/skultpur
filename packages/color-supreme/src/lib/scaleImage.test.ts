@@ -33,7 +33,6 @@ describe('scaleImage', () => {
       0,
       0,
     ]),
-    channels: 3,
     width: 3,
     height: 3,
   }
@@ -43,7 +42,6 @@ describe('scaleImage', () => {
     const newHeight = 6
     const expectedScaledImageData = {
       buffer: new Uint8ClampedArray([]),
-      channels: 3,
       width: newWidth,
       height: newHeight,
     }
@@ -59,7 +57,6 @@ describe('scaleImage', () => {
     const newHeight = 6
     const emptyImageData: BufferWithInfo = {
       buffer: new Uint8ClampedArray(0),
-      channels: 3,
       width: newWidth,
       height: newHeight,
     }
@@ -85,7 +82,6 @@ describe('scaleImage', () => {
     const newHeight = 0
     const expectedScaledImageData = {
       buffer: new Uint8ClampedArray(0),
-      channels: 3,
       width: newWidth,
       height: newHeight,
     }
@@ -100,7 +96,6 @@ describe('scaleImage', () => {
     const newHeight = 1
     const expectedScaledImageData = {
       buffer: new Uint8ClampedArray([255, 0, 0]),
-      channels: 3,
       width: newWidth,
       height: newHeight,
     }
@@ -115,7 +110,6 @@ describe('scaleImage', () => {
     const newHeight = 2
     const expectedScaledImageData = {
       buffer: new Uint8ClampedArray([255, 0, 0, 0, 0, 255, 255, 0, 255, 255, 0, 0]),
-      channels: 3,
       width: newWidth,
       height: newHeight,
     }

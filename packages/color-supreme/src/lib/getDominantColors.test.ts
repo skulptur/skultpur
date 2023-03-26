@@ -6,10 +6,9 @@ import { BufferWithInfo } from './types'
 const test_image = path.resolve(path.join(__dirname, '..', '..'), './images/0.png')
 describe('getDominantColors with sharp', () => {
   const imageData: BufferWithInfo = {
-    buffer: new Uint8ClampedArray([255, 0, 0, 255, 0, 255, 0, 255, 0, 0, 255, 255]),
+    buffer: new Uint8ClampedArray([255, 0, 0, 255, 0, 255, 0, 255, 0]),
     width: 3,
     height: 1,
-    channels: 4,
   }
 
   let image: sharp.Sharp
@@ -26,7 +25,6 @@ describe('getDominantColors with sharp', () => {
       buffer: data,
       width: info.width!,
       height: info.height!,
-      channels: info.channels,
     }
   })
 
@@ -39,7 +37,6 @@ describe('getDominantColors with sharp', () => {
       buffer: new Uint8ClampedArray([]),
       width: 0,
       height: 0,
-      channels: 3,
     }
     const numberOfColors = 3
 

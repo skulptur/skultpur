@@ -1,5 +1,5 @@
-import { imageDataToPixels, pixelsToImageData } from './bufferPixels'
-import { BufferWithInfo, PixelDataWithInfo, RGBColor } from './types'
+import { imageDataToPixels } from './bufferPixels'
+import { BufferWithInfo, PixelDataWithInfo } from './types'
 
 describe('imageUtils', () => {
   const pixelData: PixelDataWithInfo = {
@@ -10,14 +10,12 @@ describe('imageUtils', () => {
     ],
     width: 3,
     height: 1,
-    channels: 3,
   }
 
   const imageData: BufferWithInfo = {
-    buffer: new Uint8ClampedArray([255, 0, 0, 255, 0, 255, 0, 255, 0, 0, 255, 255]),
+    buffer: new Uint8ClampedArray([255, 0, 0, 0, 255, 0, 0, 0, 255]),
     width: 3,
     height: 1,
-    channels: 4,
   }
 
   describe('imageDataToPixels', () => {

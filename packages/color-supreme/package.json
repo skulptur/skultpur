@@ -30,11 +30,6 @@
     "analyze": "size-limit --why",
     "concat": "concat-ts -i ./src/index.ts -o ./src/output.ts"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
   "prettier": {
     "printWidth": 100,
     "tabWidth": 2,
@@ -67,7 +62,8 @@
     "size-limit": "^7.0.8",
     "tsdx": "^0.14.1",
     "tslib": "^2.4.0",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "data-fns": "*"
   },
   "dependencies": {
     "skmeans": "^0.11.3"

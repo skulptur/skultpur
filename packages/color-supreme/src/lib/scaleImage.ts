@@ -1,3 +1,4 @@
+import { getImageChannelCount } from './getImageChannelCount'
 import { BufferWithInfo } from './types'
 
 const cubicInterpolate = (p0: number, p1: number, p2: number, p3: number, t: number) => {
@@ -112,7 +113,8 @@ export function scaleImage(
   targetHeight: number,
   samplingMethod: SamplingFunction = nearestNeighbor
 ): BufferWithInfo {
-  const { buffer, width, height, channels } = bufferWithInfo
+  const { buffer, width, height } = bufferWithInfo
+  const channels = getImageChannelCount(bufferWithInfo) || 0
   const newWidth = Math.round(targetWidth)
   const newHeight = Math.round(targetHeight)
   const scaleFactorX = newWidth / width
@@ -136,7 +138,6 @@ export function scaleImage(
     buffer: scaledImageData,
     width: newWidth,
     height: newHeight,
-    channels,
   }
 }
 

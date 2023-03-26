@@ -1,12 +1,12 @@
-import { ChannelCount } from './types'
+import { ChannelCount, BufferWithInfo } from './types'
 
-export function getImageChannelCount(
-  imageData: Uint8ClampedArray,
-  width: number,
-  height: number
-): ChannelCount | null {
+export function getImageChannelCount({
+  buffer,
+  width,
+  height,
+}: BufferWithInfo): ChannelCount | null {
   const totalPixels = width * height
-  const totalValues = imageData.length
+  const totalValues = buffer.length
 
   const channelCount = totalValues / totalPixels
 

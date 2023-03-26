@@ -36,6 +36,5 @@ export function createColorSwatches(
     buffer: imageData,
     width,
     height,
-    channels: 4,
   }
 }
