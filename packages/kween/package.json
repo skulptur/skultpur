@@ -1,0 +1,53 @@
+{
+  "version": "0.1.1",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "name": "kween",
+  "author": "skulptur",
+  "description": "Simple tween library written in Typescript",
+  "keywords": ["tween", "typescript", "functional", "ease", "gsap"],
+  "module": "dist/kween.esm.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "check:compilation": "tsc --noEmit"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint && tsc --noEmit"
+    }
+  },
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "jsxSingleQuote": true,
+    "arrowParens": "always"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "husky": "^4.2.5",
+    "tsdx": "^0.13.1",
+    "tslib": "^1.11.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "lib": "^4.1.2"
+  }
+}
