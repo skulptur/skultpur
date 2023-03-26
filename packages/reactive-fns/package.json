@@ -1,0 +1,99 @@
+{
+  "version": "0.2.2",
+  "keywords": [
+    "callbag",
+    "observable",
+    "iterable",
+    "streams",
+    "reactive",
+    "functional"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skulptur/reactive-fns.git"
+  },
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "jsxSingleQuote": true,
+    "arrowParens": "always"
+  },
+  "name": "reactive-fns",
+  "author": "skulptur",
+  "module": "dist/reactive-fns.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/reactive-fns.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/reactive-fns.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "dependencies": {
+    "callbag": "1.4.0",
+    "callbag-combine": "^1.2.0",
+    "callbag-common": "^0.1.8",
+    "callbag-concat": "1.2.1",
+    "callbag-debounce": "^2.1.3",
+    "callbag-empty": "^1.0.1",
+    "callbag-filter": "^1.1.0",
+    "callbag-flatten": "^1.7.0",
+    "callbag-for-each": "1.1.0",
+    "callbag-from-event": "^1.3.0",
+    "callbag-from-iter": "^1.3.0",
+    "callbag-from-obs": "1.2.0",
+    "callbag-from-promise": "^1.3.0",
+    "callbag-interval": "^1.2.0",
+    "callbag-map": "^1.1.0",
+    "callbag-merge": "^3.2.2",
+    "callbag-of": "^2.0.0",
+    "callbag-pipe": "^1.2.0",
+    "callbag-sample": "^2.1.0",
+    "callbag-scan": "^1.1.0",
+    "callbag-share": "1.3.0",
+    "callbag-skip": "1.1.0",
+    "callbag-subscribe": "^1.5.1",
+    "callbag-take": "^1.5.0",
+    "common-fns": "^0.1.1"
+  },
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^4.10.2",
+    "husky": "^6.0.0",
+    "size-limit": "^4.10.2",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.2.0",
+    "typescript": "^4.2.4"
+  }
+}
