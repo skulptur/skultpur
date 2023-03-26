@@ -23,7 +23,8 @@
     "build": "npm run clean && tsc",
     "bundle": "npm run build && pkg . --out-dir ./exec/",
     "test:library": "rm -rf ./test-target && ts-node ./src/cli.ts --template-dir ./templates/typescript-library --target-dir ./test-target/library --library-name my-new-library",
-    "test:cli": "rm -rf ./test-target && ts-node ./src/cli.ts --template-dir ./templates/typescript-cli --target-dir ./test-target/cli --library-name my-new-cli"
+    "test:cli": "rm -rf ./test-target && ts-node ./src/cli.ts --template-dir ./templates/typescript-cli --target-dir ./test-target/cli --library-name my-new-cli",
+    "test:next-app": "rm -rf ./test-target && ts-node ./src/next-app.ts --template-dir ./templates/typescript-next-app --target-dir ./test-target/next-app --library-name my-new-next-app"
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.3",
