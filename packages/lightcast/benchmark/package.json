@@ -1,0 +1,12 @@
+{
+    "name": "benchmarks",
+    "version": "0.0.1",
+    "scripts": {
+        "start": "ts-node benchmarks.ts"
+    },
+    "dependencies": {
+        "@types/benchmark": "^2.1.2",
+        "benchmark": "^2.1.4",
+        "ts-node": "^10.9.1"
+    }
+}
