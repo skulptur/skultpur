@@ -1,7 +1,7 @@
 import sharp from 'sharp'
 import { getDominantColors } from './getDominantColors'
 import path from 'path'
-import { BufferWithInfo } from './types'
+import { BufferWithInfo } from 'pixel-paradise'
 
 const test_image = path.resolve(path.join(__dirname, '..', '..'), './images/0.png')
 describe('getDominantColors with sharp', () => {

@@ -19,13 +19,11 @@ const scaleImages = async () => {
     imagePaths.map(async (imagePath) => {
       const image = await loadImage(imagePath)
       const imageFilenameName = path.basename(imagePath)
-      // const factor = 0.5
+
       const scaledImage = scaleImage(image, image.width / 3.3, image.height / 3.3, nearestNeighbor)
 
       const outPath = scaledImagesDir + '/' + imageFilenameName
       await saveImageAsPng(scaledImage, 3, outPath)
-
-      // console.log('saved scaled image:', outPath)
     })
   )
 }

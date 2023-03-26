@@ -10,7 +10,7 @@
     "url": "https://github.com/skulptur/skultpur.git"
   },
   "type": "module",
-  "keywords": ["some", "keywords", "to", "describe", "the", "package"],
+  "keywords": [],
   "files": [
     "dist"
   ],
@@ -27,16 +27,18 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "script": "node -r ts-node/register -r esm ./script.ts"
   },
-  
   "devDependencies": {
-    "typescript": "^4.9.3",
+    "@types/node": "^18.15.10",
+    "esm": "^3.2.25",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2",
     "vite": "^4.2.0",
     "vitest": "^0.29.7"
   },
   "dependencies": {
-    "@types/node": "^18.15.9",
     "vite-plugin-dts": "^2.1.0"
   }
 }
