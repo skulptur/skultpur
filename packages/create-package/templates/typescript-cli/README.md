@@ -1,4 +1,4 @@
-# <replace-with-package-name>
+# replace-with-package-name
 
 A simple CLI tool to concatenate exported TypeScript files.
 

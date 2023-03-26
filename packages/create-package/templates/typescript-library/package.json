@@ -1,5 +1,5 @@
 {
-  "name": "<replace-with-package-name>",
+  "name": "replace-with-package-name",
   "description": "",
   "private": true,
   "version": "0.0.0",
@@ -15,12 +15,12 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/<replace-with-package-name>.umd.cjs",
-  "module": "./dist/<replace-with-package-name>.js",
+  "main": "./dist/replace-with-package-name.umd.cjs",
+  "module": "./dist/replace-with-package-name.js",
   "exports": {
     ".": {
-      "import": "./dist/<replace-with-package-name>.js",
-      "require": "./dist/<replace-with-package-name>.umd.cjs"
+      "import": "./dist/replace-with-package-name.js",
+      "require": "./dist/replace-with-package-name.umd.cjs"
     }
   },
   "scripts": {

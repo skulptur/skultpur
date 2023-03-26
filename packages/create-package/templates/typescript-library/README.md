@@ -1,4 +1,4 @@
-# <replace-with-package-name>
+# replace-with-package-name
 
 ## Description
 
@@ -11,9 +11,9 @@ TODO
 ## Installation
 
 ```bash
-npm install --save <replace-with-package-name>
+npm install --save replace-with-package-name
 # or
-yarn add <replace-with-package-name>
+yarn add replace-with-package-name
 ```
 
 ## Usage

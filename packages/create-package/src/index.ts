@@ -42,7 +42,7 @@ async function copyTemplate({
     if (entry.isFile()) {
       let content = await fs.readFile(srcPath, "utf-8");
       if (src === templateDir) {
-        content = content.replace(/<replace-with-package-name>/g, libraryName);
+        content = content.replace(/replace-with-package-name/g, libraryName);
       }
       await fs.outputFile(destPath, content);
     } else if (entry.isDirectory()) {
