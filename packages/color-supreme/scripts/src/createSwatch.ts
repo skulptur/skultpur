@@ -1,4 +1,5 @@
-import { createColorSwatches, RGBColor } from '../../dist'
+import { RGBColor } from 'pixel-paradise'
+import { createColorSwatches } from '../../dist'
 import { saveImageAsPng } from './io'
 
 export const createSwatch = async (rgbValues: Array<RGBColor>, path: string): Promise<string> => {

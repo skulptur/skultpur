@@ -1,5 +1,5 @@
 import sharp from 'sharp'
-import { BufferWithInfo } from '../../dist'
+import { BufferWithInfo } from 'pixel-paradise'
 
 export async function saveImageAsPng(
   { buffer, width, height }: BufferWithInfo,

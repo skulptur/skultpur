@@ -1,4 +1,4 @@
-import { nearestNeighbor, scaleImage } from '../../dist'
+import { nearestNeighbor, scaleImage } from 'pixel-paradise'
 import path from 'path'
 import { listFilesInDir } from './listFilesInDir'
 import { saveImageAsPng, loadImage } from './io'
