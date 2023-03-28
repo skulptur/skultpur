@@ -45,7 +45,7 @@ export function AppContainer(props: AppContainer) {
               p="md"
               hiddenBreakpoint="sm"
               hidden={!opened}
-              width={{ sm: 300, lg: 300 }}
+              width={{ sm: 250, lg: 250 }}
             >
               {props.navbar}
             </Navbar>

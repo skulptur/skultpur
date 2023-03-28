@@ -6,7 +6,7 @@ import type { BufferWithInfo } from './types'
 * @returns A Promise that resolves to a an array of Color which represents the pixels of the image
 * @throws Error if the canvas context is not available.
 */
-export const getImageBufferCanvas = async (imageUrl: string): Promise<BufferWithInfo> => {
+export const getImageFromUrl = async (imageUrl: string): Promise<BufferWithInfo> => {
   const image = new Image()
   image.src = imageUrl
   await new Promise((resolve) => (image.onload = resolve))

@@ -17,13 +17,13 @@ npm install --save color-supreme
 Browser
 
 ```typescript
-import { getDominantColors, getImageBufferCanvas, rgbToHex } from 'color-supreme'
+import { getDominantColors, rgbToHex } from 'color-supreme'
+import { getImageFromUrl } from 'pixel-paradise'
 
 const getColors = async (url: string, colors = 5) => {
-  const bufferWithInfo = await getImageBufferCanvas(url)
-  return getDominantColors(bufferWithInfo, colors).map(rgbToHex)
+  const pixels = await getImageFromUrl(url)
+  return getDominantColors(pixels, colors).map(rgbToHex)
 }
-
 getColors('your image url').then(console.log)
 ```
 

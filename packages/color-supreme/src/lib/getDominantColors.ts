@@ -27,7 +27,7 @@ export function getDominantColors(
   const resizedImage = scaleToMaxSize(imageBufferWithInfo, 256, 30)
 
   const pixels = imageDataToPixels(resizedImage).pixels
-
+  console.log({ pixels })
   // Return an empty array if the pixels array is empty
   if (pixels.length === 0) return []
 

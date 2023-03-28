@@ -1,23 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Title, Text, Box, useMantineTheme } from "@mantine/core";
 import { AppContainer } from "../../components/AppContainer";
 import { NestedNavbar } from "../../components/NestedNavbar";
 import { Prism } from "@mantine/prism";
+import { getDominantColors, rgbToHex } from "color-supreme";
+import { getImageFromUrl } from "pixel-paradise";
 
 export type LibraryReadmeProp = {
   readableName: string;
   libraryName: string;
   description: string;
+  children: React.ReactNode;
 };
 
 const browserExample = `
-import { getDominantColors, getPixelsCanvas, rgbToHex } from 'color-supreme'
+import { getDominantColors, rgbToHex } from 'color-supreme'
+import { getImageFromUrl } from 'pixel-paradise'
 
 const getColors = async (url: string, colors = 5) => {
-  const pixels = await getPixelsCanvas(url)
+  const pixels = await getImageFromUrl(url)
   return getDominantColors(pixels, colors).map(rgbToHex)
 }
-
 getColors('your image url').then(console.log)
 `;
 
@@ -37,7 +40,11 @@ const getColors = async (path: string, colors = 5) => {
 getColors('your image path').then(console.log)
 `;
 
-function LibraryReadme({ libraryName, description }: LibraryReadmeProp) {
+function LibraryReadme({
+  libraryName,
+  description,
+  children,
+}: LibraryReadmeProp) {
   const theme = useMantineTheme();
 
   return (
@@ -75,8 +82,35 @@ function LibraryReadme({ libraryName, description }: LibraryReadmeProp) {
           <Prism mb="lg" language="typescript">
             {nodeExample}
           </Prism>
+
+          {children}
         </Box>
       </Box>
+    </>
+  );
+}
+
+const getColors = async (url: string, colors = 5) => {
+  const pixels = await getImageFromUrl(url);
+  return getDominantColors(pixels, colors).map(rgbToHex);
+};
+
+type DominantColorsProps = {
+  url: string;
+};
+function DominantColors({ url }: DominantColorsProps) {
+  const [dominantColors, setDominantColors] = useState<String[]>([]);
+
+  useEffect(() => {
+    getColors(url).then((colors) => {
+      setDominantColors(colors);
+    });
+  }, []);
+
+  return (
+    <>
+      <img src={url} width={768 * 0.25} height={768 * 0.25} />
+      {dominantColors.toString()}
     </>
   );
 }
@@ -89,7 +123,10 @@ export default function Home() {
           readableName="Color Supreme"
           libraryName="color-supreme"
           description="A powerful library for extracting dominant colors from images. It uses the k-means clustering algorithm to analyze the colors in an image and identify the most dominant ones, making it ideal for a range of applications such as image processing, data visualization, and search algorithms."
-        />
+        >
+          {/* <DominantColors url="./images/0.png" /> */}
+          TODO: examples
+        </LibraryReadme>
       </Box>
     </AppContainer>
   );
