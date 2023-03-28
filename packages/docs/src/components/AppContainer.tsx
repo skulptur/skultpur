@@ -4,7 +4,6 @@ import {
   AppShell,
   Navbar,
   Header,
-  Aside,
   Text,
   MediaQuery,
   Burger,
@@ -30,6 +29,7 @@ export function AppContainer(props: AppContainer) {
       </Head>
       <main>
         <AppShell
+          padding={0}
           styles={{
             main: {
               background:
