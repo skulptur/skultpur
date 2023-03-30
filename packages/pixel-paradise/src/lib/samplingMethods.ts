@@ -1,5 +1,4 @@
-import { getImageChannelCount } from "./getImageChannelCount";
-import { BufferWithInfo } from "./types";
+import { SamplingMethod } from "./types";
 
 const cubicInterpolate = (
   p0: number,
@@ -16,7 +15,7 @@ const cubicInterpolate = (
   return a * Math.pow(t, 3) + b * Math.pow(t, 2) + c * t + d;
 };
 
-export const bicubicInterpolation: SamplingFunction = (
+export const bicubicInterpolation: SamplingMethod = (
   srcX,
   srcY,
   imageData,
@@ -55,7 +54,7 @@ export const bicubicInterpolation: SamplingFunction = (
   return sampledPixel;
 };
 
-export const bilinearInterpolation: SamplingFunction = (
+export const bilinearInterpolation: SamplingMethod = (
   srcX,
   srcY,
   imageData,
@@ -90,7 +89,7 @@ export const bilinearInterpolation: SamplingFunction = (
   return sampledPixel;
 };
 
-export const nearestNeighbor: SamplingFunction = (
+export const nearestNeighbor: SamplingMethod = (
   srcX,
   srcY,
   imageData,
@@ -103,79 +102,3 @@ export const nearestNeighbor: SamplingFunction = (
   const srcIndex = (roundedSrcY * width + roundedSrcX) * channels;
   return new Uint8Array(imageData.slice(srcIndex, srcIndex + channels));
 };
-
-type SamplingFunction = (
-  srcX: number,
-  srcY: number,
-  imageData: Uint8ClampedArray | Buffer,
-  width: number,
-  height: number,
-  channels: number
-) => Uint8Array;
-
-export function scaleImage(
-  bufferWithInfo: BufferWithInfo,
-  targetWidth: number,
-  targetHeight: number,
-  samplingMethod: SamplingFunction = nearestNeighbor
-): BufferWithInfo {
-  const { buffer, width, height } = bufferWithInfo;
-  const channels = getImageChannelCount(bufferWithInfo) || 0;
-  const newWidth = Math.round(targetWidth);
-  const newHeight = Math.round(targetHeight);
-  const scaleFactorX = newWidth / width;
-  const scaleFactorY = newHeight / height;
-  const scaledImageData = new Uint8ClampedArray(
-    newWidth * newHeight * channels
-  );
-
-  for (let y = 0; y < newHeight; y++) {
-    for (let x = 0; x < newWidth; x++) {
-      const srcX = x / scaleFactorX;
-      const srcY = y / scaleFactorY;
-      const sampledPixel = samplingMethod(
-        srcX,
-        srcY,
-        buffer,
-        width,
-        height,
-        channels
-      );
-
-      for (let c = 0; c < channels; c++) {
-        const dstIndex = (y * newWidth + x) * channels + c;
-        scaledImageData[dstIndex] = sampledPixel[c];
-      }
-    }
-  }
-
-  return {
-    buffer: scaledImageData,
-    width: newWidth,
-    height: newHeight,
-  };
-}
-
-export function scaleToMaxSize(
-  input: BufferWithInfo,
-  targetMaxSize: number,
-  tolerance: number = 0
-): BufferWithInfo {
-  const { width, height } = input;
-  const longestSide = Math.max(width, height);
-
-  if (
-    longestSide <= targetMaxSize + tolerance ||
-    longestSide <= targetMaxSize - tolerance
-  ) {
-    return input;
-  }
-
-  const scaleFactor = targetMaxSize / longestSide;
-  const newWidth = scaleFactor * width;
-  const newHeight = scaleFactor * height;
-
-  const scaledImage = scaleImage(input, newWidth, newHeight, nearestNeighbor);
-
-  return scaledImage;
-}

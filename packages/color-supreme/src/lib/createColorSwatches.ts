@@ -8,7 +8,6 @@ export function createColorSwatches(
   const columns = swatchesPerRow ?? swatches.length
   const width = columns * swatchSize
   const height = Math.ceil(swatches.length / columns) * swatchSize
-
   const imageData = new Uint8ClampedArray(width * height * 4)
 
   for (let i = 0; i < swatches.length; i++) {

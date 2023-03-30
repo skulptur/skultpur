@@ -1,8 +1,8 @@
-import { imageDataToPixels } from './bufferPixels'
-import { BufferWithInfo, PixelDataWithInfo } from './types'
+import { imageDataToPixels } from "./bufferToPixels";
+import { BufferWithInfo, PixelsWithInfo } from "./types";
 
-describe('imageUtils', () => {
-  const pixelData: PixelDataWithInfo = {
+describe("imageUtils", () => {
+  const pixelData: PixelsWithInfo = {
     pixels: [
       [255, 0, 0],
       [0, 255, 0],
@@ -10,19 +10,19 @@ describe('imageUtils', () => {
     ],
     width: 3,
     height: 1,
-  }
+  };
 
   const imageData: BufferWithInfo = {
     buffer: new Uint8ClampedArray([255, 0, 0, 0, 255, 0, 0, 0, 255]),
     width: 3,
     height: 1,
-  }
+  };
 
-  describe('imageDataToPixels', () => {
-    it('should convert image data to an array of pixels', () => {
-      expect(imageDataToPixels(imageData)).toEqual(pixelData)
-    })
-  })
+  describe("imageDataToPixels", () => {
+    it("should convert image data to an array of pixels", () => {
+      expect(imageDataToPixels(imageData)).toEqual(pixelData);
+    });
+  });
 
   // describe('pixelsToImageData', () => {
   //   it('should convert an array of pixels to image data', () => {
@@ -40,4 +40,4 @@ describe('imageUtils', () => {
   //   const convertedImageData = pixelsToImageData(pixels, 3, 1)
   //   expect(imageDataToPixels(convertedImageData)).toEqual(pixels)
   // })
-})
+});
