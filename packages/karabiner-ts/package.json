@@ -4,6 +4,7 @@
   "author": "skulptur",
   "private": false,
   "description": "A typescript library that makes it easy to generate karabiner configurations.",
+  "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/karabiner-ts",
   "license": "MIT",
   "module": "dist/karabiner-ts.esm.js",
   "main": "dist/index.js",

@@ -3,6 +3,7 @@
   "private": false,
   "version": "0.0.8",
   "description": "Simple CLI tool to concats exported typescript files.",
+  "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/concat-ts",
   "keywords": [
     "typescript",
     "cli"

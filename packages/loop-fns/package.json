@@ -3,6 +3,7 @@
   "version": "0.1.3",
   "author": "skulptur",
   "description": "A lightweight solution for looping with great performance and control.",
+  "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/loop-fns",
   "license": "MIT",
   "private": false,
   "module": "dist/loop-fns.esm.js",

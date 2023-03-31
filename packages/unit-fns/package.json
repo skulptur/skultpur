@@ -3,9 +3,22 @@
   "author": "Gustavo Spredemann",
   "description": "Unit-fns provides composable primitives that make it easy to generate complex numerical patterns with little code.",
   "module": "dist/unit-fns.esm.js",
+  "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/unit-fns",
   "version": "0.2.3",
   "license": "MIT",
   "private": false,
+  "keywords": [
+    "TypeScript",
+    "Numerical patterns",
+    "Composable primitives",
+    "Mathematical functions",
+    "Functional programming",
+    "Code generation",
+    "Pattern generation",
+    "Numerical computations",
+    "Data manipulation",
+    "Data visualization"
+  ],
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [

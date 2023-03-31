@@ -2,7 +2,8 @@
   "name": "create-package",
   "private": true,
   "version": "0.0.0",
-  "description": "",
+  "description": "This package has package templates and a scripts to help you kickstart new projects.",
+  "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/create-package",
   "keywords": [
     "typescript",
     "cli"

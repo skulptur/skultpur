@@ -3,6 +3,7 @@
   "version": "0.1.6",
   "author": "skulptur",
   "description": "The Pub/Sub pattern is needed every now and then and this library is a no dependency, tiny and typesafe solution.",
+  "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/lightcast",
   "license": "MIT",
   "private": false,
   "module": "dist/lightcast.esm.js",
@@ -68,7 +69,6 @@
     "tsdx": "^0.14.1",
     "tslib": "^2.4.0",
     "typescript": "^4.6.3"
-    
   },
   "dependencies": {}
 }

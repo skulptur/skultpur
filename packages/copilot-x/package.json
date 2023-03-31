@@ -3,6 +3,7 @@
   "private": false,
   "version": "0.0.1",
   "description": "A simple CLI tool where you are the copilot, because it runs on autopilot.",
+  "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/copilot-x",
   "keywords": [
     "typescript",
     "cli"

@@ -4,6 +4,7 @@
   "author": "skulptur",
   "description": "`common-fns` is a simple utility library that provides commonly used functions such as `always`, `identity`, `isEqual`, and `noop`. These functions can help reduce boilerplate code and make your codebase more expressive and concise.",
   "license": "MIT",
+  "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/common-fns",
   "private": false,
   "module": "dist/common-fns.esm.js",
   "main": "dist/index.js",

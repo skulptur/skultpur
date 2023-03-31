@@ -2,6 +2,7 @@
   "name": "random-fns",
   "version": "0.1.8",
   "description": "All your random needs in one place.",
+  "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/random-fns",
   "author": "skulptur",
   "private": false,
   "license": "MIT",
