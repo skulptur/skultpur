@@ -4,6 +4,7 @@
   "private": true,
   "description": "Documentation pages for multiple libraries developed by skulptur.",
   "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/docs",
+  "license": "MIT",
   "keywords": [
     "TypeScript",
     "Documentation",
