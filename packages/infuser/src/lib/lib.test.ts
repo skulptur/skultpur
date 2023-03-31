@@ -1,7 +1,7 @@
 import {
   getDefaultCommentStyle,
   getSlotIndices,
-  replaceContentInString,
+  updateSlot,
   getSlots,
   updateSlots,
   getSlotNames,
@@ -60,7 +60,7 @@ describe("getSlotIndices", () => {
 
 describe("replaceContentInString", () => {
   test("replaces content in existing slot", () => {
-    const replaced = replaceContentInString(
+    const replaced = updateSlot(
       fileContent,
       "slot1",
       " new content 1 ",

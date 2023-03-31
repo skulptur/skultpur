@@ -1,6 +1,6 @@
 import {
   getDefaultCommentStyle,
-  replaceContentInString,
+  updateSlot,
   getSlots,
   getSlotNames,
 } from "./lib";
@@ -40,7 +40,7 @@ describe("HTML files", () => {
   });
 
   test("replaces content in existing HTML slot", () => {
-    const replaced = replaceContentInString(
+    const replaced = updateSlot(
       htmlFileContent,
       "slot1",
       "New content 1",

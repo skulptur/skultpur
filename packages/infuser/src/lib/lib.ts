@@ -81,7 +81,7 @@ Replaces the content of a named slot in a file, identified by the given comment 
 @returns The modified content of the file
 @throws An error if the named slot cannot be found in the file
 */
-export function replaceContentInString(
+export function updateSlot(
   fileContent: string,
   slotName: string,
   newContent: string,
@@ -200,12 +200,7 @@ export function updateSlots(
   for (const update of updates) {
     const { slotName, newContent } = update;
     try {
-      fileContent = replaceContentInString(
-        fileContent,
-        slotName,
-        newContent,
-        commentStyle
-      );
+      fileContent = updateSlot(fileContent, slotName, newContent, commentStyle);
     } catch (error) {
       console.error(`Error updating slot "${slotName}":`, error.message);
     }
