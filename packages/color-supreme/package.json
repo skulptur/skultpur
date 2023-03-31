@@ -4,6 +4,7 @@
   "author": "skulptur",
   "description": "A powerful library for extracting dominant colors from images. It uses the k-means clustering algorithm to analyze the colors in an image and identify the most dominant ones, making it ideal for a range of applications such as image processing, data visualization, and search algorithms.",
   "license": "MIT",
+  "private": false,
   "module": "dist/color-supreme.esm.js",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",

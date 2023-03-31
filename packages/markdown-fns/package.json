@@ -2,6 +2,7 @@
   "version": "0.1.2",
   "license": "MIT",
   "main": "dist/index.js",
+  "private": false,
   "description": "Markdown is meant for humans to type, but isn't any good when you want to abstract patterns that often appear in documentation. With the functions provided by markdown-fns it is not only possible but also very easy to do so.",
   "typings": "dist/index.d.ts",
   "homepage": "https://github.com/skulptur/markdown-fns",

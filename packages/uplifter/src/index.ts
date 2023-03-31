@@ -1,7 +1,6 @@
 import glob from "glob";
 import fs from "fs";
 import {
-  packageJsonSchema,
   PackageJsonSchema,
   packageJsonSchemaValidator,
   isPackageJsonSchema,

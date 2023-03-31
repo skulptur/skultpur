@@ -5,8 +5,8 @@ export const packageJsonSchema = Type.Object({
   name: Type.String(),
   version: Type.String(),
   description: Type.String(),
+  private: Type.Boolean(),
   //   keywords: Type.Optional(Type.Array(Type.String())),
-  //   private: Type.Optional(Type.Boolean()),
   //   homepage: Type.Optional(Type.String({ format: "uri" })),
   //   bugs: Type.Optional(
   //     Type.Union([

@@ -4,6 +4,7 @@
   "author": "skulptur",
   "description": "A lightweight solution for looping with great performance and control.",
   "license": "MIT",
+  "private": false,
   "module": "dist/loop-fns.esm.js",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",

@@ -5,6 +5,7 @@
   "module": "dist/unit-fns.esm.js",
   "version": "0.2.3",
   "license": "MIT",
+  "private": false,
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
