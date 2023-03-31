@@ -1,0 +1,65 @@
+import {
+  getDefaultCommentStyle,
+  replaceContentInString,
+  getSlots,
+  getSlotNames,
+} from "./lib";
+
+const htmlCommentStyle = {
+  start: "<!-- start $ -->",
+  end: "<!-- end $ -->",
+};
+
+const htmlFileContent = `<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+</head>
+<body>
+  <!-- start slot1 -->Old content 1<!-- end slot1 -->
+  <!-- start slot2 -->Old content 2<!-- end slot2 -->
+</body>
+</html>
+`;
+
+const newHtmlFileContent = `<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+</head>
+<body>
+  <!-- start slot1 -->New content 1<!-- end slot1 -->
+  <!-- start slot2 -->Old content 2<!-- end slot2 -->
+</body>
+</html>
+`;
+
+describe("HTML files", () => {
+  test("returns default comment style for .html files", () => {
+    expect(getDefaultCommentStyle(".html")).toEqual(htmlCommentStyle);
+  });
+
+  test("replaces content in existing HTML slot", () => {
+    const replaced = replaceContentInString(
+      htmlFileContent,
+      "slot1",
+      "New content 1",
+      htmlCommentStyle
+    );
+    expect(replaced).toEqual(newHtmlFileContent);
+  });
+
+  test("returns an array of HTML slot names", () => {
+    const slotNames = getSlotNames(htmlFileContent, htmlCommentStyle);
+    expect(slotNames).toEqual(["slot1", "slot2"]);
+  });
+
+  test("returns all HTML slots when no slotNames are provided", () => {
+    const slots = getSlots(htmlFileContent, [], htmlCommentStyle);
+    expect(slots).toHaveLength(2);
+    expect(slots[0].slotName).toBe("slot1");
+    expect(slots[0].content).toBe("Old content 1");
+    expect(slots[1].slotName).toBe("slot2");
+    expect(slots[1].content).toBe("Old content 2");
+  });
+});

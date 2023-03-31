@@ -1,4 +1,4 @@
-import { readFile as fsReadFile, writeFile } from "fs/promises";
+import { readFile as fsReadFile, writeFile as fsWriteFile } from "fs/promises";
 import { extname } from "path";
 
 type CommentStyle = { start: string; end: string };
@@ -6,8 +6,8 @@ type CommentStyle = { start: string; end: string };
 export function getDefaultCommentStyle(
   fileExtension: string
 ): CommentStyle | null {
-  const start = "infuser start";
-  const end = "infuser end";
+  const start = "start";
+  const end = "end";
 
   const blockComment: CommentStyle = {
     start: `/* ${start} $ */`,
@@ -21,10 +21,10 @@ export function getDefaultCommentStyle(
 
   const commentStyles: Record<string, CommentStyle> = {
     ".html": htmlComment,
+    ".md": htmlComment,
     ".js": blockComment,
     ".css": blockComment,
     ".ts": blockComment,
-    ".md": htmlComment,
   };
 
   return commentStyles[fileExtension] || null;
@@ -47,8 +47,10 @@ export function getSlotIndices(
   }
 
   return {
-    startIndex,
-    endIndex: endIndex + endComment.length,
+    startIndexLeft: startIndex,
+    startIndexRight: startIndex + startComment.length,
+    endIndexLeft: endIndex,
+    endIndexRight: endIndex + endComment.length,
     startComment,
     endComment,
   };
@@ -60,14 +62,15 @@ export function replaceContentInString(
   newContent: string,
   commentStyle: CommentStyle
 ): string {
-  const { startIndex, endIndex, startComment, endComment } = getSlotIndices(
-    fileContent,
-    slotName,
-    commentStyle
-  );
+  const {
+    startIndexLeft,
+    endIndexRight,
+    startComment,
+    endComment,
+  } = getSlotIndices(fileContent, slotName, commentStyle);
 
-  const beforeContent = fileContent.slice(0, startIndex);
-  const afterContent = fileContent.slice(endIndex);
+  const beforeContent = fileContent.slice(0, startIndexLeft);
+  const afterContent = fileContent.slice(endIndexRight);
 
   return `${beforeContent}${startComment}${newContent}${endComment}${afterContent}`;
 }
@@ -88,41 +91,49 @@ export async function readFile(filePath: string, commentStyle?: CommentStyle) {
   };
 }
 
+// escapes all but $ as we use that symbol to replace with the name
+function escapeRegExp(string: string): string {
+  return string.replace(/[.*+\-?^${}()|[\]\\]/g, "\\$&");
+}
+
+export function getSlotNames(
+  fileContent: string,
+  commentStyle: CommentStyle
+): string[] {
+  const escapedStart = escapeRegExp(commentStyle.start).replace("\\$", "($)");
+  const startPattern = escapedStart.replace("($)", "(\\w+)");
+  const slotNamePattern = new RegExp(startPattern, "g");
+  const slotNames: string[] = [];
+  let match: RegExpExecArray | null;
+
+  while ((match = slotNamePattern.exec(fileContent)) !== null) {
+    const slotName = match[1];
+    if (!slotNames.includes(slotName)) {
+      slotNames.push(slotName);
+    }
+  }
+
+  return slotNames;
+}
+
 export function getSlots(
   fileContent: string,
   slotNames: string[],
   commentStyle: CommentStyle
 ) {
-  const allSlotsRegex = new RegExp(
-    `${commentStyle.start}\\s*(.*?)\\s*${commentStyle.end}`,
-    "gs"
-  );
-  let allSlots: RegExpExecArray | null;
+  const names = slotNames.length
+    ? slotNames
+    : getSlotNames(fileContent, commentStyle);
   const slots: Array<{ slotName: string; content: string }> = [];
 
-  if (!slotNames || slotNames.length === 0) {
-    while ((allSlots = allSlotsRegex.exec(fileContent))) {
-      slots.push({
-        slotName: allSlots[1],
-        content: allSlots[0]
-          .replace(commentStyle.start, "")
-          .replace(commentStyle.end, "")
-          .trim(),
-      });
-    }
-  } else {
-    for (const slotName of slotNames) {
-      const { startIndex, endIndex, startComment } = getSlotIndices(
-        fileContent,
-        slotName,
-        commentStyle
-      );
-      const content = fileContent.slice(
-        startIndex + startComment.length,
-        endIndex
-      );
-      slots.push({ slotName, content });
-    }
+  for (const slotName of names) {
+    const { startIndexRight, endIndexLeft } = getSlotIndices(
+      fileContent,
+      slotName,
+      commentStyle
+    );
+    const content = fileContent.slice(startIndexRight, endIndexLeft);
+    slots.push({ slotName, content });
   }
 
   return slots;
@@ -148,4 +159,14 @@ export function updateSlots(
   }
 
   return fileContent;
+}
+
+export async function updateFile(
+  filePath: string,
+  updates: Array<{ slotName: string; newContent: string }>,
+  commentStyle?: CommentStyle // we try to infer
+) {
+  const file = await readFile(filePath, commentStyle);
+  const fileContent = updateSlots(file.fileContent, updates, file.commentStyle);
+  return await fsWriteFile(filePath, fileContent, "utf-8");
 }
