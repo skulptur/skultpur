@@ -9,11 +9,11 @@ If you're looking for an easy way to extract or update dynamic content within st
 <!-- infuser start installation -->  
   
 ## Installation  
-yarn  
+Yarn  
 ```bash  
 yarn add infuser  
 ```  
-npm  
+NPM  
 ```bash  
 npm install infuser --save  
 ```  
@@ -32,6 +32,10 @@ npm install infuser --save
 <!-- infuser start license -->  
   
 ## License  
-MIT  
+
+This library is open source software released under the MIT license. See the LICENSE file for more information.
+
+I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.
+  
   
 <!-- infuser end license -->
