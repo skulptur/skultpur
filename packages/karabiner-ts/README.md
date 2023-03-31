@@ -1,4 +1,4 @@
-## `library-name`
+## `karabiner-ts`
 
 Single paragraph about why this library exists
 
@@ -7,20 +7,20 @@ Single paragraph about why this library exists
 Install
 
 ```bash
-yarn add library-name-fns
+yarn add karabiner-ts
 # or
-npm install --save library-name-fns
+npm install --save karabiner-ts
 ```
 
 Use
 
 ```typescript
-import { noop } from 'library-name-fns'
+import { noop } from 'karabiner-ts'
 
 console.log(noop()) // undefined
 ```
 
-[Examples](https://github.com/skulptur/library-name-fns/tree/master/example)
+[Examples](https://github.com/skulptur/karabiner-ts/tree/master/example)
 
 ## API
 

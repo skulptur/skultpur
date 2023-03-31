@@ -1,13 +1,24 @@
 #!/usr/bin/env node
 
-import { program } from "commander";
-import { log } from "./index";
+import { readPackageJsonFiles } from ".";
 
-program
-  .option("-i, --input <path>", "Input entry path")
-  .option("-o, --output <path>", "Output path")
-  .parse(process.argv);
+// Example usage
+readPackageJsonFiles("..")
+  .then((packageJsons) => {
+    console.log(packageJsons);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
-const options = program.opts();
+// import { program } from "commander";
+// import { log } from "./index";
 
-log(JSON.stringify(options));
+// program
+//   .option("-i, --input <path>", "Input entry path")
+//   .option("-o, --output <path>", "Output path")
+//   .parse(process.argv);
+
+// const options = program.opts();
+
+// log(JSON.stringify(options));

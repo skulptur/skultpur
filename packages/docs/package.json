@@ -2,6 +2,7 @@
   "name": "docs",
   "version": "0.1.0",
   "private": true,
+  "description": "Documentation pages for multiple libraries developed by skulptur.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
