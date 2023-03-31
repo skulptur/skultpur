@@ -2,6 +2,7 @@
   "name": "lightcast",
   "version": "0.1.6",
   "author": "skulptur",
+  "description": "The Pub/Sub pattern is needed every now and then and this library is a no dependency, tiny and typesafe solution.",
   "license": "MIT",
   "module": "dist/lightcast.esm.js",
   "main": "dist/index.js",

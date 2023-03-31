@@ -1,6 +1,7 @@
 {
   "name": "unit-fns",
   "author": "Gustavo Spredemann",
+  "description": "Unit-fns provides composable primitives that make it easy to generate complex numerical patterns with little code.",
   "module": "dist/unit-fns.esm.js",
   "version": "0.2.3",
   "license": "MIT",

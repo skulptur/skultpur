@@ -1,6 +1,7 @@
 {
   "name": "random-fns",
   "version": "0.1.8",
+  "description": "All your random needs in one place.",
   "author": "skulptur",
   "license": "MIT",
   "module": "dist/random-fns.esm.js",

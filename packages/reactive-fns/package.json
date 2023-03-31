@@ -1,5 +1,6 @@
 {
   "version": "0.2.2",
+  "description": "This library is based on the brilliant Callbag spec by André Staltz, which allows creating both pullable and listenable streams from simple functions. That makes it lightweight and flexible and that's why it shines when used as a primitive for libraries or apps!",
   "keywords": [
     "callbag",
     "observable",

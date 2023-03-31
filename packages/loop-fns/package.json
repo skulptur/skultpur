@@ -2,6 +2,7 @@
   "name": "loop-fns",
   "version": "0.1.3",
   "author": "skulptur",
+  "description": "A lightweight solution for looping with great performance and control.",
   "license": "MIT",
   "module": "dist/loop-fns.esm.js",
   "main": "dist/index.js",

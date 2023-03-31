@@ -1,6 +1,7 @@
 {
   "name": "perfect-time",
   "version": "0.2.0",
+  "description": "A generic clock that makes it easy to schedule repeating time based events with precision in Typescript. It works by calling scheduled events slightly before their side effects should take place, which is great in combination with Web Audio for example.",
   "author": "skulptur",
   "license": "MIT",
   "module": "dist/perfect-time.esm.js",
