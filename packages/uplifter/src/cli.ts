@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { readPackages } from "./readPackages";
-import { infuseReadmes } from "./infuseReadmes";
+import { readPackages } from "./lib/readPackages";
+import { infuseReadmes } from "./lib/infuseReadmes";
 
 // Example usage
 readPackages("..")
