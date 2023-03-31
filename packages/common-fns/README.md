@@ -1,21 +1,48 @@
-## Motivation
+<!-- infuser start title -->
 
-All the functions that are generic enough and used often!
+# common-fns
 
-## Get started
+<!-- infuser end title -->
 
-Install
+<!-- infuser start description -->
+
+`common-fns` is a simple utility library that provides commonly used functions such as `always`, `identity`, `isEqual`, and `noop`. These functions can help reduce boilerplate code and make your codebase more expressive and concise.
+
+<!-- infuser end description -->
+
+<!-- infuser start installation -->
+
+## Installation
+
+Yarn
 
 ```bash
-npm install --save common-fns
-# or
 yarn add common-fns
 ```
 
-Use
+NPM
 
-```typescript
-import { noop } from 'common-fns'
-
-console.log(noop()) // undefined
+```bash
+npm install common-fns --save
 ```
+
+<!-- infuser end installation -->
+
+<!-- infuser start usage -->
+<!-- infuser end usage -->
+
+<!-- infuser start development -->
+<!-- infuser end development -->
+
+<!-- infuser start notes -->
+<!-- infuser end notes -->
+
+<!-- infuser start license -->
+
+## License
+
+This library is open source software released under the MIT license. See the LICENSE file for more information.
+
+I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.
+
+<!-- infuser end license -->
