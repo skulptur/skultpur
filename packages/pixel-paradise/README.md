@@ -1,25 +1,41 @@
+<!-- infuser start title -->
 # pixel-paradise
+<!-- infuser end title -->
 
-## Description
+<!-- infuser start description -->
+Image manipulation library.
+<!-- infuser end description -->
 
-A library with core functionality for image manipulation
+<!-- infuser start installation -->  
+  
+## Installation  
+Yarn  
+```bash  
+yarn add pixel-paradise  
+```  
+NPM  
+```bash  
+npm install pixel-paradise --save  
+```  
+  
+<!-- infuser end installation -->
 
-## Features
+<!-- infuser start usage -->
+<!-- infuser end usage -->
 
-TODO
+<!-- infuser start development -->
+<!-- infuser end development -->
 
-## Installation
+<!-- infuser start notes -->
+<!-- infuser end notes -->
 
-```bash
-npm install --save pixel-paradise
-# or
-yarn add pixel-paradise
-```
+<!-- infuser start license -->  
+  
+## License  
 
-## Usage
+This library is open source software released under the MIT license. See the LICENSE file for more information.
 
-TODO
-
-## License
-
-MIT License
+I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.
+  
+  
+<!-- infuser end license -->

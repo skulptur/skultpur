@@ -1,21 +1,41 @@
-## Motivation
+<!-- infuser start title -->
+# random-fns
+<!-- infuser end title -->
 
+<!-- infuser start description -->
 All your random needs in one place.
+<!-- infuser end description -->
 
-## Get started
+<!-- infuser start installation -->  
+  
+## Installation  
+Yarn  
+```bash  
+yarn add random-fns  
+```  
+NPM  
+```bash  
+npm install random-fns --save  
+```  
+  
+<!-- infuser end installation -->
 
-Install
+<!-- infuser start usage -->
+<!-- infuser end usage -->
 
-```bash
-npm install --save random-fns
-# or
-yarn add random-fns
-```
+<!-- infuser start development -->
+<!-- infuser end development -->
 
-Use
+<!-- infuser start notes -->
+<!-- infuser end notes -->
 
-```typescript
-import { random } from 'random-fns'
+<!-- infuser start license -->  
+  
+## License  
 
-console.log(random()) // equivalent to Math.random
-```
+This library is open source software released under the MIT license. See the LICENSE file for more information.
+
+I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.
+  
+  
+<!-- infuser end license -->

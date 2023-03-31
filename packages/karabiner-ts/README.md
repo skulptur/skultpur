@@ -1,38 +1,41 @@
-## `karabiner-ts`
+<!-- infuser start title -->
+# karabiner-ts
+<!-- infuser end title -->
 
-Single paragraph about why this library exists
+<!-- infuser start description -->
+A typescript library that makes it easy to generate karabiner configurations.
+<!-- infuser end description -->
 
-## Get started
+<!-- infuser start installation -->  
+  
+## Installation  
+Yarn  
+```bash  
+yarn add karabiner-ts  
+```  
+NPM  
+```bash  
+npm install karabiner-ts --save  
+```  
+  
+<!-- infuser end installation -->
 
-Install
+<!-- infuser start usage -->
+<!-- infuser end usage -->
 
-```bash
-yarn add karabiner-ts
-# or
-npm install --save karabiner-ts
-```
+<!-- infuser start development -->
+<!-- infuser end development -->
 
-Use
+<!-- infuser start notes -->
+<!-- infuser end notes -->
 
-```typescript
-import { noop } from 'karabiner-ts'
+<!-- infuser start license -->  
+  
+## License  
 
-console.log(noop()) // undefined
-```
+This library is open source software released under the MIT license. See the LICENSE file for more information.
 
-[Examples](https://github.com/skulptur/karabiner-ts/tree/master/example)
-
-## API
-
-- Pure functions.
-- The argument order is optimized for partial application.
-
-Exports:
-
-### noop
-
-`() => void`
-
-```typescript
-const nothing = noop() // undefined
-```
+I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.
+  
+  
+<!-- infuser end license -->

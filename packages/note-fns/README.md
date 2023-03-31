@@ -1,18 +1,29 @@
-## About
+<!-- infuser start title -->
+# note-fns
+<!-- infuser end title -->
 
+<!-- infuser start description -->
 Use this library when you need a comprehensive but lightweight solution for working with musical notes in Typescript. It provides functions, types and constants that make it easy to manipulate musical note information. Works great in conjunction with other music related libraries.
+<!-- infuser end description -->
 
-## Get started
+<!-- infuser start installation -->  
+  
+## Installation  
+Yarn  
+```bash  
+yarn add note-fns  
+```  
+NPM  
+```bash  
+npm install note-fns --save  
+```  
+  
+<!-- infuser end installation -->
 
-Install
+<!-- infuser start usage -->
+<!-- infuser end usage -->
 
-```bash
-npm install --save note-fns
-# or
-yarn add note-fns
-```
-
-Use
+## Use
 
 ```typescript
 import { getNote } from 'note-fns'
@@ -238,3 +249,20 @@ Included intervals:
 - `diminishedEighth` / `d8`: Interval = 11
 - `diminishedOctave`: Interval = 11
 - `augmentedSeventh` / `A7`: Interval = 12
+
+<!-- infuser start development -->
+<!-- infuser end development -->
+
+<!-- infuser start notes -->
+<!-- infuser end notes -->
+
+<!-- infuser start license -->  
+  
+## License  
+
+This library is open source software released under the MIT license. See the LICENSE file for more information.
+
+I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.
+  
+  
+<!-- infuser end license -->

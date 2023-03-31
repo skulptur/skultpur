@@ -1,18 +1,29 @@
-## `loop-fns`
+<!-- infuser start title -->
+# loop-fns
+<!-- infuser end title -->
 
+<!-- infuser start description -->
 A lightweight solution for looping with great performance and control.
+<!-- infuser end description -->
 
-## Get started
+<!-- infuser start installation -->  
+  
+## Installation  
+Yarn  
+```bash  
+yarn add loop-fns  
+```  
+NPM  
+```bash  
+npm install loop-fns --save  
+```  
+  
+<!-- infuser end installation -->
 
-Install
+<!-- infuser start usage -->
+<!-- infuser end usage -->
 
-```bash
-yarn add loop-fns
-# or
-npm install --save loop-fns
-```
-
-Use
+## Use
 
 ```typescript
 import { loopFrames } from 'loop-fns'
@@ -29,4 +40,19 @@ const props = loopFrames((props) => {
 props.start()
 ```
 
-<!-- [Examples](https://github.com/skulptur/loop-fns/tree/master/example) -->
+<!-- infuser start development -->
+<!-- infuser end development -->
+
+<!-- infuser start notes -->
+<!-- infuser end notes -->
+
+<!-- infuser start license -->  
+  
+## License  
+
+This library is open source software released under the MIT license. See the LICENSE file for more information.
+
+I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.
+  
+  
+<!-- infuser end license -->

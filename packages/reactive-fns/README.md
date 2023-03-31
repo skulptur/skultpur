@@ -1,29 +1,39 @@
-## Motivation
+<!-- infuser start title -->
+# reactive-fns
+<!-- infuser end title -->
 
-This library is based on the brilliant [Callbag](https://github.com/callbag/callbag) spec by André Staltz, which allows creating both pullable and listenable streams from simple functions. That makes it lightweight and flexible and that's why it shines when used as a primitive for libraries or apps!
+<!-- infuser start description -->
+This library is based on the brilliant Callbag spec by André Staltz, which allows creating both pullable and listenable streams from simple functions. That makes it lightweight and flexible and that's why it shines when used as a primitive for libraries or apps!
+<!-- infuser end description -->
 
+<!-- infuser start installation -->  
+  
+## Installation  
+Yarn  
+```bash  
+yarn add reactive-fns  
+```  
+NPM  
+```bash  
+npm install reactive-fns --save  
+```  
+  
+<!-- infuser end installation -->
 
-## Get started
+<!-- infuser start usage -->
+<!-- infuser end usage -->
 
-Install
-
-```bash
-npm install --save reactive-fns
-# or
-yarn add reactive-fns
-```
-
-Use
+## Use
 
 ```typescript
 import { pipe, interval, tap, map, filter, forEach } from 'reactive-fns'
 
 pipe(
-    interval(1000),
-    tap(v => console.log('Before: ' + v)),
-    map(x => x * 3),
-    filter(x => x % 2 === 0),
-    forEach(v => console.log('After: ' + v))
+  interval(1000),
+  tap((v) => console.log('Before: ' + v)),
+  map((x) => x * 3),
+  filter((x) => x % 2 === 0),
+  forEach((v) => console.log('After: ' + v))
 )
 ```
 
@@ -64,8 +74,24 @@ pipe(
 - pipe: Pipes streams to operators to sinks.
 - tap: Taps into given stream.
 
-
 ## Learn more
 
-* [Callbag basics](https://github.com/staltz/callbag-basics)
-* [Why we need callbags](https://staltz.com/why-we-need-callbags.html)
+- [Callbag basics](https://github.com/staltz/callbag-basics)
+- [Why we need callbags](https://staltz.com/why-we-need-callbags.html)
+
+<!-- infuser start development -->
+<!-- infuser end development -->
+
+<!-- infuser start notes -->
+<!-- infuser end notes -->
+
+<!-- infuser start license -->  
+  
+## License  
+
+This library is open source software released under the MIT license. See the LICENSE file for more information.
+
+I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.
+  
+  
+<!-- infuser end license -->

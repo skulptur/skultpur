@@ -1,20 +1,31 @@
-## `perfect-time`
+<!-- infuser start title -->
+# perfect-time
+<!-- infuser end title -->
 
+<!-- infuser start description -->
 A generic clock that makes it easy to schedule repeating time based events with precision in Typescript. It works by calling scheduled events slightly before their side effects should take place, which is great in combination with Web Audio for example.
+<!-- infuser end description -->
 
 This essentially allows you to circumvent [issues with javascript timers](https://www.html5rocks.com/en/tutorials/audio/scheduling/).
 
-## Get started
+<!-- infuser start installation -->  
+  
+## Installation  
+Yarn  
+```bash  
+yarn add perfect-time  
+```  
+NPM  
+```bash  
+npm install perfect-time --save  
+```  
+  
+<!-- infuser end installation -->
 
-Install
+<!-- infuser start usage -->
+<!-- infuser end usage -->
 
-```bash
-yarn add perfect-time
-# or
-npm install --save perfect-time
-```
-
-Use
+## Use
 
 ```typescript
 import { createClock, createSetIntervalTicker } from 'perfect-time'
@@ -128,3 +139,20 @@ player.setTimeout(9, (event) => {
 ```
 
 [Examples](https://github.com/skulptur/perfect-time/tree/master/example/src)
+
+<!-- infuser start development -->
+<!-- infuser end development -->
+
+<!-- infuser start notes -->
+<!-- infuser end notes -->
+
+<!-- infuser start license -->  
+  
+## License  
+
+This library is open source software released under the MIT license. See the LICENSE file for more information.
+
+I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.
+  
+  
+<!-- infuser end license -->

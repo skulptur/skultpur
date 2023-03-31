@@ -1,23 +1,34 @@
-## `data-fns`
+<!-- infuser start title -->
+# data-fns
+<!-- infuser end title -->
 
+<!-- infuser start description -->
 This library provides utility functions for working with array data that are useful in many contexts, including creative coding. It offers generic functions that perform common operations such as offsetting an array, generating an array based on a callback function, and chunking an array according to a pattern.
+<!-- infuser end description -->
 
-## Get started
+<!-- infuser start installation -->  
+  
+## Installation  
+Yarn  
+```bash  
+yarn add data-fns  
+```  
+NPM  
+```bash  
+npm install data-fns --save  
+```  
+  
+<!-- infuser end installation -->
 
-Install
+<!-- infuser start usage -->
+<!-- infuser end usage -->
 
-```bash
-yarn add data-fns
-# or
-npm install --save data-fns
-```
-
-Use
+## Use
 
 ```typescript
-import { times } from 'data-fns';
+import { times } from 'data-fns'
 
-console.log(times(5, index => index * 2));
+console.log(times(5, (index) => index * 2))
 ```
 
 ## Documentation
@@ -58,7 +69,7 @@ Calls a callback function a specified number of times and returns the results in
 - callback (`(index: number) => T`) - The callback function to call.
 
 ```tsx
-times(5, i => i * 2);
+times(5, (i) => i * 2)
 // Returns [0, 2, 4, 6, 8]
 ```
 
@@ -73,7 +84,7 @@ Generates a sequence of values by applying a given function to an initial value 
 - iteratorFn (`(value: T) => T`) - The function to apply to the initial value and each subsequent value.
 
 ```tsx
-generateSequence(5, 1, value => value * 2);
+generateSequence(5, 1, (value) => value * 2)
 // Returns [1, 2, 4, 8, 16]
 ```
 
@@ -88,8 +99,8 @@ Maps an item in an array at a specified index to a new value.
 - mapFn (`(item: T) => T`) - A function that maps the item to a new value.
 
 ```tsx
-const originalArray = [1, 2, 3, 4, 5];
-const mappedArray = mapAt(originalArray, 2, item => item * 2);
+const originalArray = [1, 2, 3, 4, 5]
+const mappedArray = mapAt(originalArray, 2, (item) => item * 2)
 // Returns [1, 2, 6, 4, 5]
 ```
 
@@ -104,9 +115,9 @@ Gets an item from an array based on a mapped index.
 - indexMapFn (`(index: number, length: number) => number`) - A function that maps the index to a new index.
 
 ```tsx
-const array = ['a', 'b', 'c', 'd', 'e'];
-const indexMapFn = (index, length) => (index * 2) % length;
-getItem(2, array, indexMapFn);
+const array = ['a', 'b', 'c', 'd', 'e']
+const indexMapFn = (index, length) => (index * 2) % length
+getItem(2, array, indexMapFn)
 // Returns 'e'
 ```
 
@@ -120,7 +131,7 @@ Maps an index to a cyclic pattern.
 - length (`number`) - The length of the sequence.
 
 ```tsx
-cyclic(6, 5);
+cyclic(6, 5)
 // Returns 1
 ```
 
@@ -134,9 +145,9 @@ Maps an index to a palindrome pattern.
 - length (`number`) - The length of the sequence.
 
 ```tsx
-const length = 5;
-const indexes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-indexes.map(index => palindrome(index, length));
+const length = 5
+const indexes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+indexes.map((index) => palindrome(index, length))
 // Returns [0, 1, 2, 1, 0, 1, 2, 1, 0, 1]
 ```
 
@@ -151,19 +162,19 @@ Returns the remainder of dividing the dividend by the divisor, with support for 
 
 ```tsx
 // Basic usage
-modulo(5, 3);
+modulo(5, 3)
 // Returns 2
 
 // Support for negative dividends
-modulo(-5, -3);
+modulo(-5, -3)
 // Returns 2
 
 // Support for negative divisors
-modulo(-5, 3);
+modulo(-5, 3)
 // Returns -2
 
 // Support for negative dividends and divisors
-modulo(5, -3);
+modulo(5, -3)
 // Returns -2
 ```
 
@@ -182,7 +193,7 @@ Generates a new sequence using a one-dimensional cellular automaton.
 - boundaryFn (`BoundaryFunction`) - The boundary function to use.
 
 ```tsx
-generateSequence(10, sequence, cellularAutomata);
+generateSequence(10, sequence, cellularAutomata)
 // Returns [
 //  [0, 0, 0, 0, 1, 0, 0, 0],
 //  [0, 0, 0, 1, 1, 1, 0, 0],
@@ -208,7 +219,7 @@ Generates a Euclidean rhythm sequence.
 - rotation (`number`) - The rotation of the sequence (default: 0).
 
 ```tsx
-euclideanSequencer(8, 3, 1);
+euclideanSequencer(8, 3, 1)
 // Returns [1, 3, 6]
 ```
 
@@ -223,7 +234,7 @@ Generates a sequence of indices representing the "silences" (i.e. rests) in a Eu
 - rotation (`number`) - The rotation of the rhythm (default: 0).
 
 ```tsx
-euclideanSilences(8, 3);
+euclideanSilences(8, 3)
 // Returns [1, 3, 4, 6, 7]
 ```
 
@@ -265,7 +276,7 @@ Splits an array into chunks based on a pattern.
 - pattern (`number[]`) - The pattern to split the array with.
 
 ```tsx
-patternChunks([1, 2, 3, 4, 5, 6, 7, 8], [1, 2, 3]);
+patternChunks([1, 2, 3, 4, 5, 6, 7, 8], [1, 2, 3])
 // Returns [[1], [2, 3], [4, 5, 6], [7], [8]]
 ```
 
@@ -278,13 +289,13 @@ Converts an array of binary digits to an array of indices where the digit is 1.
 - binary (`number[]`) - An array of binary digits (0 or 1).
 
 ```tsx
-binaryToIndices([1, 0, 1, 1, 0, 1]);
+binaryToIndices([1, 0, 1, 1, 0, 1])
 // Returns [0, 2, 3, 5]
 
-binaryToIndices([1, 1, 1, 1, 1]);
+binaryToIndices([1, 1, 1, 1, 1])
 // Returns [0, 1, 2, 3, 4]
 
-binaryToIndices([0, 0, 0, 0, 0]);
+binaryToIndices([0, 0, 0, 0, 0])
 // Returns []
 ```
 
@@ -299,16 +310,33 @@ Converts an array of indices to a binary array where the indices are 1 and the o
 
 ```tsx
 // Basic usage
-indicesToBinary([0, 2, 4], 5);
+indicesToBinary([0, 2, 4], 5)
 // Returns [1, 0, 1, 0, 1]
 
 // Ignoring negative indices
-indicesToBinary([0, -1, 2, -2, 4], 5);
+indicesToBinary([0, -1, 2, -2, 4], 5)
 // Returns [1, 0, 1, 0, 1]
 
 // Indices outside range are ignored
-indicesToBinary([0, 2, 4, 6], 5);
+indicesToBinary([0, 2, 4, 6], 5)
 // Returns [1, 0, 1, 0, 1]
 ```
 
 <!-- INSERT GENERATED DOCS END -->
+
+<!-- infuser start development -->
+<!-- infuser end development -->
+
+<!-- infuser start notes -->
+<!-- infuser end notes -->
+
+<!-- infuser start license -->  
+  
+## License  
+
+This library is open source software released under the MIT license. See the LICENSE file for more information.
+
+I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.
+  
+  
+<!-- infuser end license -->

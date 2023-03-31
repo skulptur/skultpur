@@ -1,18 +1,29 @@
-## Motivation
+<!-- infuser start title -->
+# lightcast
+<!-- infuser end title -->
 
+<!-- infuser start description -->
 The Pub/Sub pattern is needed every now and then and this library is a no dependency, tiny and typesafe solution.
+<!-- infuser end description -->
 
-## Get started
+<!-- infuser start installation -->  
+  
+## Installation  
+Yarn  
+```bash  
+yarn add lightcast  
+```  
+NPM  
+```bash  
+npm install lightcast --save  
+```  
+  
+<!-- infuser end installation -->
 
-Install
+<!-- infuser start usage -->
+<!-- infuser end usage -->
 
-```bash
-npm install --save lightcast
-# or
-yarn add lightcast
-```
-
-Use
+## Use
 
 ```typescript
 import { createPubSub } from 'lightcast'
@@ -68,3 +79,20 @@ const loader = createLoader({
   // ...
 })
 ```
+
+<!-- infuser start development -->
+<!-- infuser end development -->
+
+<!-- infuser start notes -->
+<!-- infuser end notes -->
+
+<!-- infuser start license -->  
+  
+## License  
+
+This library is open source software released under the MIT license. See the LICENSE file for more information.
+
+I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.
+  
+  
+<!-- infuser end license -->
