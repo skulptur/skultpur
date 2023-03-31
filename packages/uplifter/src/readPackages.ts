@@ -6,6 +6,7 @@ import {
   isPackageJsonSchema,
   PackageJsonSchema,
 } from "./packageJsonSchema";
+import { getDocsForPackage } from "./getDocsForPackage";
 
 async function checkIfExists(path: string): Promise<boolean> {
   try {
@@ -49,8 +50,19 @@ export async function readPackages(searchDir: string) {
         );
       }
 
+      const {
+        installYarn,
+        installNpm,
+        notice,
+        licenseNotice,
+      } = getDocsForPackage(data);
+
       return {
         data,
+        installYarn,
+        installNpm,
+        notice,
+        licenseNotice,
         packageJsonPath: absolutePath,
         packagePath,
         readmePath,
