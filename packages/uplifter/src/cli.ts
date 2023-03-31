@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { readPackageJsonFiles } from ".";
+import { readPackageJsonFiles } from "./readPackageJsonFiles";
 
 // Example usage
 readPackageJsonFiles("..")
