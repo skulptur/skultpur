@@ -14,8 +14,8 @@ Returns the default comment style for a given file extension
 export function getDefaultCommentStyle(
   fileExtension: string
 ): CommentStyle | null {
-  const start = "start";
-  const end = "end";
+  const start = "infuser start";
+  const end = "infuser end";
 
   const blockComment: CommentStyle = {
     start: `/* ${start} $ */`,

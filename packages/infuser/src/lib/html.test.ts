@@ -6,8 +6,8 @@ import {
 } from "./lib";
 
 const htmlCommentStyle = {
-  start: "<!-- start $ -->",
-  end: "<!-- end $ -->",
+  start: "<!-- infuser start $ -->",
+  end: "<!-- infuser end $ -->",
 };
 
 const htmlFileContent = `<!DOCTYPE html>
@@ -16,8 +16,8 @@ const htmlFileContent = `<!DOCTYPE html>
   <title>Page Title</title>
 </head>
 <body>
-  <!-- start slot1 -->Old content 1<!-- end slot1 -->
-  <!-- start slot2 -->Old content 2<!-- end slot2 -->
+  <!-- infuser start slot1 -->Old content 1<!-- infuser end slot1 -->
+  <!-- infuser start slot2 -->Old content 2<!-- infuser end slot2 -->
 </body>
 </html>
 `;
@@ -28,8 +28,8 @@ const newHtmlFileContent = `<!DOCTYPE html>
   <title>Page Title</title>
 </head>
 <body>
-  <!-- start slot1 -->New content 1<!-- end slot1 -->
-  <!-- start slot2 -->Old content 2<!-- end slot2 -->
+  <!-- infuser start slot1 -->New content 1<!-- infuser end slot1 -->
+  <!-- infuser start slot2 -->Old content 2<!-- infuser end slot2 -->
 </body>
 </html>
 `;
