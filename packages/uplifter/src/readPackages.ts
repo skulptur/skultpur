@@ -4,6 +4,7 @@ import path from "path";
 import {
   packageJsonSchemaValidator,
   isPackageJsonSchema,
+  PackageJsonSchema,
 } from "./packageJsonSchema";
 
 async function checkIfExists(path: string): Promise<boolean> {
@@ -14,6 +15,11 @@ async function checkIfExists(path: string): Promise<boolean> {
     return false;
   }
 }
+
+type Awaited<T> = T extends PromiseLike<infer U> ? Awaited<U> : T;
+type ArrayElement<T extends any[]> = T extends (infer U)[] ? U : never;
+// get the return type, unwrap the promise and get the type of element of array
+export type Package = ArrayElement<Awaited<ReturnType<typeof readPackages>>>;
 
 export async function readPackages(searchDir: string) {
   const pattern = `${searchDir}/*/package.json`;
@@ -31,7 +37,7 @@ export async function readPackages(searchDir: string) {
   const packageJsons = await Promise.all(
     filePaths.map(async (filePath) => {
       const contents = await fs.readFile(filePath, "utf8");
-      const data = JSON.parse(contents);
+      const data = JSON.parse(contents) as PackageJsonSchema;
       const absolutePath = path.resolve(filePath);
       const packagePath = path.dirname(absolutePath);
       const readmePath = path.resolve(packagePath, "README.md");

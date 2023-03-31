@@ -1,3 +1,5 @@
+import { times } from 'data-fns'
+
 export const lineBreak = () => '  \n'
 
 export const bold = (str: string) => wrap('**', str)
@@ -7,7 +9,7 @@ export const code = (language: string, str: string) =>
 
 // TODO: clamp 1 - 6
 export const heading = (level: number, str: string) =>
-  spaces([join(times(always('#'), level)), str])
+  spaces([join(times(level, () => '#')), str])
 
 export const image = (alt: string) => (url: string) => `![${alt}](${url})`
 
@@ -60,8 +62,6 @@ export const table = (rows: Array<Array<string>>) => {
 export const unordered = (stringArray: Array<string>) =>
   prefix(lineBreak(), lines(stringArray.map(str => prefix('* ', str))))
 
-export const always = <T>(value: T) => () => value
-
 export const join = (stringArray: Array<string>) => stringArray.join('')
 
 export const joinWith = (separator: string, stringArray: Array<string>) =>
@@ -74,9 +74,6 @@ export const postfix = (str1: string, str2: string) => `${str2}${str1}`
 export const spaces = (stringArray: Array<string>) => stringArray.join(' ')
 
 export const lines = (stringArray: Array<string>) => stringArray.join('  \n')
-
-export const times = <T>(callback: (index: number) => T, length: number) =>
-  [...new Array(length)].map((_, index) => callback(index))
 
 export const wrap = (wrapper: string, str: string) =>
   `${wrapper}${str}${wrapper}`

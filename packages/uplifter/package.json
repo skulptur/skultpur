@@ -38,6 +38,7 @@
     "@sinclair/typebox": "^0.26.8",
     "commander": "^10.0.0",
     "typescript": "^5.0.2",
-    "infuser": "*"
+    "infuser": "*",
+    "markdown-fns": "*"
   }
 }

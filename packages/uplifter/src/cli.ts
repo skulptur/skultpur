@@ -1,12 +1,17 @@
 #!/usr/bin/env node
 
 import { readPackages } from "./readPackages";
-import { readMarkdownFiles } from "./readMarkdownFiles";
+import { infuseReadmes } from "./infuseReadmes";
 
 // Example usage
 readPackages("..")
-  .then((packageJsons) => {
-    console.log(packageJsons);
+  .then((packages) => {
+    console.log(packages);
+    return Promise.all(
+      packages.map((pkg) => {
+        return infuseReadmes(pkg);
+      })
+    );
   })
   .catch((err) => {
     console.error(err);
