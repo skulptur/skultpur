@@ -1,11 +1,25 @@
 #!/usr/bin/env node
 
 import { readPackageJsonFiles } from "./readPackageJsonFiles";
+import { readMarkdownFiles } from "./readMarkdownFiles";
+
+// // Example usage
+// readPackageJsonFiles("..")
+//   .then((packageJsons) => {
+//     console.log(packageJsons);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
 
 // Example usage
-readPackageJsonFiles("..")
-  .then((packageJsons) => {
-    console.log(packageJsons);
+readMarkdownFiles("..")
+  .then((markdownFiles) => {
+    markdownFiles.forEach((file) => {
+      if (file.slots.length) {
+        console.log(file.filePath, file.slots);
+      }
+    });
   })
   .catch((err) => {
     console.error(err);

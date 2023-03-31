@@ -1,10 +1,10 @@
 import glob from "glob";
-import { readFile } from "infuser";
+import { readFile, getSlots } from "infuser";
 
 export async function readMarkdownFiles(searchDir: string) {
   const pattern = `${searchDir}/*/*.md`;
 
-  const files = await new Promise<string[]>((resolve, reject) => {
+  const filePaths = await new Promise<string[]>((resolve, reject) => {
     glob(pattern, (err, files) => {
       if (err) {
         reject(err);
@@ -15,8 +15,19 @@ export async function readMarkdownFiles(searchDir: string) {
   });
 
   const contents = await Promise.all(
-    files.map(async (file) => {
-      return readFile(file);
+    filePaths.map(async (filePath) => {
+      const openedFile = await readFile(filePath);
+      const slots = getSlots(
+        openedFile.fileContent,
+        [],
+        openedFile.commentStyle
+      );
+
+      return {
+        filePath,
+        slots,
+        ...openedFile,
+      };
     })
   );
 
