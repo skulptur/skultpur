@@ -27,8 +27,8 @@ export const getImageFromUrl = async (imageUrl: string): Promise<BufferWithInfo>
   ctx.clearRect(0, 0, canvas.width, canvas.height)
   canvas.width = 0
   canvas.height = 0
-  image.src = ''
   canvas.remove()
+  image.src = ''
 
   return {
     buffer: imageData.data,

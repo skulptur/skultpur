@@ -2,7 +2,7 @@ import { getImageChannelCount } from "./getImageChannelCount";
 import { nearestNeighbor } from "./samplingMethods";
 import { BufferWithInfo, SamplingMethod } from "./types";
 
-export function ScaleBuffer(
+export function scaleBuffer(
   bufferWithInfo: BufferWithInfo,
   targetWidth: number,
   targetHeight: number,

@@ -1,5 +1,5 @@
 import { nearestNeighbor } from "./samplingMethods";
-import { ScaleBuffer } from "./ScaleBuffer";
+import { scaleBuffer } from "./sscaleBuffer";
 import { BufferWithInfo } from "./types";
 
 export function scaleBufferToMaxSize(
@@ -21,7 +21,7 @@ export function scaleBufferToMaxSize(
   const newWidth = scaleFactor * width;
   const newHeight = scaleFactor * height;
 
-  const scaledImage = ScaleBuffer(
+  const scaledImage = scaleBuffer(
     bufferWithInfo,
     newWidth,
     newHeight,

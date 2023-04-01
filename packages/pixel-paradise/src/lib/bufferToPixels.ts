@@ -5,7 +5,7 @@ import { BufferWithInfo, PixelsWithInfo, RGBColor } from "./types";
  * @param {Buffer | Uint8ClampedArray} imageData - The image data to convert along with its width and height.
  * @returns {number[][]} An array of pixels where each pixel is represented as an array of three RGB values.
  */
-export function imageDataToPixels(imageData: BufferWithInfo): PixelsWithInfo {
+export function bufferToPixels(imageData: BufferWithInfo): PixelsWithInfo {
   const { buffer, width, height } = imageData;
 
   const pixels: RGBColor[] = [];

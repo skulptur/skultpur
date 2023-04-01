@@ -1,5 +1,5 @@
 import { nearestNeighbor } from "./samplingMethods";
-import { ScaleBuffer } from "./ScaleBuffer";
+import { scaleBuffer } from "./sscaleBuffer";
 import { BufferWithInfo } from "./types";
 
 describe("scaleImage", () => {
@@ -47,7 +47,7 @@ describe("scaleImage", () => {
       height: newHeight,
     };
 
-    const scaledImageData = ScaleBuffer(
+    const scaledImageData = scaleBuffer(
       imageData,
       newWidth,
       newHeight,
@@ -70,7 +70,7 @@ describe("scaleImage", () => {
       newWidth * newHeight * channels
     );
 
-    const scaledImageData = ScaleBuffer(
+    const scaledImageData = scaleBuffer(
       emptyImageData,
       newWidth,
       newHeight,
@@ -85,7 +85,7 @@ describe("scaleImage", () => {
     const newWidth = imageData.width;
     const newHeight = imageData.height;
 
-    const scaledImageData = ScaleBuffer(
+    const scaledImageData = scaleBuffer(
       imageData,
       newWidth,
       newHeight,
@@ -104,7 +104,7 @@ describe("scaleImage", () => {
       height: newHeight,
     };
 
-    const scaledImageData = ScaleBuffer(
+    const scaledImageData = scaleBuffer(
       imageData,
       newWidth,
       newHeight,
@@ -123,7 +123,7 @@ describe("scaleImage", () => {
       height: newHeight,
     };
 
-    const scaledImageData = ScaleBuffer(
+    const scaledImageData = scaleBuffer(
       imageData,
       newWidth,
       newHeight,
@@ -155,7 +155,7 @@ describe("scaleImage", () => {
       height: newHeight,
     };
 
-    const scaledImageData = ScaleBuffer(
+    const scaledImageData = scaleBuffer(
       imageData,
       newWidth,
       newHeight,

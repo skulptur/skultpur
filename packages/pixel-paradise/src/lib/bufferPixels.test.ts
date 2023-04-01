@@ -1,4 +1,4 @@
-import { imageDataToPixels } from "./bufferToPixels";
+import { bufferToPixels } from "./bufferToPixels";
 import { BufferWithInfo, PixelsWithInfo } from "./types";
 
 describe("imageUtils", () => {
@@ -20,7 +20,7 @@ describe("imageUtils", () => {
 
   describe("imageDataToPixels", () => {
     it("should convert image data to an array of pixels", () => {
-      expect(imageDataToPixels(imageData)).toEqual(pixelData);
+      expect(bufferToPixels(imageData)).toEqual(pixelData);
     });
   });
 
