@@ -516,7 +516,12 @@ export const packages = {
     "usage": {
       "installYarn": "yarn add infuser",
       "installNpm": "npm install infuser --save",
-      "examples": []
+      "examples": [
+        {
+          "name": "Node",
+          "content": "import { updateFile } from \"infuser\";\n\nconst filePath = \"./example.html\";\nconst updates = [\n  {\n    slotName: \"header\",\n    newContent: \"<h1>New header content</h1>\",\n  },\n  {\n    slotName: \"footer\",\n    newContent: \"<p>New footer content</p>\",\n  },\n];\n\nupdateFile(filePath, updates)\n  .then(() => {\n    console.log(\"File successfully updated\");\n  })\n  .catch((error) => {\n    console.error(\"An error occurred:\", error);\n  });\n"
+        }
+      ]
     }
   },
   "karabiner-ts": {
