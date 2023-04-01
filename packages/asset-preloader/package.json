@@ -1,0 +1,77 @@
+{
+  "name": "asset-preloader",
+  "private": false,
+  "version": "0.1.4",
+  "author": "skulptur",
+  "license": "MIT",
+  "description": "A tiny asset preloader for the browser via XHR2. It can preload assets of different file types and composite progress together, with support for multiple event subscriptions.",
+  "module": "dist/asset-preloader.esm.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/asset-preloader",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skulptur/skultpur.git"
+  },
+  "keywords": [
+    "typescript",
+    "asset",
+    "loader",
+    "preloader",
+    "progress"
+  ],
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "jsxSingleQuote": true,
+    "arrowParens": "always"
+  },
+  "size-limit": [
+    {
+      "path": "dist/asset-preloader.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/asset-preloader.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^4.10.2",
+    "husky": "^6.0.0",
+    "size-limit": "^4.10.2",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.2.0",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "lightcast": "^0.1.3"
+  }
+}

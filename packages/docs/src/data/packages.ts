@@ -1,4 +1,87 @@
 export const packages = {
+  "asset-preloader": {
+    "name": "asset-preloader",
+    "private": false,
+    "version": "0.1.4",
+    "author": "skulptur",
+    "license": "MIT",
+    "description": "A tiny asset preloader for the browser via XHR2. It can preload assets of different file types and composite progress together, with support for multiple event subscriptions.",
+    "module": "dist/asset-preloader.esm.js",
+    "main": "dist/index.js",
+    "typings": "dist/index.d.ts",
+    "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/asset-preloader",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/skulptur/skultpur.git"
+    },
+    "keywords": [
+      "typescript",
+      "asset",
+      "loader",
+      "preloader",
+      "progress"
+    ],
+    "files": [
+      "dist",
+      "src"
+    ],
+    "engines": {
+      "node": ">=10"
+    },
+    "scripts": {
+      "start": "tsdx watch",
+      "build": "tsdx build",
+      "test": "tsdx test --passWithNoTests",
+      "lint": "tsdx lint",
+      "prepare": "tsdx build",
+      "size": "size-limit",
+      "analyze": "size-limit --why"
+    },
+    "husky": {
+      "hooks": {
+        "pre-commit": "tsdx lint"
+      }
+    },
+    "prettier": {
+      "printWidth": 100,
+      "tabWidth": 2,
+      "useTabs": false,
+      "semi": false,
+      "singleQuote": true,
+      "trailingComma": "es5",
+      "bracketSpacing": true,
+      "jsxBracketSameLine": false,
+      "jsxSingleQuote": true,
+      "arrowParens": "always"
+    },
+    "size-limit": [
+      {
+        "path": "dist/asset-preloader.cjs.production.min.js",
+        "limit": "10 KB"
+      },
+      {
+        "path": "dist/asset-preloader.esm.js",
+        "limit": "10 KB"
+      }
+    ],
+    "devDependencies": {
+      "@size-limit/preset-small-lib": "^4.10.2",
+      "husky": "^6.0.0",
+      "size-limit": "^4.10.2",
+      "tsdx": "^0.14.1",
+      "tslib": "^2.2.0",
+      "typescript": "^4.2.4"
+    },
+    "dependencies": {
+      "lightcast": "^0.1.3"
+    },
+    "readme": "## `asset-preloader`\n\nA tiny asset preloader for the browser via XHR2. It can preload assets of different file types and composite progress together, with support for multiple event subscriptions.\n\n## Get started\n\nInstall\n\n```bash\nyarn add asset-preloader\n# or\nnpm install --save asset-preloader\n```\n\nUse\n\n```typescript\nimport { createPreloader } from 'asset-preloader'\n\nconst preloader = createPreloader()\n\nconst urls = [\n  'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',\n  'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',\n]\n\nurls.forEach((url) => preloader.load(url))\n\npreloader.start()\n\n// event subscriptions\npreloader.onComplete((assets) => {\n  console.log('completed', assets)\n})\n\npreloader.onProgress((event) => {\n  console.log(Math.round(event.progress * 100) + '%')\n})\n\npreloader.onFetched((assets) => {\n  console.log('fetched', assets)\n})\n\npreloader.onError((assets) => {\n  console.log('error', assets)\n})\n```\n\n[Examples](https://github.com/skulptur/asset-preloader/tree/master/example)\n\n## Canceling\n\nThe asset preloader can be canceled at any time during loading. When calling `preload.cancel()` all assets already preloaded will be available for use, but the download of pending assets will be abandoned and `status` will be set to `0`.\n\n```typescript\npreload.onCancel((items) => {\n  console.log(items)\n})\n\npreload.cancel()\n```\n",
+    "usage": {
+      "installYarn": "yarn add asset-preloader",
+      "installNpm": "npm install asset-preloader --save",
+      "examples": []
+    }
+  },
   "color-supreme": {
     "name": "color-supreme",
     "version": "0.1.1",
@@ -582,7 +665,7 @@ export const packages = {
       "tslib": "^2.0.1",
       "typescript": "^4.0.2"
     },
-    "readme": "<!-- infuser start title -->\n\n# interpolation-fns\n\n<!-- infuser end title -->\n<!-- infuser start description -->\n\nFunctions for working with interpolation\n\n<!-- infuser end description -->\n\n<!-- infuser start installation -->\n\n## Installation\n\nYarn\n\n```bash\nyarn add interpolation-fns\n```\n\nNPM\n\n```bash\nnpm install interpolation-fns --save\n```\n\n<!-- infuser end installation -->\n\n<!-- infuser start usage -->\n<!-- infuser end usage -->\n\n<!-- infuser start development -->\n<!-- infuser end development -->\n\n<!-- infuser start footer -->\n\n## Notice\n\nThis library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.\n\n<!-- infuser end footer -->\n",
+    "readme": "<!-- infuser start title -->  \n# interpolation-fns  \n<!-- infuser end title -->\n<!-- infuser start description -->  \nFunctions for working with interpolation  \n<!-- infuser end description -->\n\n<!-- infuser start installation -->  \n## Installation  \nYarn  \n```bash  \nyarn add interpolation-fns  \n```  \nNPM  \n```bash  \nnpm install interpolation-fns --save  \n```  \n<!-- infuser end installation -->\n\n<!-- infuser start usage -->\n<!-- infuser end usage -->\n\n<!-- infuser start development -->\n<!-- infuser end development -->\n\n<!-- infuser start footer -->  \n## Notice  \nThis library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.  \n<!-- infuser end footer -->\n",
     "usage": {
       "installYarn": "yarn add interpolation-fns",
       "installNpm": "npm install interpolation-fns --save",
