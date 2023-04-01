@@ -2,6 +2,7 @@ import path from "path";
 import fs from "fs/promises";
 import { readdir } from "fs/promises";
 import { join } from "path";
+import { upperCaseFirst } from "upper-case-first";
 
 async function getTsFilesInDir(dirPath: string): Promise<string[]> {
   try {
@@ -31,7 +32,7 @@ export async function getDocsExamples(name: string) {
       const name = path.basename(filePath, path.extname(filePath));
       const content = await fs.readFile(filePath, "utf-8");
       return {
-        name,
+        name: upperCaseFirst(name),
         content,
       };
     })

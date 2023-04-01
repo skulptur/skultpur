@@ -3,7 +3,6 @@ import { getPackagePaths } from "./getPackagePaths";
 import { updateFile, SlotUpdate } from "infuser";
 import { code, heading, lines } from "markdown-fns";
 import { getUsage, getLicenseNotice } from "./getDocsForPackage";
-import { upperCaseFirst } from "upper-case-first";
 
 export async function infuseReadmes(pkg: Package) {
   try {
@@ -49,10 +48,7 @@ export async function infuseReadmes(pkg: Package) {
           heading(2, "Use"),
           ...docs.examples
             .map((example) => {
-              return lines([
-                upperCaseFirst(example.name),
-                code("typescript", example.content),
-              ]);
+              return lines([example.name, code("typescript", example.content)]);
             })
             .flat(1),
           "",

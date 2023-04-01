@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mantine/core";
-import { AppContainer } from "../../../components/AppContainer";
-import { NestedNavbar } from "../../../components/NestedNavbar";
+import { AppContainer } from "../../components/AppContainer";
+import { NestedNavbar } from "../../components/NestedNavbar";
 import { getDominantColors, rgbToHex } from "color-supreme";
 import { getImageFromUrl } from "pixel-paradise";
-import { LibraryReadme } from "../../../components/LibraryReadme";
+import { LibraryReadme } from "../../components/LibraryReadme";
 
 const getColors = async (url: string, colors = 5) => {
   const pixels = await getImageFromUrl(url);

@@ -72,6 +72,20 @@ export const packages = {
     "dependencies": {
       "ml-kmeans": "^6.0.0",
       "pixel-paradise": "*"
+    },
+    "usage": {
+      "installYarn": "yarn add color-supreme",
+      "installNpm": "npm install color-supreme --save",
+      "examples": [
+        {
+          "name": "Browser",
+          "content": "import { getDominantColors, rgbToHex } from \"color-supreme\";\nimport { getImageFromUrl } from \"pixel-paradise\";\n\nexport const getColors = async (url: string, colors = 5) => {\n  const pixels = await getImageFromUrl(url);\n  return getDominantColors(pixels, colors).map(rgbToHex);\n};\n\n// getColors('your image url').then(console.log)\n"
+        },
+        {
+          "name": "Node",
+          "content": "import sharp from \"sharp\";\nimport { getDominantColors, rgbToHex } from \"color-supreme\";\n\nexport const getColors = async (imagePath: string, colors = 5) => {\n  const { data, info } = await sharp(imagePath)\n    .raw()\n    .toBuffer({ resolveWithObject: true });\n\n  const bufferWithInfo = {\n    buffer: data,\n    width: info.width,\n    height: info.height,\n  };\n\n  return getDominantColors(bufferWithInfo, colors).map(rgbToHex);\n};\n\n// getColors(\"your image path\").then(console.log);\n"
+        }
+      ]
     }
   },
   "common-fns": {
@@ -143,6 +157,11 @@ export const packages = {
       "tsdx": "^0.14.1",
       "tslib": "^2.2.0",
       "typescript": "^4.2.4"
+    },
+    "usage": {
+      "installYarn": "yarn add common-fns",
+      "installNpm": "npm install common-fns --save",
+      "examples": []
     }
   },
   "concat-ts": {
@@ -181,6 +200,11 @@ export const packages = {
     "dependencies": {
       "commander": "^10.0.0",
       "typescript": "^5.0.2"
+    },
+    "usage": {
+      "installYarn": "yarn add concat-ts",
+      "installNpm": "npm install concat-ts --save",
+      "examples": []
     }
   },
   "copilot-x": {
@@ -218,6 +242,11 @@ export const packages = {
     "dependencies": {
       "commander": "^10.0.0",
       "typescript": "^5.0.2"
+    },
+    "usage": {
+      "installYarn": "yarn add copilot-x",
+      "installNpm": "npm install copilot-x --save",
+      "examples": []
     }
   },
   "create-package": {
@@ -260,6 +289,11 @@ export const packages = {
       "commander": "^10.0.0",
       "enquirer": "^2.3.6",
       "typescript": "^5.0.2"
+    },
+    "usage": {
+      "installYarn": "yarn add create-package",
+      "installNpm": "npm install create-package --save",
+      "examples": []
     }
   },
   "data-fns": {
@@ -338,6 +372,16 @@ export const packages = {
     },
     "dependencies": {
       "unit-fns": "^0.1.6"
+    },
+    "usage": {
+      "installYarn": "yarn add data-fns",
+      "installNpm": "npm install data-fns --save",
+      "examples": [
+        {
+          "name": "Browser",
+          "content": "import { times } from \"data-fns\";\n\nconsole.log(times(5, (index) => index * 2));\n"
+        }
+      ]
     }
   },
   "docs": {
@@ -415,6 +459,11 @@ export const packages = {
       "uplifter": "*",
       "docs": "*",
       "note-fns": "*"
+    },
+    "usage": {
+      "installYarn": "yarn add docs",
+      "installNpm": "npm install docs --save",
+      "examples": []
     }
   },
   "infuser": {
@@ -463,6 +512,11 @@ export const packages = {
     "dependencies": {
       "commander": "^10.0.0",
       "typescript": "^5.0.2"
+    },
+    "usage": {
+      "installYarn": "yarn add infuser",
+      "installNpm": "npm install infuser --save",
+      "examples": []
     }
   },
   "karabiner-ts": {
@@ -533,6 +587,11 @@ export const packages = {
     "dependencies": {
       "@types/lodash.castarray": "^4.4.6",
       "lodash.castarray": "^4.4.0"
+    },
+    "usage": {
+      "installYarn": "yarn add karabiner-ts",
+      "installNpm": "npm install karabiner-ts --save",
+      "examples": []
     }
   },
   "kween": {
@@ -594,6 +653,16 @@ export const packages = {
     },
     "dependencies": {
       "lib": "^4.1.2"
+    },
+    "usage": {
+      "installYarn": "yarn add kween",
+      "installNpm": "npm install kween --save",
+      "examples": [
+        {
+          "name": "Browser",
+          "content": "import { tween, bounceInOut } from \"kween\";\n\ntween({\n  duration: 1000, // in milliseconds\n  ease: bounceInOut,\n  onUpdate: (value, progress) => {\n    // value is eased, progress is linear\n    console.log(value, progress);\n  },\n});\n"
+        }
+      ]
     }
   },
   "lightcast": {
@@ -668,7 +737,12 @@ export const packages = {
       "tslib": "^2.4.0",
       "typescript": "^4.6.3"
     },
-    "dependencies": {}
+    "dependencies": {},
+    "usage": {
+      "installYarn": "yarn add lightcast",
+      "installNpm": "npm install lightcast --save",
+      "examples": []
+    }
   },
   "loop-fns": {
     "name": "loop-fns",
@@ -734,6 +808,11 @@ export const packages = {
       "tsdx": "^0.14.1",
       "tslib": "^2.4.0",
       "typescript": "^4.6.3"
+    },
+    "usage": {
+      "installYarn": "yarn add loop-fns",
+      "installNpm": "npm install loop-fns --save",
+      "examples": []
     }
   },
   "markdown-fns": {
@@ -789,6 +868,11 @@ export const packages = {
     },
     "dependencies": {
       "data-fns": "*"
+    },
+    "usage": {
+      "installYarn": "yarn add markdown-fns",
+      "installNpm": "npm install markdown-fns --save",
+      "examples": []
     }
   },
   "note-fns": {
@@ -870,6 +954,11 @@ export const packages = {
       "tslib": "^2.1.0",
       "type-fest": "^1.0.2",
       "typescript": "^4.1.3"
+    },
+    "usage": {
+      "installYarn": "yarn add note-fns",
+      "installNpm": "npm install note-fns --save",
+      "examples": []
     }
   },
   "perfect-time": {
@@ -948,6 +1037,11 @@ export const packages = {
     "dependencies": {
       "audio-fns": "^0.3.2",
       "lightcast": "^0.1.5"
+    },
+    "usage": {
+      "installYarn": "yarn add perfect-time",
+      "installNpm": "npm install perfect-time --save",
+      "examples": []
     }
   },
   "pixel-paradise": {
@@ -993,6 +1087,11 @@ export const packages = {
     },
     "dependencies": {
       "vite-plugin-dts": "^2.1.0"
+    },
+    "usage": {
+      "installYarn": "yarn add pixel-paradise",
+      "installNpm": "npm install pixel-paradise --save",
+      "examples": []
     }
   },
   "random-fns": {
@@ -1067,6 +1166,11 @@ export const packages = {
     "dependencies": {
       "open-simplex-noise": "^2.5.0",
       "unit-fns": "^0.1.7"
+    },
+    "usage": {
+      "installYarn": "yarn add random-fns",
+      "installNpm": "npm install random-fns --save",
+      "examples": []
     }
   },
   "reactive-fns": {
@@ -1169,6 +1273,11 @@ export const packages = {
       "tsdx": "^0.14.1",
       "tslib": "^2.2.0",
       "typescript": "^4.2.4"
+    },
+    "usage": {
+      "installYarn": "yarn add reactive-fns",
+      "installNpm": "npm install reactive-fns --save",
+      "examples": []
     }
   },
   "unit-fns": {
@@ -1227,7 +1336,12 @@ export const packages = {
       "tslib": "^2.0.0",
       "typescript": "^3.9.6"
     },
-    "dependencies": {}
+    "dependencies": {},
+    "usage": {
+      "installYarn": "yarn add unit-fns",
+      "installNpm": "npm install unit-fns --save",
+      "examples": []
+    }
   },
   "uplifter": {
     "name": "uplifter",
@@ -1273,6 +1387,11 @@ export const packages = {
       "markdown-fns": "*",
       "typescript": "^5.0.2",
       "upper-case-first": "^2.0.2"
+    },
+    "usage": {
+      "installYarn": "yarn add uplifter",
+      "installNpm": "npm install uplifter --save",
+      "examples": []
     }
   }
 }

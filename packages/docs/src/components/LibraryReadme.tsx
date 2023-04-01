@@ -7,31 +7,6 @@ export type LibraryReadmeProp = {
   libraryName: keyof typeof packages;
 };
 
-const browserExample = `
-import { getDominantColors, rgbToHex } from 'color-supreme'
-import { getImageFromUrl } from 'pixel-paradise'
-
-const getColors = async (url: string, colors = 5) => {
-  const pixels = await getImageFromUrl(url)
-  return getDominantColors(pixels, colors).map(rgbToHex)
-}
-getColors('your image url').then(console.log)
-`;
-const nodeExample = `
-import sharp from 'sharp'
-import { getDominantColors, imageToPixels, rgbToHex } from 'color-supreme'
-
-const getColors = async (path: string, colors = 5) => {
-  const { data, info } = await sharp(path)
-    .raw()
-    .toBuffer({ resolveWithObject: true })
-  const pixels = imageToPixels(data, info.width!, info.height!)
-
-  return getDominantColors(pixels, colors).map(rgbToHex)
-}
-
-getColors('your image path').then(console.log)
-`;
 export function LibraryReadme({ libraryName }: LibraryReadmeProp) {
   const theme = useMantineTheme();
 
@@ -54,24 +29,29 @@ export function LibraryReadme({ libraryName }: LibraryReadmeProp) {
           <Text mb="xl">{pkg.description}</Text>
 
           <Text mb="sm">Install with yarn</Text>
-          <Prism mb="lg" language="bash">{`yarn add ${libraryName}`}</Prism>
+          <Prism mb="lg" language="bash">
+            {pkg.usage.installYarn}
+          </Prism>
           <Text mb="sm">Install with npm</Text>
-          <Prism mb="lg" language="bash">{`yarn add ${libraryName}`}</Prism>
-
-          <Title mb="lg" order={2}>
-            Use
-          </Title>
-          <Text mb="lg">Extracting dominant colors:</Text>
-
-          <Text mb="sm">Browser</Text>
-          <Prism mb="lg" language="typescript">
-            {browserExample}
+          <Prism mb="lg" language="bash">
+            {pkg.usage.installNpm}
           </Prism>
 
-          <Text mb="sm">Node (example with sharp)</Text>
-          <Prism mb="lg" language="typescript">
-            {nodeExample}
-          </Prism>
+          {pkg.usage.examples.length > 0 && (
+            <Title mb="lg" order={2}>
+              Use
+            </Title>
+          )}
+          {pkg.usage.examples.map((example) => {
+            return (
+              <React.Fragment key={example.name}>
+                <Text mb="sm">{example.name}</Text>
+                <Prism mb="lg" language="typescript">
+                  {example.content}
+                </Prism>
+              </React.Fragment>
+            );
+          })}
         </Box>
       </Box>
     </>

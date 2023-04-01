@@ -1,15 +1,11 @@
 import React from "react";
 import { Navbar, ScrollArea, createStyles, rem } from "@mantine/core";
 import { LinksGroup } from "./LinksGroup";
+import { packages } from "../data/packages";
 
-const mainMenu = [
-  {
-    label: "color-supreme",
-  },
-  {
-    label: "social-matrix",
-  },
-];
+const mainMenu = Object.entries(packages)
+  .filter(([_name, pkg]) => !pkg.private)
+  .map(([label]) => ({ label }));
 
 const useStyles = createStyles((theme) => ({
   navbar: {
