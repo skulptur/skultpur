@@ -28,14 +28,18 @@ export function LibraryReadme({ libraryName }: LibraryReadmeProp) {
         <Box p="md" maw={1000} m="auto">
           <Text mb="xl">{pkg.description}</Text>
 
-          <Text mb="sm">Install with yarn</Text>
-          <Prism mb="lg" language="bash">
-            {pkg.usage.installYarn}
-          </Prism>
-          <Text mb="sm">Install with npm</Text>
-          <Prism mb="lg" language="bash">
-            {pkg.usage.installNpm}
-          </Prism>
+          {!pkg.private && (
+            <>
+              <Text mb="sm">Install with yarn</Text>
+              <Prism mb="lg" language="bash">
+                {pkg.usage.installYarn}
+              </Prism>
+              <Text mb="sm">Install with npm</Text>
+              <Prism mb="lg" language="bash">
+                {pkg.usage.installNpm}
+              </Prism>
+            </>
+          )}
 
           {pkg.usage.examples.length > 0 && (
             <Title mb="lg" order={2}>
