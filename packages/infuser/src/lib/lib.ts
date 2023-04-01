@@ -102,6 +102,7 @@ export function getSlotIndices(
   const startIndex = fileContent.indexOf(startComment);
   const endIndex = fileContent.indexOf(endComment);
 
+  // TODO: should we always error?
   if (startIndex === -1 || endIndex === -1) {
     throw new Error(
       `Content not found between ${startComment} and ${endComment}`
@@ -178,6 +179,33 @@ export function getSlotNames(
 }
 
 /**
+Gets the content of the named slot in a file, identified by the given comment style
+@param fileContent - The content of the file to search for the slot
+@param slotName - The name of the slot to get
+@param commentStyle - The style of comments used to identify the slot
+@returns An object containing the name and content of the named slot in the file
+*/
+export function getSlot(
+  fileContent: string,
+  slotName: string,
+  commentStyle: CommentStyleOrFileExtension
+): { slotName: string; content: string } | null {
+  const resolvedCommentStyle = resolveCommentStyle(commentStyle);
+  try {
+    const { startIndexRight, endIndexLeft } = getSlotIndices(
+      fileContent,
+      slotName,
+      resolvedCommentStyle
+    );
+    const content = fileContent.slice(startIndexRight, endIndexLeft);
+
+    return { slotName, content };
+  } catch {
+    return null;
+  }
+}
+
+/**
 Gets the content of all the named slots in a file, identified by the given comment style
 @param fileContent - The content of the file to search for slots
 @param slotNames - (optional) An array of the names of the slots to get; if not provided, all slots in the file will be returned
@@ -187,21 +215,17 @@ Gets the content of all the named slots in a file, identified by the given comme
 export function getSlots(
   fileContent: string,
   slotNames: string[],
-  commentStyle: CommentStyle
-) {
+  commentStyle: CommentStyleOrFileExtension
+): Array<{ slotName: string; content: string } | null> {
+  const resolvedCommentStyle = resolveCommentStyle(commentStyle);
   const names = slotNames.length
     ? slotNames
-    : getSlotNames(fileContent, commentStyle);
+    : getSlotNames(fileContent, resolvedCommentStyle);
   const slots: Array<{ slotName: string; content: string }> = [];
 
   for (const slotName of names) {
-    const { startIndexRight, endIndexLeft } = getSlotIndices(
-      fileContent,
-      slotName,
-      commentStyle
-    );
-    const content = fileContent.slice(startIndexRight, endIndexLeft);
-    slots.push({ slotName, content });
+    const slot = getSlot(fileContent, slotName, resolvedCommentStyle);
+    slots.push(slot);
   }
 
   return slots;

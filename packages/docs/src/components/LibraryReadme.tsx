@@ -2,7 +2,7 @@ import React from "react";
 import { Title, Box, useMantineTheme } from "@mantine/core";
 import { packages } from "../data/packages";
 import { useMarkdown } from "../hooks/useMarkdown";
-import { updateSlots } from "infuser";
+import { updateSlots, getSlot } from "infuser";
 
 export type LibraryReadmeProp = {
   libraryName: keyof typeof packages;
@@ -35,6 +35,8 @@ export function LibraryReadme({ libraryName }: LibraryReadmeProp) {
   // this remove first occurence is a quick and dirty way to remove the title
   // it is so we can style the title differently more easily
   const content = useMarkdown(updatedReadme);
+  const footerSlot = getSlot(pkg.readme, "footer", "md");
+  const footer = useMarkdown(footerSlot ? footerSlot.content : "");
 
   return (
     <>
@@ -82,6 +84,9 @@ export function LibraryReadme({ libraryName }: LibraryReadmeProp) {
             );
           })} */}
         </Box>
+      </Box>
+      <Box p="md" maw={1000} m="auto">
+        {footer}
       </Box>
     </>
   );
