@@ -23,8 +23,8 @@ async function getTsFilesInDir(dirPath: string): Promise<string[]> {
 }
 
 export async function getDocsExamples(name: string) {
-  const dirAbove = path.join(__dirname, "..", "..", "..");
-  const docExamples = path.resolve(dirAbove, "docs/src/examples/", name);
+  const packagesDir = path.join(__dirname, "..", "..", "..");
+  const docExamples = path.resolve(packagesDir, name, "usage");
 
   const examplePaths = await getTsFilesInDir(docExamples);
   const examples = Promise.all(

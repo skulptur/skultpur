@@ -1,40 +1,28 @@
-<!-- infuser start header -->
-
-# infuser
-
-If you're looking for an easy way to extract or update dynamic content within static files, this library has got you covered! With `getSlots`, you can quickly extract the content of slots or placeholders within your files. And with `updateSlots`, you can effortlessly replace the content of these slots with new content. Say goodbye to the hassle of manually updating static files with dynamic content. Let `infuser` do the heavy lifting for you and streamline your workflow like never before!
-
+<!-- infuser start header -->  
+# infuser  
+If you're looking for an easy way to extract or update dynamic content within static files, this library has got you covered! With `getSlots`, you can quickly extract the content of slots or placeholders within your files. And with `updateSlots`, you can effortlessly replace the content of these slots with new content. Say goodbye to the hassle of manually updating static files with dynamic content. Let `infuser` do the heavy lifting for you and streamline your workflow like never before!  
 <!-- infuser end header -->
 
-<!-- infuser start installation -->
-
-## Installation
-
-Yarn
-
-```bash
-yarn add infuser
-```
-
-NPM
-
-```bash
-npm install infuser --save
-```
-
+<!-- infuser start installation -->  
+## Installation  
+Yarn  
+```bash  
+yarn add infuser  
+```  
+NPM  
+```bash  
+npm install infuser --save  
+```  
 <!-- infuser end installation -->
 
-<!-- infuser start usage -->
-
-## Use
-
-Node
-
-```typescript
-import { updateFile } from "infuser";
+<!-- infuser start usage -->  
+## Use  
+Node  
+```typescript  
+import { updateFile, SlotUpdate } from "infuser";
 
 const filePath = "./example.html";
-const updates = [
+const updates: Array<SlotUpdate> = [
   {
     slotName: "header",
     newContent: "<h1>New header content</h1>",
@@ -52,8 +40,8 @@ updateFile(filePath, updates)
   .catch((error) => {
     console.error("An error occurred:", error);
   });
-```
-
+  
+```  
 <!-- infuser end usage -->
 
 ### File structure
@@ -69,17 +57,17 @@ Infuser library uses special comments to identify slots in a file. Here's an exa
     <title>Document</title>
   </head>
   <body>
-    <!-- infuser start header -->
+    <!-- infuser start my-header -->
     <h1>Original header content</h1>
-    <!-- infuser end header -->
+    <!-- infuser end my-header -->
 
     <div>
       <p>Content not inside a slot remains unchanged.</p>
     </div>
 
-    <!-- infuser start footer -->
+    <!-- infuser start my-footer -->
     <p>Original footer content</p>
-    <!-- infuser end footer -->
+    <!-- infuser end my-footer -->
   </body>
 </html>
 ```
@@ -91,10 +79,7 @@ Infuser supports some common file formats out of the box, and you can specify th
 <!-- infuser start development -->
 <!-- infuser end development -->
 
-<!-- infuser start footer -->
-
-## Notice
-
-This library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.
-
+<!-- infuser start footer -->  
+## Notice  
+This library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.  
 <!-- infuser end footer -->

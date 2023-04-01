@@ -519,7 +519,7 @@ export const packages = {
       "examples": [
         {
           "name": "Node",
-          "content": "import { updateFile } from \"infuser\";\n\nconst filePath = \"./example.html\";\nconst updates = [\n  {\n    slotName: \"header\",\n    newContent: \"<h1>New header content</h1>\",\n  },\n  {\n    slotName: \"footer\",\n    newContent: \"<p>New footer content</p>\",\n  },\n];\n\nupdateFile(filePath, updates)\n  .then(() => {\n    console.log(\"File successfully updated\");\n  })\n  .catch((error) => {\n    console.error(\"An error occurred:\", error);\n  });\n"
+          "content": "import { updateFile, SlotUpdate } from \"infuser\";\n\nconst filePath = \"./example.html\";\nconst updates: Array<SlotUpdate> = [\n  {\n    slotName: \"header\",\n    newContent: \"<h1>New header content</h1>\",\n  },\n  {\n    slotName: \"footer\",\n    newContent: \"<p>New footer content</p>\",\n  },\n];\n\nupdateFile(filePath, updates)\n  .then(() => {\n    console.log(\"File successfully updated\");\n  })\n  .catch((error) => {\n    console.error(\"An error occurred:\", error);\n  });\n"
         }
       ]
     }
@@ -654,7 +654,8 @@ export const packages = {
       "husky": "^4.2.5",
       "tsdx": "^0.13.1",
       "tslib": "^1.11.1",
-      "typescript": "^3.8.3"
+      "typescript": "^3.8.3",
+      "kween": "*"
     },
     "dependencies": {
       "lib": "^4.1.2"
@@ -665,7 +666,7 @@ export const packages = {
       "examples": [
         {
           "name": "Browser",
-          "content": "import { tween, bounceInOut } from \"kween\";\n\ntween({\n  duration: 1000, // in milliseconds\n  ease: bounceInOut,\n  onUpdate: (value, progress) => {\n    // value is eased, progress is linear\n    console.log(value, progress);\n  },\n});\n"
+          "content": "import { tween, bounceInOut } from 'kween'\n\ntween({\n  duration: 1000, // in milliseconds\n  ease: bounceInOut,\n  onUpdate: (value, progress) => {\n    // value is eased, progress is linear\n    console.log(value, progress)\n  },\n})\n"
         }
       ]
     }

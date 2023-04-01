@@ -1,7 +1,7 @@
-import { updateFile } from "infuser";
+import { updateFile, SlotUpdate } from "infuser";
 
 const filePath = "./example.html";
-const updates = [
+const updates: Array<SlotUpdate> = [
   {
     slotName: "header",
     newContent: "<h1>New header content</h1>",
