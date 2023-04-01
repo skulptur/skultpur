@@ -1,8 +1,12 @@
-<!-- infuser start title -->  
-# concat-ts  
+<!-- infuser start title -->
+
+# concat-ts
+
 <!-- infuser end title -->
-<!-- infuser start description -->  
-Simple CLI tool to concats exported typescript files.  
+<!-- infuser start description -->
+
+Simple CLI tool to concats exported typescript files.
+
 <!-- infuser end description -->
 
 ## Description
@@ -97,10 +101,6 @@ export default class Bar {
 
 As you can see this is a simple concat and things such as the default exports will not be fixed. That being said, the files are topologically imported.
 
-## License
-
-MIT License
-
 # Development
 
 ### **dev**
@@ -139,7 +139,10 @@ Cleans, then builds, then bundles into native executables for Windows, Mac, and 
 
 Your shareable executables will be in the `./exec/` directory.
 
-<!-- infuser start footer -->  
-## Notice  
-This library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.  
+<!-- infuser start footer -->
+
+## Notice
+
+This library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.
+
 <!-- infuser end footer -->
