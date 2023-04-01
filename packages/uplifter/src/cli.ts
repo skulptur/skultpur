@@ -6,7 +6,7 @@ import { infuseReadmes } from "./lib/infuseReadmes";
 // Example usage
 readPackages("..")
   .then((packages) => {
-    console.log(packages);
+    // console.log(packages);
     return Promise.all(
       packages.map((pkg) => {
         return infuseReadmes(pkg);

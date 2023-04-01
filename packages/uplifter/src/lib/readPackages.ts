@@ -50,7 +50,7 @@ export async function readPackages(searchDir: string) {
         );
       }
 
-      const docs = getDocsForPackage(data);
+      const docs = await getDocsForPackage(data);
 
       return {
         data,

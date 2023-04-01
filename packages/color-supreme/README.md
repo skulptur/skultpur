@@ -20,42 +20,6 @@ npm install color-supreme --save
   
 <!-- infuser end installation -->
 
-## Use
-
-Browser
-
-```typescript
-import { getDominantColors, rgbToHex } from 'color-supreme'
-import { getImageFromUrl } from 'pixel-paradise'
-
-const getColors = async (url: string, colors = 5) => {
-  const pixels = await getImageFromUrl(url)
-  return getDominantColors(pixels, colors).map(rgbToHex)
-}
-getColors('your image url').then(console.log)
-```
-
-Node (example with sharp)
-
-```typescript
-import sharp from 'sharp'
-import { getDominantColors, rgbToHex } from 'color-supreme'
-
-const getColors = async (imagePath: string, colors = 5) => {
-  const { data, info } = await sharp(imagePath)
-    .raw()
-    .toBuffer({ resolveWithObject: true })
-
-  const bufferWithInfo = { buffer: data, width: info.width, height: info.height }
-
-  return getDominantColors(bufferWithInfo, colors)
-}
-
-getColors('your image path').then(console.log)
-```
-
----
-
 <!-- infuser start usage -->
 <!-- infuser end usage -->
 
