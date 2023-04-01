@@ -3,8 +3,10 @@ import { Navbar, ScrollArea, createStyles, rem } from "@mantine/core";
 import { LinksGroup } from "./LinksGroup";
 import { packages } from "../data/packages";
 
+const isDevelopment = process.env.NODE_ENV === "development";
+
 const mainMenu = Object.entries(packages)
-  .filter(([_name, pkg]) => !pkg.private)
+  .filter(([_name, pkg]) => (isDevelopment ? true : !pkg.private))
   .map(([label]) => ({ label }));
 
 const useStyles = createStyles((theme) => ({
