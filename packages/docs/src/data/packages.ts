@@ -196,7 +196,7 @@ export const packages = {
       "commander": "^10.0.0",
       "typescript": "^5.0.2"
     },
-    "readme": "<!-- infuser start title -->  \n# concat-ts  \n<!-- infuser end title -->\n<!-- infuser start description -->  \nSimple CLI tool to concats exported typescript files.  \n<!-- infuser end description -->\n\n## Description\n\nconcat-ts is a command-line utility that processes TypeScript files, concatenating them while preserving their export order. It simplifies the process of merging exported TypeScript files into a single output file, making it easier to manage and share code.\n\n## Features\n\nConcatenates TypeScript files in topological order based on their exports. Removes import declarations from the output file. Easy to integrate into your build process\n\n## Installation\n\nInstall concat-ts as a global package:\n\n```bash\nnpm install -g concat-ts\n```\n\nOr, add it as a dependency to your project:\n\n```bash\nnpm install concat-ts --save-dev\n```\n\n## Usage\n\nCommand Line\n\n```bash\nconcat-ts -i <input_entry_path> -o <output_path>\n```\n\n- -i, --input <path>: Input entry path (required)\n- -o, --output <path>: Output path (required)\n\nProgrammatically\n\n```typescript\nimport { concatTs } from \"concat-ts\";\n\nconcatTs({\n  input: \"path/to/input/entry.ts\",\n  output: \"path/to/output/file.ts\",\n});\n```\n\nExample\nGiven the following TypeScript files:\n\nindex.ts\n\n```typescript\nexport { default as Foo } from \"./Foo\";\nexport { default as Bar } from \"./Bar\";\n```\n\nFoo.ts\n\n```typescript\nexport default class Foo {\n  // ...\n}\n```\n\nBar.ts\n\n```typescript\nexport default class Bar {\n  // ...\n}\n```\n\nRunning the command:\n\n```bash\nconcat-ts -i index.ts -o output.ts\n```\n\nWill produce the following concatenated output file:\n\noutput.ts\n\n```typescript\nexport default class Foo {\n  // ...\n}\n\nexport default class Bar {\n  // ...\n}\n```\n\nAs you can see this is a simple concat and things such as the default exports will not be fixed. That being said, the files are topologically imported.\n\n## License\n\nMIT License\n\n# Development\n\n### **dev**\n\n`npm run dev`\n\nRuns the CLI application.\n\nYou can pass arguments to your application by running `npm run dev -- --your-argument`. The extra `--` is so that your arguments are passed to your CLI application, and not `npm`.\n\n### **clean**\n\n`npm run clean`\n\nRemoves any built code and any built executables.\n\n### **build**\n\n`npm run build`\n\nCleans, then builds the TypeScript code.\n\nYour built code will be in the `./dist/` directory.\n\n### **test**\n\n`npm run test`\n\nCleans, then builds, and tests the built code.\n\n### **bundle**\n\n`npm run bundle`\n\nCleans, then builds, then bundles into native executables for Windows, Mac, and Linux.\n\nYour shareable executables will be in the `./exec/` directory.\n\n<!-- infuser start footer -->  \n## Notice  \nThis library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.  \n<!-- infuser end footer -->\n",
+    "readme": "<!-- infuser start title -->  \n# concat-ts  \n<!-- infuser end title -->\n<!-- infuser start description -->  \nSimple CLI tool to concats exported typescript files.  \n<!-- infuser end description -->\n\n## Description\n\nconcat-ts is a command-line utility that processes TypeScript files, concatenating them while preserving their export order. It simplifies the process of merging exported TypeScript files into a single output file, making it easier to manage and share code.\n\n## Features\n\nConcatenates TypeScript files in topological order based on their exports. Removes import declarations from the output file. Easy to integrate into your build process\n\n## Installation\n\nInstall concat-ts as a global package:\n\n```bash\nnpm install -g concat-ts\n```\n\nOr, add it as a dependency to your project:\n\n```bash\nnpm install concat-ts --save-dev\n```\n\n## Usage\n\nCommand Line\n\n```bash\nconcat-ts -i <input_entry_path> -o <output_path>\n```\n\n- -i, --input <path>: Input entry path (required)\n- -o, --output <path>: Output path (required)\n\nProgrammatically\n\n```typescript\nimport { concatTs } from \"concat-ts\";\n\nconcatTs({\n  input: \"path/to/input/entry.ts\",\n  output: \"path/to/output/file.ts\",\n});\n```\n\nExample\nGiven the following TypeScript files:\n\nindex.ts\n\n```typescript\nexport { default as Foo } from \"./Foo\";\nexport { default as Bar } from \"./Bar\";\n```\n\nFoo.ts\n\n```typescript\nexport default class Foo {\n  // ...\n}\n```\n\nBar.ts\n\n```typescript\nexport default class Bar {\n  // ...\n}\n```\n\nRunning the command:\n\n```bash\nconcat-ts -i index.ts -o output.ts\n```\n\nWill produce the following concatenated output file:\n\noutput.ts\n\n```typescript\nexport default class Foo {\n  // ...\n}\n\nexport default class Bar {\n  // ...\n}\n```\n\nAs you can see this is a simple concat and things such as the default exports will not be fixed. That being said, the files are topologically imported.\n\n# Development\n\n### **dev**\n\n`npm run dev`\n\nRuns the CLI application.\n\nYou can pass arguments to your application by running `npm run dev -- --your-argument`. The extra `--` is so that your arguments are passed to your CLI application, and not `npm`.\n\n### **clean**\n\n`npm run clean`\n\nRemoves any built code and any built executables.\n\n### **build**\n\n`npm run build`\n\nCleans, then builds the TypeScript code.\n\nYour built code will be in the `./dist/` directory.\n\n### **test**\n\n`npm run test`\n\nCleans, then builds, and tests the built code.\n\n### **bundle**\n\n`npm run bundle`\n\nCleans, then builds, then bundles into native executables for Windows, Mac, and Linux.\n\nYour shareable executables will be in the `./exec/` directory.\n\n<!-- infuser start footer -->  \n## Notice  \nThis library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.  \n<!-- infuser end footer -->\n",
     "usage": {
       "installYarn": "yarn add concat-ts",
       "installNpm": "npm install concat-ts --save",
@@ -519,6 +519,73 @@ export const packages = {
     "usage": {
       "installYarn": "yarn add infuser",
       "installNpm": "npm install infuser --save",
+      "examples": []
+    }
+  },
+  "interpolation-fns": {
+    "private": false,
+    "version": "0.1.2",
+    "description": "Functions for working with interpolation",
+    "license": "MIT",
+    "main": "dist/index.js",
+    "typings": "dist/index.d.ts",
+    "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/interpolation-fns",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/skulptur/skultpur.git"
+    },
+    "files": [
+      "dist",
+      "src"
+    ],
+    "engines": {
+      "node": ">=10"
+    },
+    "scripts": {
+      "start": "tsdx watch",
+      "build": "tsdx build",
+      "test": "tsdx test",
+      "lint": "tsdx lint",
+      "prepare": "tsdx build"
+    },
+    "peerDependencies": {},
+    "husky": {
+      "hooks": {
+        "pre-commit": "tsdx lint"
+      }
+    },
+    "prettier": {
+      "printWidth": 80,
+      "semi": false,
+      "singleQuote": true,
+      "trailingComma": "es5"
+    },
+    "name": "interpolation-fns",
+    "author": "skulptur",
+    "module": "dist/interpolation-fns.esm.js",
+    "keywords": [
+      "functional",
+      "math",
+      "interpolation",
+      "lerp",
+      "linear",
+      "cubic",
+      "cosine",
+      "catmull rom",
+      "nearest",
+      "smoothstep",
+      "typescript"
+    ],
+    "devDependencies": {
+      "husky": "^4.2.5",
+      "tsdx": "^0.13.3",
+      "tslib": "^2.0.1",
+      "typescript": "^4.0.2"
+    },
+    "readme": "<!-- infuser start title -->\n\n# interpolation-fns\n\n<!-- infuser end title -->\n<!-- infuser start description -->\n\nFunctions for working with interpolation\n\n<!-- infuser end description -->\n\n<!-- infuser start installation -->\n\n## Installation\n\nYarn\n\n```bash\nyarn add interpolation-fns\n```\n\nNPM\n\n```bash\nnpm install interpolation-fns --save\n```\n\n<!-- infuser end installation -->\n\n<!-- infuser start usage -->\n<!-- infuser end usage -->\n\n<!-- infuser start development -->\n<!-- infuser end development -->\n\n<!-- infuser start footer -->\n\n## Notice\n\nThis library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.\n\n<!-- infuser end footer -->\n",
+    "usage": {
+      "installYarn": "yarn add interpolation-fns",
+      "installNpm": "npm install interpolation-fns --save",
       "examples": []
     }
   },
@@ -1298,7 +1365,7 @@ export const packages = {
       "commander": "^10.0.0",
       "typescript": "^5.0.2"
     },
-    "readme": "# social-matrix\n\nA simple CLI tool to concatenate exported TypeScript files.\n\n## Description\n\nconcat-ts is a command-line utility that processes TypeScript files, concatenating them while preserving their export order. It simplifies the process of merging exported TypeScript files into a single output file, making it easier to manage and share code.\n\n## Features\n\nConcatenates TypeScript files in topological order based on their exports. Removes import declarations from the output file. Easy to integrate into your build process\n\n## Installation\n\nInstall concat-ts as a global package:\n\n```bash\nnpm install -g concat-ts\n```\n\nOr, add it as a dependency to your project:\n\n```bash\nnpm install concat-ts --save-dev\n```\n\n## Usage\n\nCommand Line\n\n```bash\nconcat-ts -i <input_entry_path> -o <output_path>\n```\n\n- -i, --input <path>: Input entry path (required)\n- -o, --output <path>: Output path (required)\n\nProgrammatically\n\n```typescript\nimport { concatTs } from \"concat-ts\";\n\nconcatTs({\n  input: \"path/to/input/entry.ts\",\n  output: \"path/to/output/file.ts\",\n});\n```\n\nExample\nGiven the following TypeScript files:\n\nindex.ts\n\n```typescript\nexport { default as Foo } from \"./Foo\";\nexport { default as Bar } from \"./Bar\";\n```\n\nFoo.ts\n\n```typescript\nexport default class Foo {\n  // ...\n}\n```\n\nBar.ts\n\n```typescript\nexport default class Bar {\n  // ...\n}\n```\n\nRunning the command:\n\n```bash\nconcat-ts -i index.ts -o output.ts\n```\n\nWill produce the following concatenated output file:\n\noutput.ts\n\n```typescript\nexport default class Foo {\n  // ...\n}\n\nexport default class Bar {\n  // ...\n}\n```\n\nAs you can see this is a simple concat and things such as the default exports will not be fixed. That being said, the files are topologically imported.\n\n## License\n\nMIT License\n\n# Development\n\n### **dev**\n\n`npm run dev`\n\nRuns the CLI application.\n\nYou can pass arguments to your application by running `npm run dev -- --your-argument`. The extra `--` is so that your arguments are passed to your CLI application, and not `npm`.\n\n### **clean**\n\n`npm run clean`\n\nRemoves any built code and any built executables.\n\n### **build**\n\n`npm run build`\n\nCleans, then builds the TypeScript code.\n\nYour built code will be in the `./dist/` directory.\n\n### **test**\n\n`npm run test`\n\nCleans, then builds, and tests the built code.\n\n### **bundle**\n\n`npm run bundle`\n\nCleans, then builds, then bundles into native executables for Windows, Mac, and Linux.\n\nYour shareable executables will be in the `./exec/` directory.\n",
+    "readme": "<!-- infuser start title -->  \n# social-matrix  \n<!-- infuser end title -->\n<!-- infuser start description -->  \nAutomatically arrange posts order  \n<!-- infuser end description -->\n\n<!-- infuser start installation -->  \n## Installation  \nYarn  \n```bash  \nyarn add social-matrix  \n```  \nNPM  \n```bash  \nnpm install social-matrix --save  \n```  \n<!-- infuser end installation -->\n\n<!-- infuser start usage -->\n<!-- infuser end usage -->\n\n<!-- infuser start development -->\n<!-- infuser end development -->\n\n<!-- infuser start footer -->  \n## Notice  \nThis library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.  \n<!-- infuser end footer -->\n",
     "usage": {
       "installYarn": "yarn add social-matrix",
       "installNpm": "npm install social-matrix --save",

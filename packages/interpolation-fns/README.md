@@ -1,19 +1,19 @@
 <!-- infuser start title -->  
-# social-matrix  
+# interpolation-fns  
 <!-- infuser end title -->
 <!-- infuser start description -->  
-Automatically arrange posts order  
+Functions for working with interpolation  
 <!-- infuser end description -->
 
 <!-- infuser start installation -->  
 ## Installation  
 Yarn  
 ```bash  
-yarn add social-matrix  
+yarn add interpolation-fns  
 ```  
 NPM  
 ```bash  
-npm install social-matrix --save  
+npm install interpolation-fns --save  
 ```  
 <!-- infuser end installation -->
 
