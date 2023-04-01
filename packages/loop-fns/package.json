@@ -28,11 +28,6 @@
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
   "prettier": {
     "printWidth": 100,
     "tabWidth": 2,
@@ -57,7 +52,6 @@
   ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "^7.0.8",
-    "husky": "^7.0.4",
     "size-limit": "^7.0.8",
     "tsdx": "^0.14.1",
     "tslib": "^2.4.0",

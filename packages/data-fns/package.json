@@ -34,11 +34,6 @@
     "analyze": "size-limit --why",
     "generate-docs": "ts-readme && markdown-toc -i ./README.md"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
   "prettier": {
     "printWidth": 100,
     "tabWidth": 2,
@@ -63,7 +58,6 @@
   ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "^4.10.2",
-    "husky": "^6.0.0",
     "markdown-toc": "^1.2.0",
     "random-fns": "^0.1.8",
     "size-limit": "^4.10.2",

@@ -11,6 +11,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "nohoist": [
+    "**/tsdx"
+  ],
   "devDependencies": {
     "lerna": "^6.6.1"
   }

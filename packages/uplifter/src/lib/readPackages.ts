@@ -20,8 +20,7 @@ export async function readPackage(packagePath: string) {
     throw new Error(`Failed to read package data for ${packagePath}`);
   }
 
-  const packageJsonPath = paths.packageJsonPath;
-  const contents = await fs.readFile(packageJsonPath, "utf8");
+  const contents = await fs.readFile(paths.packageJsonPath, "utf8");
   const data = JSON.parse(contents) as PackageJsonSchema;
 
   const isValid = isPackageJsonSchema(data);
@@ -32,10 +31,14 @@ export async function readPackage(packagePath: string) {
         " doesn't conform to our schema.\n" +
         JSON.stringify([...packageJsonSchemaValidator.Errors(data)], null, 2)
     );
-    return null;
   }
 
-  return data;
+  const readme = await fs.readFile(paths.readmePath, "utf8");
+
+  return {
+    ...data,
+    readme,
+  };
 }
 
 export async function readPackages(searchDir: string) {
