@@ -1,5 +1,6 @@
 import { readFile as fsReadFile, writeFile as fsWriteFile } from "fs/promises";
 import { extname } from "path";
+import { SlotUpdate } from "./types";
 
 /**
 The style of comment delimiters for identifying slots in a file
@@ -194,7 +195,7 @@ Updates the content of one or more named slots in a file, identified by the give
 */
 export function updateSlots(
   fileContent: string,
-  updates: Array<{ slotName: string; newContent: string }>,
+  updates: Array<SlotUpdate>,
   commentStyle: CommentStyle
 ) {
   for (const update of updates) {
@@ -219,7 +220,7 @@ Updates the content of one or more named slots (identified by the given comment 
 */
 export async function updateFile(
   filePath: string,
-  updates: Array<{ slotName: string; newContent: string }>,
+  updates: Array<SlotUpdate>,
   commentStyle?: CommentStyle // we try to infer
 ) {
   const file = await readFile(filePath, commentStyle);

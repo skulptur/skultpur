@@ -59,6 +59,9 @@ export async function getDocsForPackage(pkg: PackageJsonSchema) {
 
   return {
     examples,
+    getExample: (name: string) => {
+      return examples.find((example) => example.name === name);
+    },
     installYarn: "yarn add " + pkg.name,
     installNpm: "npm install " + pkg.name + " --save",
     notice,

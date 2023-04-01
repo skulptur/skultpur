@@ -1,10 +1,10 @@
 import { Package } from "./readPackages";
-import { updateFile } from "infuser";
-import { code, heading, lines, lineBreak } from "markdown-fns";
+import { updateFile, SlotUpdate } from "infuser";
+import { code, heading, lines } from "markdown-fns";
 
 export async function infuseReadmes(pkg: Package) {
   try {
-    await updateFile(pkg.readmePath, [
+    const updates: Array<SlotUpdate> = [
       {
         slotName: "title",
         newContent: `\n${heading(1, pkg.data.name)}\n`,
@@ -16,34 +16,49 @@ export async function infuseReadmes(pkg: Package) {
       {
         slotName: "installation",
         newContent: lines([
-          lineBreak(),
+          "",
           heading(2, "Installation"),
           "Yarn",
           code("bash", pkg.docs.installYarn),
           "NPM",
           code("bash", pkg.docs.installNpm),
-          lineBreak(),
+          "",
         ]),
       },
       {
         slotName: "notes",
-        newContent: lines([
-          lineBreak(),
-          heading(2, "Notice"),
-          pkg.docs.notice,
-          lineBreak(),
-        ]),
+        newContent: lines(["", heading(2, "Notice"), pkg.docs.notice, ""]),
       },
       {
         slotName: "license",
         newContent: lines([
-          lineBreak(),
+          "",
           heading(2, "License"),
           pkg.docs.licenseNotice,
-          lineBreak(),
+          "",
         ]),
       },
-    ]);
+    ];
+
+    const examples: string[][] = [];
+
+    // add browser example if we have it
+    const browserExample = pkg.docs.getExample("browser");
+    browserExample &&
+      examples.push(["Browser", code("typescript", browserExample.content)]);
+    // add node example if we have it
+    const nodeExample = pkg.docs.getExample("node");
+    nodeExample &&
+      examples.push(["Node", code("typescript", nodeExample.content)]);
+
+    // add usage if we have examples
+    examples.length &&
+      updates.push({
+        slotName: "usage",
+        newContent: lines(["", heading(2, "Use"), ...examples.flat(1), ""]),
+      });
+
+    await updateFile(pkg.readmePath, updates);
   } catch (error) {
     console.error(error);
   }

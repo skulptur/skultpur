@@ -54,6 +54,24 @@
     "react-dom": "18.2.0",
     "typescript": "5.0.2",
     "color-supreme": "*",
-    "pixel-paradise": "*"
+    "infuser": "*",
+    "perfect-time": "*",
+    "common-fns": "*",
+    "karabiner-ts": "*",
+    "pixel-paradise": "*",
+    "concat-ts": "*",
+    "kween": "*",
+    "random-fns": "*",
+    "copilot-x": "*",
+    "lightcast": "*",
+    "reactive-fns": "*",
+    "create-package": "*",
+    "loop-fns": "*",
+    "unit-fns": "*",
+    "data-fns": "*",
+    "markdown-fns": "*",
+    "uplifter": "*",
+    "docs": "*",
+    "note-fns": "*"
   }
 }
