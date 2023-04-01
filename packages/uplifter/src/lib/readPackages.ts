@@ -26,7 +26,7 @@ export async function readPackage(packagePath: string) {
 
   const isValid = isPackageJsonSchema(data);
   if (!isValid) {
-    console.error(
+    throw new Error(
       "Package json of " +
         entryName +
         " doesn't conform to our schema.\n" +

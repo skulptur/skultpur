@@ -1280,6 +1280,52 @@ export const packages = {
       "examples": []
     }
   },
+  "social-matrix": {
+    "name": "social-matrix",
+    "private": true,
+    "version": "0.0.1",
+    "description": "Automatically arrange posts order",
+    "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/social-matrix",
+    "keywords": [
+      "typescript",
+      "cli"
+    ],
+    "license": "MIT",
+    "main": "./dist/index.js",
+    "bin": "./dist/cli.js",
+    "files": [
+      "dist/**/*"
+    ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/skulptur/skulptur.git"
+    },
+    "scripts": {
+      "dev": "ts-node ./src/cli.ts",
+      "clean": "rimraf ./dist/ ./exec/",
+      "build": "npm run clean && tsc",
+      "bundle": "npm run build && pkg . --out-dir ./exec/",
+      "test": "jest"
+    },
+    "devDependencies": {
+      "@types/jest": "^29.5.0",
+      "@types/node": "^18.15.5",
+      "jest": "^29.5.0",
+      "ts-jest": "^29.0.5",
+      "pkg": "^5.8.1",
+      "rimraf": "^2.6.3",
+      "ts-node": "^10.9.1"
+    },
+    "dependencies": {
+      "commander": "^10.0.0",
+      "typescript": "^5.0.2"
+    },
+    "usage": {
+      "installYarn": "yarn add social-matrix",
+      "installNpm": "npm install social-matrix --save",
+      "examples": []
+    }
+  },
   "unit-fns": {
     "name": "unit-fns",
     "author": "Gustavo Spredemann",

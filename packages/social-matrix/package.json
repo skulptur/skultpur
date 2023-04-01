@@ -1,8 +1,9 @@
 {
   "name": "social-matrix",
   "private": true,
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Automatically arrange posts order",
+  "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/social-matrix",
   "keywords": [
     "typescript",
     "cli"
