@@ -7,12 +7,13 @@ export async function infuseReadmes(pkg: Package) {
   try {
     const updates: Array<SlotUpdate> = [
       {
-        slotName: "title",
-        newContent: `\n${heading(1, pkg.data.name)}\n`,
-      },
-      {
-        slotName: "description",
-        newContent: `\n${pkg.data.description}\n`,
+        slotName: "header",
+        newContent: lines([
+          "",
+          heading(1, pkg.data.name),
+          pkg.data.description,
+          "",
+        ]),
       },
       {
         slotName: "installation",
@@ -28,7 +29,7 @@ export async function infuseReadmes(pkg: Package) {
       },
       {
         slotName: "notes",
-        newContent: lines(["", heading(2, "Notice"), pkg.docs.notice, ""]),
+        newContent: "",
       },
       {
         slotName: "license",
@@ -36,6 +37,7 @@ export async function infuseReadmes(pkg: Package) {
           "",
           heading(2, "License"),
           pkg.docs.licenseNotice,
+          lines(["", heading(2, "Notice"), pkg.docs.notice, ""]),
           "",
         ]),
       },

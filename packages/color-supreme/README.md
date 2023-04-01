@@ -1,10 +1,7 @@
-<!-- infuser start title -->
-# color-supreme
-<!-- infuser end title -->
-
-<!-- infuser start description -->
-A powerful library for extracting dominant colors from images. It uses the k-means clustering algorithm to analyze the colors in an image and identify the most dominant ones, making it ideal for a range of applications such as image processing, data visualization, and search algorithms.
-<!-- infuser end description -->
+<!-- infuser start header -->  
+# color-supreme  
+A powerful library for extracting dominant colors from images. It uses the k-means clustering algorithm to analyze the colors in an image and identify the most dominant ones, making it ideal for a range of applications such as image processing, data visualization, and search algorithms.  
+<!-- infuser end header -->
 
 <!-- infuser start installation -->  
 ## Installation  
@@ -60,16 +57,13 @@ export const getColors = async (imagePath: string, colors = 5) => {
 <!-- infuser start development -->
 <!-- infuser end development -->
 
-<!-- infuser start notes -->  
-## Notice  
-This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding.  
-<!-- infuser end notes -->
-
 <!-- infuser start license -->  
 ## License  
 
-This library is open source software released under the MIT license. See the LICENSE file for more information.
-
-I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.
+This library is open source software released under the MIT license. See the LICENSE file for more information. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.
+  
+  
+## Notice  
+This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding.  
   
 <!-- infuser end license -->
