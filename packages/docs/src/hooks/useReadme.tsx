@@ -1,5 +1,3 @@
-import React from "react";
-import { Title, Box, useMantineTheme } from "@mantine/core";
 import { packages } from "../data/packages";
 import { useMarkdown } from "../hooks/useMarkdown";
 import { updateSlots, getSlot } from "infuser";

@@ -10,6 +10,7 @@ export default function SocialMatrixReadme() {
   const router = useRouter();
   const packageName = router.query.packageName as string;
 
+  // @ts-ignore
   if (!packageName || !packages[packageName]) {
     // TODO: back to main
     return null;
