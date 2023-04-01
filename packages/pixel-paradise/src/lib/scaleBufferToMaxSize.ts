@@ -1,5 +1,5 @@
 import { nearestNeighbor } from "./samplingMethods";
-import { scaleBuffer } from "./sscaleBuffer";
+import { scaleBuffer } from "./scale";
 import { BufferWithInfo } from "./types";
 
 export function scaleBufferToMaxSize(
