@@ -9,9 +9,17 @@ readPackages("..")
   .then(async (packages) => {
     // I want to save the data so docs can use
     const dirAbove = path.join(__dirname, "..", "..");
-    const docExamples = path.resolve(dirAbove, "docs/data", "packages.json");
+    const docExamples = path.resolve(dirAbove, "docs/src/data", "packages.ts");
+    const packagesObject = packages.reduce((accumulator, currentPackage) => {
+      accumulator[currentPackage.name] = currentPackage;
+      return accumulator;
+    }, {});
+
     await fs
-      .writeFile(docExamples, JSON.stringify(packages, null, 2))
+      .writeFile(
+        docExamples,
+        "export const packages = " + JSON.stringify(packagesObject, null, 2)
+      )
       .then(() => {
         console.log(`File saved to ${docExamples}`);
       })

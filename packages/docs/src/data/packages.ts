@@ -1,5 +1,5 @@
-[
-  {
+export const packages = {
+  "color-supreme": {
     "name": "color-supreme",
     "version": "0.1.1",
     "author": "skulptur",
@@ -74,7 +74,7 @@
       "pixel-paradise": "*"
     }
   },
-  {
+  "common-fns": {
     "name": "common-fns",
     "version": "0.1.4",
     "author": "skulptur",
@@ -145,7 +145,7 @@
       "typescript": "^4.2.4"
     }
   },
-  {
+  "concat-ts": {
     "name": "concat-ts",
     "private": false,
     "version": "0.0.8",
@@ -183,7 +183,7 @@
       "typescript": "^5.0.2"
     }
   },
-  {
+  "copilot-x": {
     "name": "copilot-x",
     "private": false,
     "version": "0.0.1",
@@ -220,7 +220,7 @@
       "typescript": "^5.0.2"
     }
   },
-  {
+  "create-package": {
     "name": "create-package",
     "private": true,
     "version": "0.0.0",
@@ -262,7 +262,7 @@
       "typescript": "^5.0.2"
     }
   },
-  {
+  "data-fns": {
     "name": "data-fns",
     "version": "1.1.0",
     "author": "skulptur",
@@ -340,7 +340,7 @@
       "unit-fns": "^0.1.6"
     }
   },
-  {
+  "docs": {
     "name": "docs",
     "version": "0.1.0",
     "private": true,
@@ -417,7 +417,7 @@
       "note-fns": "*"
     }
   },
-  {
+  "infuser": {
     "name": "infuser",
     "private": false,
     "version": "0.0.2",
@@ -465,7 +465,7 @@
       "typescript": "^5.0.2"
     }
   },
-  {
+  "karabiner-ts": {
     "name": "karabiner-ts",
     "version": "0.1.0",
     "author": "skulptur",
@@ -535,7 +535,7 @@
       "lodash.castarray": "^4.4.0"
     }
   },
-  {
+  "kween": {
     "version": "0.1.1",
     "license": "MIT",
     "main": "dist/index.js",
@@ -596,7 +596,7 @@
       "lib": "^4.1.2"
     }
   },
-  {
+  "lightcast": {
     "name": "lightcast",
     "version": "0.1.6",
     "author": "skulptur",
@@ -670,7 +670,7 @@
     },
     "dependencies": {}
   },
-  {
+  "loop-fns": {
     "name": "loop-fns",
     "version": "0.1.3",
     "author": "skulptur",
@@ -736,7 +736,7 @@
       "typescript": "^4.6.3"
     }
   },
-  {
+  "markdown-fns": {
     "version": "0.1.2",
     "license": "MIT",
     "main": "dist/index.js",
@@ -791,7 +791,7 @@
       "data-fns": "*"
     }
   },
-  {
+  "note-fns": {
     "name": "note-fns",
     "author": "skulptur",
     "version": "0.2.1",
@@ -872,7 +872,7 @@
       "typescript": "^4.1.3"
     }
   },
-  {
+  "perfect-time": {
     "name": "perfect-time",
     "version": "0.2.0",
     "description": "A generic clock that makes it easy to schedule repeating time based events with precision in Typescript. It works by calling scheduled events slightly before their side effects should take place, which is great in combination with Web Audio for example.",
@@ -950,7 +950,7 @@
       "lightcast": "^0.1.5"
     }
   },
-  {
+  "pixel-paradise": {
     "name": "pixel-paradise",
     "description": "Image manipulation library.",
     "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/pixel-paradise",
@@ -995,7 +995,7 @@
       "vite-plugin-dts": "^2.1.0"
     }
   },
-  {
+  "random-fns": {
     "name": "random-fns",
     "version": "0.1.8",
     "description": "All your random needs in one place.",
@@ -1069,7 +1069,7 @@
       "unit-fns": "^0.1.7"
     }
   },
-  {
+  "reactive-fns": {
     "version": "0.2.2",
     "description": "This library is based on the brilliant Callbag spec by André Staltz, which allows creating both pullable and listenable streams from simple functions. That makes it lightweight and flexible and that's why it shines when used as a primitive for libraries or apps!",
     "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/reactive-fns",
@@ -1171,7 +1171,7 @@
       "typescript": "^4.2.4"
     }
   },
-  {
+  "unit-fns": {
     "name": "unit-fns",
     "author": "Gustavo Spredemann",
     "description": "Unit-fns provides composable primitives that make it easy to generate complex numerical patterns with little code.",
@@ -1229,7 +1229,7 @@
     },
     "dependencies": {}
   },
-  {
+  "uplifter": {
     "name": "uplifter",
     "private": true,
     "version": "0.0.0",
@@ -1267,10 +1267,12 @@
     },
     "dependencies": {
       "@sinclair/typebox": "^0.26.8",
+      "change-case": "^4.1.2",
       "commander": "^10.0.0",
-      "typescript": "^5.0.2",
       "infuser": "*",
-      "markdown-fns": "*"
+      "markdown-fns": "*",
+      "typescript": "^5.0.2",
+      "upper-case-first": "^2.0.2"
     }
   }
-]
+}

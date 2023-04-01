@@ -2,11 +2,13 @@ import { Package } from "./readPackages";
 import { getPackagePaths } from "./getPackagePaths";
 import { updateFile, SlotUpdate } from "infuser";
 import { code, heading, lines } from "markdown-fns";
-import { getDocsForPackage } from "./getDocsForPackage";
+import { getUsage, getLicenseNotice } from "./getDocsForPackage";
+import { upperCaseFirst } from "upper-case-first";
 
 export async function infuseReadmes(pkg: Package) {
   try {
-    const docs = await getDocsForPackage(pkg);
+    const docs = await getUsage(pkg.name);
+
     const updates: Array<SlotUpdate> = [
       {
         slotName: "header",
@@ -29,34 +31,34 @@ export async function infuseReadmes(pkg: Package) {
         newContent: "",
       },
       {
-        slotName: "license",
+        slotName: "footer",
         newContent: lines([
           "",
-          heading(2, "License"),
-          docs.licenseNotice,
-          lines(["", heading(2, "Notice"), docs.notice, ""]),
+          heading(2, "Notice"),
+          getLicenseNotice(pkg.license),
           "",
         ]),
       },
     ];
 
-    const examples: string[][] = [];
-
-    // add browser example if we have it
-    const browserExample = docs.getExample("browser");
-    browserExample &&
-      examples.push(["Browser", code("typescript", browserExample.content)]);
-    // add node example if we have it
-    const nodeExample = docs.getExample("node");
-    nodeExample &&
-      examples.push(["Node", code("typescript", nodeExample.content)]);
-
-    // add usage if we have examples
-    examples.length &&
+    if (docs.examples.length) {
       updates.push({
         slotName: "usage",
-        newContent: lines(["", heading(2, "Use"), ...examples.flat(1), ""]),
+        newContent: lines([
+          "",
+          heading(2, "Use"),
+          ...docs.examples
+            .map((example) => {
+              return lines([
+                upperCaseFirst(example.name),
+                code("typescript", example.content),
+              ]);
+            })
+            .flat(1),
+          "",
+        ]),
       });
+    }
 
     const { readmePath } = await getPackagePaths(pkg.name);
 

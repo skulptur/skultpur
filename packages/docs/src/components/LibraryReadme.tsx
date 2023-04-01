@@ -1,10 +1,12 @@
 import React from "react";
 import { Title, Text, Box, useMantineTheme } from "@mantine/core";
 import { Prism } from "@mantine/prism";
+import { packages } from "../data/packages";
 
 export type LibraryReadmeProp = {
-  libraryName: string;
+  libraryName: keyof typeof packages;
 };
+
 const browserExample = `
 import { getDominantColors, rgbToHex } from 'color-supreme'
 import { getImageFromUrl } from 'pixel-paradise'
@@ -33,10 +35,12 @@ getColors('your image path').then(console.log)
 export function LibraryReadme({ libraryName }: LibraryReadmeProp) {
   const theme = useMantineTheme();
 
+  const pkg = packages[libraryName];
+
   return (
     <>
       <Box p="md" maw={1000} m="auto">
-        <Title order={1}>{libraryName}</Title>
+        <Title order={1}>{pkg.name}</Title>
       </Box>
       <Box
         sx={{
@@ -47,7 +51,7 @@ export function LibraryReadme({ libraryName }: LibraryReadmeProp) {
         }}
       >
         <Box p="md" maw={1000} m="auto">
-          <Text mb="xl">{"description"}</Text>
+          <Text mb="xl">{pkg.description}</Text>
 
           <Text mb="sm">Install with yarn</Text>
           <Prism mb="lg" language="bash">{`yarn add ${libraryName}`}</Prism>
