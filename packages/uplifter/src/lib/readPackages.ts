@@ -50,19 +50,11 @@ export async function readPackages(searchDir: string) {
         );
       }
 
-      const {
-        installYarn,
-        installNpm,
-        notice,
-        licenseNotice,
-      } = getDocsForPackage(data);
+      const docs = getDocsForPackage(data);
 
       return {
         data,
-        installYarn,
-        installNpm,
-        notice,
-        licenseNotice,
+        docs,
         packageJsonPath: absolutePath,
         packagePath,
         readmePath,
