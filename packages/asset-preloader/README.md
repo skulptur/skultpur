@@ -1,6 +1,9 @@
-## `asset-preloader`
-
-A tiny asset preloader for the browser via XHR2. It can preload assets of different file types and composite progress together, with support for multiple event subscriptions.
+<!-- infuser start title -->  
+# asset-preloader  
+<!-- infuser end title -->
+<!-- infuser start description -->  
+A tiny asset preloader for the browser via XHR2. It can preload assets of different file types and composite progress together, with support for multiple event subscriptions.  
+<!-- infuser end description -->
 
 ## Get started
 

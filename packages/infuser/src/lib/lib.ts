@@ -249,7 +249,7 @@ export function updateSlots(
     try {
       fileContent = updateSlot(fileContent, slotName, newContent, commentStyle);
     } catch (error) {
-      console.error(`Error updating slot "${slotName}":`, error.message);
+      // console.error(`Error updating slot "${slotName}":`, error.message);
     }
   }
 
