@@ -1,7 +1,9 @@
-<!-- infuser start header -->  
+<!-- infuser start title -->  
 # common-fns  
+<!-- infuser end title -->
+<!-- infuser start description -->  
 `common-fns` is a simple utility library that provides commonly used functions such as `always`, `identity`, `isEqual`, and `noop`. These functions can help reduce boilerplate code and make your codebase more expressive and concise.  
-<!-- infuser end header -->
+<!-- infuser end description -->
 
 <!-- infuser start installation -->  
 ## Installation  

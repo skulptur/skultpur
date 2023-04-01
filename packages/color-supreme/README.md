@@ -1,7 +1,9 @@
-<!-- infuser start header -->  
+<!-- infuser start title -->  
 # color-supreme  
+<!-- infuser end title -->
+<!-- infuser start description -->  
 A powerful library for extracting dominant colors from images. It uses the k-means clustering algorithm to analyze the colors in an image and identify the most dominant ones, making it ideal for a range of applications such as image processing, data visualization, and search algorithms.  
-<!-- infuser end header -->
+<!-- infuser end description -->
 
 <!-- infuser start installation -->  
 ## Installation  

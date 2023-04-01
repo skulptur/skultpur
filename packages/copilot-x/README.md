@@ -1,7 +1,9 @@
-<!-- infuser start header -->  
+<!-- infuser start title -->  
 # copilot-x  
+<!-- infuser end title -->
+<!-- infuser start description -->  
 A simple CLI tool where you are the copilot, because it runs on autopilot.  
-<!-- infuser end header -->
+<!-- infuser end description -->
 
 <!-- infuser start installation -->  
 ## Installation  

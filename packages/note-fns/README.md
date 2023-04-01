@@ -1,7 +1,9 @@
-<!-- infuser start header -->  
+<!-- infuser start title -->  
 # note-fns  
+<!-- infuser end title -->
+<!-- infuser start description -->  
 Use this library when you need a comprehensive but lightweight solution for working with musical notes in Typescript. It provides functions, types and constants that make it easy to manipulate musical note information. Works great in conjunction with other music related libraries.  
-<!-- infuser end header -->
+<!-- infuser end description -->
 
 <!-- infuser start installation -->  
 ## Installation  

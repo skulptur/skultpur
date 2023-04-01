@@ -1,9 +1,4 @@
-import {
-  getDefaultCommentStyle,
-  updateSlot,
-  getSlots,
-  getSlotNames,
-} from "./lib";
+import { getCommentStyle, updateSlot, getSlots, getSlotNames } from "./lib";
 
 const htmlCommentStyle = {
   start: "<!-- infuser start $ -->",
@@ -36,7 +31,7 @@ const newHtmlFileContent = `<!DOCTYPE html>
 
 describe("HTML files", () => {
   test("returns default comment style for .html files", () => {
-    expect(getDefaultCommentStyle(".html")).toEqual(htmlCommentStyle);
+    expect(getCommentStyle(".html")).toEqual(htmlCommentStyle);
   });
 
   test("replaces content in existing HTML slot", () => {

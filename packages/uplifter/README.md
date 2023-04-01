@@ -1,7 +1,9 @@
-<!-- infuser start header -->  
+<!-- infuser start title -->  
 # uplifter  
+<!-- infuser end title -->
+<!-- infuser start description -->  
 Give your packages a makeover with this library.  
-<!-- infuser end header -->
+<!-- infuser end description -->
 
 <!-- infuser start installation -->  
 ## Installation  

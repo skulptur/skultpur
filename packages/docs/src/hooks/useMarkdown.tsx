@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
-import { Text, Anchor, Paper, Code, Title, createStyles } from "@mantine/core";
+import { Text, Anchor, Code, Title } from "@mantine/core";
 import { Prism } from "@mantine/prism";
 
 function renderNode(node: any): React.ReactNode {

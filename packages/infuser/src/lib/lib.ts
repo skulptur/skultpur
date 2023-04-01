@@ -1,42 +1,86 @@
-import { readFile as fsReadFile, writeFile as fsWriteFile } from "fs/promises";
-import { extname } from "path";
 import { SlotUpdate } from "./types";
 
 /**
 The style of comment delimiters for identifying slots in a file
 */
-type CommentStyle = { start: string; end: string };
+export type CommentStyle = { start: string; end: string };
+
+const start = "infuser start";
+const end = "infuser end";
+
+const blockComment: CommentStyle = {
+  start: `/* ${start} $ */`,
+  end: `/* ${end} $ */`,
+};
+
+const lineComment: CommentStyle = {
+  start: `// ${start} $`,
+  end: `// ${end} $`,
+};
+
+const htmlComment: CommentStyle = {
+  start: `<!-- ${start} $ -->`,
+  end: `<!-- ${end} $ -->`,
+};
+
+const pythonComment: CommentStyle = {
+  start: `# ${start} $`,
+  end: `# ${end} $`,
+};
+
+const rubyComment: CommentStyle = {
+  start: `=begin ${start} $`,
+  end: `=end ${end} $`,
+};
+
+export const commentStyles = {
+  html: htmlComment,
+  md: htmlComment,
+  js: blockComment,
+  css: blockComment,
+  ts: blockComment,
+  jsx: blockComment,
+  tsx: blockComment,
+  scss: blockComment,
+  less: blockComment,
+  sass: blockComment,
+  php: blockComment,
+  py: pythonComment,
+  rb: rubyComment,
+  java: blockComment,
+  c: blockComment,
+  cpp: blockComment,
+  cs: blockComment,
+  go: blockComment,
+  kt: blockComment,
+  sql: lineComment,
+  sh: lineComment,
+} as const;
+
+export type FileExtension = keyof typeof commentStyles;
+
+export type CommentStyleOrFileExtension = FileExtension | CommentStyle;
+
+const resolveCommentStyle = (
+  commentStyleOrFileExtension: CommentStyleOrFileExtension
+) => {
+  const commentStyle =
+    typeof commentStyleOrFileExtension === "string"
+      ? commentStyles[commentStyleOrFileExtension]
+      : commentStyleOrFileExtension;
+  if (!commentStyle) {
+    throw new Error("Couldn't resolve comment style.");
+  }
+  return commentStyle;
+};
 
 /**
 Returns the default comment style for a given file extension
 @param fileExtension - The extension of the file to check for a default comment style
 @returns The default comment style for the given file extension, or null if none exists
 */
-export function getDefaultCommentStyle(
-  fileExtension: string
-): CommentStyle | null {
-  const start = "infuser start";
-  const end = "infuser end";
-
-  const blockComment: CommentStyle = {
-    start: `/* ${start} $ */`,
-    end: `/* ${end} $ */`,
-  };
-
-  const htmlComment: CommentStyle = {
-    start: `<!-- ${start} $ -->`,
-    end: `<!-- ${end} $ -->`,
-  };
-
-  const commentStyles: Record<string, CommentStyle> = {
-    ".html": htmlComment,
-    ".md": htmlComment,
-    ".js": blockComment,
-    ".css": blockComment,
-    ".ts": blockComment,
-  };
-
-  return commentStyles[fileExtension] || null;
+export function getCommentStyle(fileExtension: string): CommentStyle | null {
+  return commentStyles[fileExtension.replace(/\./g, "")] || null;
 }
 
 /**
@@ -50,10 +94,11 @@ Gets the start and end indices of a named slot in a file, identified by the give
 export function getSlotIndices(
   fileContent: string,
   slotName: string,
-  commentStyle: CommentStyle
+  commentStyle: CommentStyleOrFileExtension
 ) {
-  const startComment = commentStyle.start.replace("$", slotName);
-  const endComment = commentStyle.end.replace("$", slotName);
+  const resolvedCommentStyle = resolveCommentStyle(commentStyle);
+  const startComment = resolvedCommentStyle.start.replace("$", slotName);
+  const endComment = resolvedCommentStyle.end.replace("$", slotName);
   const startIndex = fileContent.indexOf(startComment);
   const endIndex = fileContent.indexOf(endComment);
 
@@ -86,7 +131,7 @@ export function updateSlot(
   fileContent: string,
   slotName: string,
   newContent: string,
-  commentStyle: CommentStyle
+  commentStyle: CommentStyleOrFileExtension
 ): string {
   const {
     startIndexLeft,
@@ -99,29 +144,6 @@ export function updateSlot(
   const afterContent = fileContent.slice(endIndexRight);
 
   return `${beforeContent}${startComment}${newContent}${endComment}${afterContent}`;
-}
-
-/**
-Reads the content of a file and returns it, along with the comment style used to identify slots in the file
-@param filePath - The path to the file to read
-@param commentStyle - (optional) The style of comments used to identify slots in the file; if not provided, the default comment style for the file extension will be used
-@returns An object containing the content of the file and the comment style used to identify slots in the file
-@throws An error if no default comment style is available for the file extension and no comment style is provided
-*/
-export async function readFile(filePath: string, commentStyle?: CommentStyle) {
-  commentStyle = commentStyle || getDefaultCommentStyle(extname(filePath));
-  if (!commentStyle) {
-    throw new Error(
-      "No default comment style available for this file type, please specify the commentStyle param."
-    );
-  }
-
-  const fileContent = await fsReadFile(filePath, "utf-8");
-
-  return {
-    fileContent,
-    commentStyle,
-  };
 }
 
 // escapes all but $ as we use that symbol to replace with the name
@@ -196,7 +218,7 @@ Updates the content of one or more named slots in a file, identified by the give
 export function updateSlots(
   fileContent: string,
   updates: Array<SlotUpdate>,
-  commentStyle: CommentStyle
+  commentStyle: CommentStyleOrFileExtension
 ) {
   for (const update of updates) {
     const { slotName, newContent } = update;
@@ -208,22 +230,4 @@ export function updateSlots(
   }
 
   return fileContent;
-}
-
-/**
-Updates the content of one or more named slots (identified by the given comment style) in a file and writes the changes to disk
-@param filePath - The path to the file to modify
-@param updates - An array of objects containing the name and new content of each named slot to update
-@param commentStyle - (optional) The style of comments used to identify the slots; if not provided, the default comment style for the file extension will be used
-@returns A promise that resolves when the file has been successfully updated
-@throws An error if the named slot cannot be found in the file or no default comment style is available for the file extension and no comment style is provided
-*/
-export async function updateFile(
-  filePath: string,
-  updates: Array<SlotUpdate>,
-  commentStyle?: CommentStyle // we try to infer
-) {
-  const file = await readFile(filePath, commentStyle);
-  const fileContent = updateSlots(file.fileContent, updates, file.commentStyle);
-  return await fsWriteFile(filePath, fileContent, "utf-8");
 }

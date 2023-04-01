@@ -1,7 +1,9 @@
-<!-- infuser start header -->  
+<!-- infuser start title -->  
 # pixel-paradise  
+<!-- infuser end title -->
+<!-- infuser start description -->  
 Image manipulation library.  
-<!-- infuser end header -->
+<!-- infuser end description -->
 
 <!-- infuser start installation -->  
 ## Installation  

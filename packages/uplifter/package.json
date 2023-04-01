@@ -38,8 +38,8 @@
     "@sinclair/typebox": "^0.26.8",
     "change-case": "^4.1.2",
     "commander": "^10.0.0",
-    "infuser": "*",
     "markdown-fns": "*",
+    "infuser": "*",
     "typescript": "^5.0.2",
     "upper-case-first": "^2.0.2"
   }

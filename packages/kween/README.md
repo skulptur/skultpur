@@ -2,7 +2,9 @@
   <img alt="kween-logo" src="https://github.com/skulptur/kween/blob/master/kween-logo.png?raw=true" width="350">
 </p>
 
-<!-- infuser start description --> <!-- infuser end description -->
+<!-- infuser start description -->  
+Simple tween library written in Typescript  
+<!-- infuser end description -->
 
 <!-- infuser start installation -->  
 ## Installation  

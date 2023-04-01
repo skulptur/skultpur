@@ -1,7 +1,9 @@
-<!-- infuser start header -->  
+<!-- infuser start title -->  
 # lightcast  
+<!-- infuser end title -->
+<!-- infuser start description -->  
 The Pub/Sub pattern is needed every now and then and this library is a no dependency, tiny and typesafe solution.  
-<!-- infuser end header -->
+<!-- infuser end description -->
 
 <!-- infuser start installation -->  
 ## Installation  

@@ -1,7 +1,9 @@
-<!-- infuser start header -->  
+<!-- infuser start title -->  
 # unit-fns  
+<!-- infuser end title -->
+<!-- infuser start description -->  
 Unit-fns provides composable primitives that make it easy to generate complex numerical patterns with little code.  
-<!-- infuser end header -->
+<!-- infuser end description -->
 
 <!-- infuser start installation -->  
 ## Installation  

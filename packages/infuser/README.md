@@ -1,7 +1,9 @@
-<!-- infuser start header -->  
+<!-- infuser start title -->  
 # infuser  
+<!-- infuser end title -->
+<!-- infuser start description -->  
 If you're looking for an easy way to extract or update dynamic content within static files, this library has got you covered! With `getSlots`, you can quickly extract the content of slots or placeholders within your files. And with `updateSlots`, you can effortlessly replace the content of these slots with new content. Say goodbye to the hassle of manually updating static files with dynamic content. Let `infuser` do the heavy lifting for you and streamline your workflow like never before!  
-<!-- infuser end header -->
+<!-- infuser end description -->
 
 <!-- infuser start installation -->  
 ## Installation  
@@ -15,10 +17,14 @@ npm install infuser --save
 ```  
 <!-- infuser end installation -->
 
-<!-- infuser start usage -->  
-## Use  
-Node  
-```typescript  
+<!-- infuser start usage -->
+<!-- infuser end usage -->
+
+## Use
+
+Node
+
+```typescript
 import { updateFile, SlotUpdate } from "infuser";
 
 const filePath = "./example.html";
@@ -40,9 +46,7 @@ updateFile(filePath, updates)
   .catch((error) => {
     console.error("An error occurred:", error);
   });
-  
-```  
-<!-- infuser end usage -->
+```
 
 ### File structure
 

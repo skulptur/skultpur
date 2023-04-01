@@ -1,7 +1,9 @@
-<!-- infuser start header -->  
+<!-- infuser start title -->  
 # loop-fns  
+<!-- infuser end title -->
+<!-- infuser start description -->  
 A lightweight solution for looping with great performance and control.  
-<!-- infuser end header -->
+<!-- infuser end description -->
 
 <!-- infuser start installation -->  
 ## Installation  

@@ -1,6 +1,7 @@
 import { Package } from "./readPackages";
 import { getPackagePaths } from "./getPackagePaths";
-import { updateFile, SlotUpdate } from "infuser";
+import { SlotUpdate } from "infuser";
+import { updateFile } from "infuser/node";
 import { code, heading, lines } from "markdown-fns";
 import { getUsage, getLicenseNotice } from "./getDocsForPackage";
 
@@ -10,8 +11,12 @@ export async function infuseReadmes(pkg: Package) {
 
     const updates: Array<SlotUpdate> = [
       {
-        slotName: "header",
-        newContent: lines(["", heading(1, pkg.name), pkg.description, ""]),
+        slotName: "title",
+        newContent: lines(["", heading(1, pkg.name), ""]),
+      },
+      {
+        slotName: "description",
+        newContent: lines(["", pkg.description, ""]),
       },
       {
         slotName: "installation",

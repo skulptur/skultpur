@@ -8,4 +8,5 @@
     "skipLibCheck": true,
     "declaration": true
   },
+  "include": ["src/**/*", "src/node/**/*"]
 }

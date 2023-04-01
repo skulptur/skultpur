@@ -1,7 +1,9 @@
-<!-- infuser start header -->  
+<!-- infuser start title -->  
 # karabiner-ts  
+<!-- infuser end title -->
+<!-- infuser start description -->  
 A typescript library that makes it easy to generate karabiner configurations.  
-<!-- infuser end header -->
+<!-- infuser end description -->
 
 <!-- infuser start installation -->  
 ## Installation  

@@ -1,5 +1,5 @@
 import {
-  getDefaultCommentStyle,
+  getCommentStyle,
   getSlotIndices,
   updateSlot,
   getSlots,
@@ -32,7 +32,7 @@ some more content
 
 describe("infuser", () => {
   test("returns empty comment style for unknown extensions", () => {
-    expect(getDefaultCommentStyle(".txt")).toEqual(null);
+    expect(getCommentStyle(".txt")).toEqual(null);
   });
 });
 

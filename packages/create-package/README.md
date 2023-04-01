@@ -1,7 +1,9 @@
-<!-- infuser start header -->  
+<!-- infuser start title -->  
 # create-package  
+<!-- infuser end title -->
+<!-- infuser start description -->  
 This package has package templates and a scripts to help you kickstart new projects.  
-<!-- infuser end header -->
+<!-- infuser end description -->
 
 <!-- infuser start installation -->  
 ## Installation  

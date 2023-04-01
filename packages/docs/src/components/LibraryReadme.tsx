@@ -1,23 +1,8 @@
 import React from "react";
-import { Title, Text, Box, useMantineTheme } from "@mantine/core";
-import { Prism } from "@mantine/prism";
+import { Title, Box, useMantineTheme } from "@mantine/core";
 import { packages } from "../data/packages";
 import { useMarkdown } from "../hooks/useMarkdown";
-
-// // Usage example
-// const originalString = "I like apples, but I love apples more.";
-// const targetString = "apples";
-// const result = removeFirstOccurrence(originalString, targetString);
-// console.log(result); // Output: "I like , but I love apples more."
-function removeFirstOccurrence(str: string, target: string) {
-  const index = str.indexOf(target);
-
-  if (index !== -1) {
-    return str.slice(0, index) + str.slice(index + target.length);
-  }
-
-  return str;
-}
+import { updateSlots } from "infuser";
 
 export type LibraryReadmeProp = {
   libraryName: keyof typeof packages;
@@ -28,9 +13,28 @@ export function LibraryReadme({ libraryName }: LibraryReadmeProp) {
 
   const pkg = packages[libraryName];
 
+  const updates = [
+    {
+      slotName: "title",
+      newContent: "",
+    },
+    {
+      slotName: "footer",
+      newContent: "",
+    },
+  ];
+  if (pkg.private) {
+    updates.push({
+      slotName: "installation",
+      newContent: "",
+    });
+  }
+
+  const updatedReadme = updateSlots(pkg.readme, updates, "md");
+
   // this remove first occurence is a quick and dirty way to remove the title
   // it is so we can style the title differently more easily
-  const content = useMarkdown(removeFirstOccurrence(pkg.readme, libraryName));
+  const content = useMarkdown(updatedReadme);
 
   return (
     <>

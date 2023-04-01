@@ -1,9 +1,11 @@
 Warning: This is a work in progress and the API isn't currently stable yet!
 
-<!-- infuser start header -->  
+<!-- infuser start title -->  
 # markdown-fns  
+<!-- infuser end title -->
+<!-- infuser start description -->  
 Markdown is meant for humans to type, but isn't any good when you want to abstract patterns that often appear in documentation. With the functions provided by markdown-fns it is not only possible but also very easy to do so.  
-<!-- infuser end header -->
+<!-- infuser end description -->
 
 <!-- infuser start installation -->  
 ## Installation  
