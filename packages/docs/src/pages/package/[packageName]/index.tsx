@@ -8,9 +8,9 @@ import { packages } from "../../../data/packages";
 
 export default function SocialMatrixReadme() {
   const router = useRouter();
-  const { packageName } = router.query;
+  const packageName = router.query.packageName as string;
 
-  if (!packageName || !packages[packageName as any]) {
+  if (!packageName || !packages[packageName]) {
     // TODO: back to main
     return null;
   }
