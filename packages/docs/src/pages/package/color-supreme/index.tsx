@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Title, Text, Box, useMantineTheme } from "@mantine/core";
-import { AppContainer } from "../../components/AppContainer";
-import { NestedNavbar } from "../../components/NestedNavbar";
+import { AppContainer } from "../../../components/AppContainer";
+import { NestedNavbar } from "../../../components/NestedNavbar";
 import { Prism } from "@mantine/prism";
 import { getDominantColors, rgbToHex } from "color-supreme";
 import { getImageFromUrl } from "pixel-paradise";

@@ -7,23 +7,7 @@ const mainMenu = [
     label: "color-supreme",
   },
   {
-    label: "pixel-paradise",
-
-    // initiallyOpened: true,
-    // links: [
-    //   { label: "Overview", link: "/" },
-    //   { label: "Forecasts", link: "/" },
-    //   { label: "Outlook", link: "/" },
-    //   { label: "Real time", link: "/" },
-    // ],
-  },
-  {
     label: "social-matrix",
-    // links: [
-    //   { label: "Upcoming releases", link: "/" },
-    //   { label: "Previous releases", link: "/" },
-    //   { label: "Releases schedule", link: "/" },
-    // ],
   },
 ];
 

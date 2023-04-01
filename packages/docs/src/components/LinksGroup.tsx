@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import {
   Group,
   Box,
@@ -8,11 +9,7 @@ import {
   createStyles,
   rem,
 } from "@mantine/core";
-import {
-  IconCalendarStats,
-  IconChevronLeft,
-  IconChevronRight,
-} from "@tabler/icons-react";
+import { IconChevronRight } from "@tabler/icons-react";
 
 const useStyles = createStyles((theme) => ({
   control: {
@@ -56,24 +53,28 @@ const useStyles = createStyles((theme) => ({
       color: theme.colorScheme === "dark" ? theme.white : theme.black,
     },
   },
-
   chevron: {
     transition: "transform 200ms ease",
   },
 }));
 
-interface LinksGroupProps {
+export type LinksGroupProps = {
   label: string;
+  link?: string;
   initiallyOpened?: boolean;
   links?: { label: string; link: string }[];
-}
+};
 
-export function LinksGroup({ label, initiallyOpened, links }: LinksGroupProps) {
-  const { classes, theme } = useStyles();
-  const hasLinks = Array.isArray(links);
-  const [opened, setOpened] = useState(initiallyOpened || false);
-  const ChevronIcon = theme.dir === "ltr" ? IconChevronRight : IconChevronLeft;
-  const items = (hasLinks ? links : []).map((link) => (
+export function LinksGroup(props: LinksGroupProps) {
+  const router = useRouter();
+  const basePath = router.basePath || "";
+  const { classes } = useStyles();
+  const hasLinks = props.links && props.links.length;
+  const [opened, setOpened] = useState(
+    hasLinks ? props.initiallyOpened : false
+  );
+
+  const items = (hasLinks ? props.links! : []).map((link) => (
     <Text<"a">
       component="a"
       className={classes.link}
@@ -88,51 +89,27 @@ export function LinksGroup({ label, initiallyOpened, links }: LinksGroupProps) {
   return (
     <>
       <UnstyledButton
-        onClick={() => setOpened((o) => !o)}
+        onClick={() => {
+          setOpened((o) => !o);
+          router.push(`${basePath}/package/${props.label}`);
+        }}
         className={classes.control}
       >
         <Group position="apart" spacing={0}>
-          <Box ml="md">{label}</Box>
+          <Box ml="md">{props.label}</Box>
           {hasLinks && (
-            <ChevronIcon
+            <IconChevronRight
               className={classes.chevron}
               size="1rem"
               stroke={1.5}
               style={{
-                transform: opened
-                  ? `rotate(${theme.dir === "rtl" ? -90 : 90}deg)`
-                  : "none",
+                transform: opened ? `rotate(-90deg)` : "none",
               }}
             />
           )}
         </Group>
       </UnstyledButton>
-      {hasLinks ? <Collapse in={opened}>{items}</Collapse> : null}
+      {hasLinks ? <Collapse in={opened!}>{items}</Collapse> : null}
     </>
-  );
-}
-
-const mockdata = {
-  label: "Releases",
-  icon: IconCalendarStats,
-  links: [
-    { label: "Upcoming releases", link: "/" },
-    { label: "Previous releases", link: "/" },
-    { label: "Releases schedule", link: "/" },
-  ],
-};
-
-export function NavbarLinksGroup() {
-  return (
-    <Box
-      sx={(theme) => ({
-        minHeight: rem(220),
-        padding: theme.spacing.md,
-        backgroundColor:
-          theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.white,
-      })}
-    >
-      <LinksGroup {...mockdata} />
-    </Box>
   );
 }
