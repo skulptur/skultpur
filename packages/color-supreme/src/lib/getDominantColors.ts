@@ -1,5 +1,5 @@
 import { kmeans, Options as KMeansOptions } from 'ml-kmeans'
-import { imageDataToPixels, scaleToMaxSize, BufferWithInfo, RGBColor } from 'pixel-paradise'
+import { bufferToPixels, scaleToMaxSize, BufferWithInfo, RGBColor } from 'pixel-paradise'
 
 export type SkMeansResult<TPoint extends number[]> = {
   it: number
@@ -26,7 +26,7 @@ export function getDominantColors(
 ): RGBColor[] {
   const resizedImage = scaleToMaxSize(imageBufferWithInfo, 256, 30)
 
-  const pixels = imageDataToPixels(resizedImage).pixels
+  const pixels = bufferToPixels(resizedImage).pixels
   console.log({ pixels })
   // Return an empty array if the pixels array is empty
   if (pixels.length === 0) return []
