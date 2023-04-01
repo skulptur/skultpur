@@ -2,18 +2,15 @@ import { Package } from "./readPackages";
 import { getPackagePaths } from "./getPackagePaths";
 import { updateFile, SlotUpdate } from "infuser";
 import { code, heading, lines } from "markdown-fns";
+import { getDocsForPackage } from "./getDocsForPackage";
 
 export async function infuseReadmes(pkg: Package) {
   try {
+    const docs = await getDocsForPackage(pkg);
     const updates: Array<SlotUpdate> = [
       {
         slotName: "header",
-        newContent: lines([
-          "",
-          heading(1, pkg.data.name),
-          pkg.data.description,
-          "",
-        ]),
+        newContent: lines(["", heading(1, pkg.name), pkg.description, ""]),
       },
       {
         slotName: "installation",
@@ -21,9 +18,9 @@ export async function infuseReadmes(pkg: Package) {
           "",
           heading(2, "Installation"),
           "Yarn",
-          code("bash", pkg.docs.installYarn),
+          code("bash", docs.installYarn),
           "NPM",
-          code("bash", pkg.docs.installNpm),
+          code("bash", docs.installNpm),
           "",
         ]),
       },
@@ -36,8 +33,8 @@ export async function infuseReadmes(pkg: Package) {
         newContent: lines([
           "",
           heading(2, "License"),
-          pkg.docs.licenseNotice,
-          lines(["", heading(2, "Notice"), pkg.docs.notice, ""]),
+          docs.licenseNotice,
+          lines(["", heading(2, "Notice"), docs.notice, ""]),
           "",
         ]),
       },
@@ -46,11 +43,11 @@ export async function infuseReadmes(pkg: Package) {
     const examples: string[][] = [];
 
     // add browser example if we have it
-    const browserExample = pkg.docs.getExample("browser");
+    const browserExample = docs.getExample("browser");
     browserExample &&
       examples.push(["Browser", code("typescript", browserExample.content)]);
     // add node example if we have it
-    const nodeExample = pkg.docs.getExample("node");
+    const nodeExample = docs.getExample("node");
     nodeExample &&
       examples.push(["Node", code("typescript", nodeExample.content)]);
 
@@ -61,7 +58,7 @@ export async function infuseReadmes(pkg: Package) {
         newContent: lines(["", heading(2, "Use"), ...examples.flat(1), ""]),
       });
 
-    const { readmePath } = await getPackagePaths(pkg.data.name);
+    const { readmePath } = await getPackagePaths(pkg.name);
 
     await updateFile(readmePath, updates);
   } catch (error) {
