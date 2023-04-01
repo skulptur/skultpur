@@ -14,7 +14,6 @@ import {
   ordered,
   spaces,
   strike,
-  times,
   unordered,
   table,
   lineBreak,
@@ -28,7 +27,12 @@ const exampleUrl =
 const fruits = ['Apples', 'Oranges', 'Bananas']
 
 const markdown = lines([
-  lines(times(index => heading(index + 1, 'This is a heading.'), 6)),
+  heading(1, 'This is a heading.'),
+  heading(2, 'This is a heading.'),
+  heading(3, 'This is a heading.'),
+  heading(4, 'This is a heading.'),
+  heading(5, 'This is a heading.'),
+  heading(6, 'This is a heading.'),
   'This is regular text.',
   italic('Italic text.'),
   bold('Bold text.'),

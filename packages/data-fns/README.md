@@ -18,16 +18,16 @@ npm install data-fns --save
 ```  
 <!-- infuser end installation -->
 
-<!-- infuser start usage -->
+<!-- infuser start usage -->  
+## Use  
+Browser  
+```typescript  
+import { times } from "data-fns";
+
+console.log(times(5, (index) => index * 2));
+  
+```  
 <!-- infuser end usage -->
-
-## Use
-
-```typescript
-import { times } from 'data-fns'
-
-console.log(times(5, (index) => index * 2))
-```
 
 ## Documentation
 
