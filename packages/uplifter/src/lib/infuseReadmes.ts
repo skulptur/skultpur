@@ -1,4 +1,5 @@
 import { Package } from "./readPackages";
+import { getPackagePaths } from "./getPackagePaths";
 import { updateFile, SlotUpdate } from "infuser";
 import { code, heading, lines } from "markdown-fns";
 
@@ -58,7 +59,9 @@ export async function infuseReadmes(pkg: Package) {
         newContent: lines(["", heading(2, "Use"), ...examples.flat(1), ""]),
       });
 
-    await updateFile(pkg.readmePath, updates);
+    const { readmePath } = await getPackagePaths(pkg.data.name);
+
+    await updateFile(readmePath, updates);
   } catch (error) {
     console.error(error);
   }

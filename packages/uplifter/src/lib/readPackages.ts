@@ -1,4 +1,3 @@
-import glob from "glob";
 import fs from "fs/promises";
 import path from "path";
 import {
@@ -7,15 +6,7 @@ import {
   PackageJsonSchema,
 } from "./packageJsonSchema";
 import { getDocsForPackage } from "./getDocsForPackage";
-
-async function checkIfExists(path: string): Promise<boolean> {
-  try {
-    await fs.access(path);
-    return true;
-  } catch {
-    return false;
-  }
-}
+import { getPackagePaths } from "./getPackagePaths";
 
 type Awaited<T> = T extends PromiseLike<infer U> ? Awaited<U> : T;
 type ArrayElement<T extends any[]> = T extends (infer U)[] ? U : never;
@@ -23,57 +14,44 @@ type ArrayElement<T extends any[]> = T extends (infer U)[] ? U : never;
 export type Package = ArrayElement<Awaited<ReturnType<typeof readPackages>>>;
 
 export async function readPackages(searchDir: string) {
-  const pattern = `${searchDir}/*/package.json`;
+  const entries = await fs.readdir(searchDir, { withFileTypes: true });
 
-  const filePaths = await new Promise<string[]>((resolve, reject) => {
-    glob(pattern, (err, files) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(files);
-      }
-    });
-  });
-
-  const packageJsons = await Promise.all(
-    filePaths.map(async (filePath) => {
-      const contents = await fs.readFile(filePath, "utf8");
-      const data = JSON.parse(contents) as PackageJsonSchema;
-      const absolutePath = path.resolve(filePath);
-      const packagePath = path.dirname(absolutePath);
-      const readmePath = path.resolve(packagePath, "README.md");
-      const readmeExists = await checkIfExists(readmePath);
-
-      if (!readmeExists) {
-        throw new Error(
-          "No Readme found for " + data.name + " at " + readmePath
-        );
-      }
-
-      const docs = await getDocsForPackage(data);
-
-      return {
-        data,
-        docs,
-        packageJsonPath: absolutePath,
-        packagePath,
-        readmePath,
-      };
-    })
+  const packages = await Promise.all(
+    entries
+      .filter((entry) => entry.isDirectory())
+      .map(async (entry) => {
+        const packagePath = path.join(searchDir, entry.name);
+        const paths = await getPackagePaths(entry.name);
+        if (!paths) {
+          throw new Error(`Failed to read package data for ${packagePath}`);
+        }
+        const packageJsonPath = paths.packageJsonPath;
+        const contents = await fs.readFile(packageJsonPath, "utf8");
+        const data = JSON.parse(contents) as PackageJsonSchema;
+        const docs = await getDocsForPackage(data);
+        return {
+          data,
+          docs,
+        };
+      })
   );
 
-  const validated = packageJsons.filter((json) => {
-    const isValid = isPackageJsonSchema(json.data);
+  const validatedPackages = packages.filter((pkg) => {
+    const isValid = isPackageJsonSchema(pkg.data);
     if (!isValid) {
       console.error(
         "Package json of " +
-          json.data.name +
+          pkg.data.name +
           " doesn't conform to our schema.\n" +
-          JSON.stringify([...packageJsonSchemaValidator.Errors(json)], null, 2)
+          JSON.stringify(
+            [...packageJsonSchemaValidator.Errors(pkg.data)],
+            null,
+            2
+          )
       );
     }
     return isValid;
   });
 
-  return validated;
+  return validatedPackages;
 }

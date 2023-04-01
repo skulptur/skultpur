@@ -2,12 +2,25 @@
 
 import { readPackages } from "./lib/readPackages";
 import { infuseReadmes } from "./lib/infuseReadmes";
+import path from "path";
+import fs from "fs/promises";
 
-// Example usage
 readPackages("..")
-  .then((packages) => {
-    // console.log(packages);
-    return Promise.all(
+  .then(async (packages) => {
+    // I want to save the data so docs can use
+    const dirAbove = path.join(__dirname, "..", "..");
+    const docExamples = path.resolve(dirAbove, "docs/data", "packages.json");
+    await fs
+      .writeFile(docExamples, JSON.stringify(packages, null, 2))
+      .then(() => {
+        console.log(`File saved to ${docExamples}`);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    // Then I want to infuse everything
+    await Promise.all(
       packages.map((pkg) => {
         return infuseReadmes(pkg);
       })
@@ -16,28 +29,3 @@ readPackages("..")
   .catch((err) => {
     console.error(err);
   });
-
-// // Example usage
-// readMarkdownFiles("..")
-//   .then((markdownFiles) => {
-//     markdownFiles.forEach((file) => {
-//       if (file.slots.length) {
-//         console.log(file.filePath, file.slots);
-//       }
-//     });
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });
-
-// import { program } from "commander";
-// import { log } from "./index";
-
-// program
-//   .option("-i, --input <path>", "Input entry path")
-//   .option("-o, --output <path>", "Output path")
-//   .parse(process.argv);
-
-// const options = program.opts();
-
-// log(JSON.stringify(options));
