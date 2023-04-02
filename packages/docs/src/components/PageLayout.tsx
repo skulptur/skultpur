@@ -11,7 +11,7 @@ export function PageLayout({ header, children, footer }: PageLayoutProps) {
   const theme = useMantineTheme();
 
   return (
-    <>
+    <Box maw={1200}>
       <Box p="md" maw={1000} m="auto">
         {header}
       </Box>
@@ -30,6 +30,6 @@ export function PageLayout({ header, children, footer }: PageLayoutProps) {
       <Box p="md" maw={1000} m="auto">
         {footer}
       </Box>
-    </>
+    </Box>
   );
 }

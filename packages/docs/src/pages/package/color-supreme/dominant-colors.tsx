@@ -30,5 +30,9 @@ function DominantColors({ url }: DominantColorsProps) {
 }
 
 export default function ColorSupremeReadme() {
-  return <PageLayout />;
+  return (
+    <PageLayout header={"color-supreme: extract dominant colors"}>
+      hello
+    </PageLayout>
+  );
 }
