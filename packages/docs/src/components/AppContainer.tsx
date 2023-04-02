@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Head from "next/head";
+import { NestedNavbar } from "./NestedNavbar";
 import {
   AppShell,
   Navbar,
@@ -11,9 +12,7 @@ import {
 } from "@mantine/core";
 
 export type AppContainer = {
-  navbar: React.ReactNode;
   children: React.ReactNode;
-  title: string;
 };
 
 export function AppContainer(props: AppContainer) {
@@ -22,7 +21,7 @@ export function AppContainer(props: AppContainer) {
   return (
     <>
       <Head>
-        <title>{props.title}</title>
+        <title>Skulptur</title>
         <meta name="description" content="Docs" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -47,7 +46,7 @@ export function AppContainer(props: AppContainer) {
               hidden={!opened}
               width={{ sm: 250, lg: 250 }}
             >
-              {props.navbar}
+              <NestedNavbar />
             </Navbar>
           }
           // aside={
@@ -76,7 +75,7 @@ export function AppContainer(props: AppContainer) {
                   />
                 </MediaQuery>
 
-                <Text>{props.title}</Text>
+                <Text>Skulptur - Libraries docs</Text>
               </div>
             </Header>
           }

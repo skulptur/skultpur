@@ -1,5 +1,5 @@
-import { bufferToPixels } from "./bufferToPixels";
-import { BufferWithInfo, PixelsWithInfo } from "./types";
+import { bufferToPixels } from "./bufferToPixels.js";
+import { BufferWithInfo, PixelsWithInfo } from "./types.js";
 
 describe("imageUtils", () => {
   const pixelData: PixelsWithInfo = {

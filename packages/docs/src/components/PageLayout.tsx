@@ -2,12 +2,12 @@ import React from "react";
 import { Box, useMantineTheme } from "@mantine/core";
 
 export type PageLayoutProps = {
-  header: React.ReactNode;
-  main: React.ReactNode;
-  footer: React.ReactNode;
+  header?: React.ReactNode;
+  children?: React.ReactNode;
+  footer?: React.ReactNode;
 };
 
-export function PageLayout({ header, main, footer }: PageLayoutProps) {
+export function PageLayout({ header, children, footer }: PageLayoutProps) {
   const theme = useMantineTheme();
 
   return (
@@ -24,7 +24,7 @@ export function PageLayout({ header, main, footer }: PageLayoutProps) {
         }}
       >
         <Box p="md" maw={1000} m="auto">
-          {main}
+          {children}
         </Box>
       </Box>
       <Box p="md" maw={1000} m="auto">

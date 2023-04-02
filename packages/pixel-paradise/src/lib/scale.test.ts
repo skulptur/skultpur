@@ -1,6 +1,6 @@
-import { nearestNeighbor } from "./samplingMethods";
-import { scale } from "./scale";
-import { BufferWithInfo } from "./types";
+import { nearestNeighbor } from "./samplingMethods.js";
+import { scale } from "./scale.js";
+import { BufferWithInfo } from "./types.js";
 
 describe("scaleImage", () => {
   const channels = 3;

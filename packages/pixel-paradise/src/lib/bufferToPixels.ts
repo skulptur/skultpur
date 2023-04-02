@@ -1,4 +1,4 @@
-import { BufferWithInfo, PixelsWithInfo, RGBColor } from "./types";
+import { BufferWithInfo, PixelsWithInfo, RGBColor } from "./types.js";
 
 /**
  * Convert image data to an array of pixels where each pixel is represented as an array of three RGB values.

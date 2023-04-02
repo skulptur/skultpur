@@ -1,4 +1,4 @@
-import { SamplingMethod } from "./types";
+import { SamplingMethod } from "./types.js";
 
 const cubicInterpolate = (
   p0: number,

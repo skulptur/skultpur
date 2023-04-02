@@ -1,6 +1,6 @@
-import { getImageChannelCount } from "./getImageChannelCount";
-import { nearestNeighbor } from "./samplingMethods";
-import { BufferWithInfo, SamplingMethod } from "./types";
+import { getImageChannelCount } from "./getImageChannelCount.js";
+import { nearestNeighbor } from "./samplingMethods.js";
+import { BufferWithInfo, SamplingMethod } from "./types.js";
 
 export function scale(
   bufferWithInfo: BufferWithInfo,

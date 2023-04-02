@@ -6,6 +6,7 @@ import { ModalsProvider } from '@mantine/modals'
 import { Spotlight } from '@/components/Spotlight'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useState } from 'react'
+import { AppContainer } from '@/components/AppContainer'
 
 const queryClient = new QueryClient()
 
@@ -30,7 +31,9 @@ export default function App({ Component, pageProps }: AppProps) {
              <Notifications />
               <ModalsProvider>
                 <Spotlight>
-                  <Component {...pageProps} />
+                  <AppContainer>
+                    <Component {...pageProps} />
+                  </AppContainer>
                 </Spotlight>
               </ModalsProvider>
           </MantineProvider>

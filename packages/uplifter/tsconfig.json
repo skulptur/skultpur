@@ -2,11 +2,12 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",
-    "module": "nodenext",
-    "moduleResolution": "node16",
-    "target": "es6",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2020",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "declaration": true
+    "declaration": true,
+    "sourceMap": true,
   },
 }

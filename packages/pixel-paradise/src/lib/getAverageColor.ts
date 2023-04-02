@@ -1,5 +1,5 @@
-import { getImageChannelCount } from "./getImageChannelCount";
-import { BufferWithInfo } from "./types";
+import { getImageChannelCount } from "./getImageChannelCount.js";
+import { BufferWithInfo } from "./types.js";
 
 export function getAverageColor(
   bufferWithInfo: BufferWithInfo,

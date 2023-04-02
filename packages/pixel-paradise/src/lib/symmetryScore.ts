@@ -1,6 +1,6 @@
-import { getAverageColor } from "./getAverageColor";
-import { getImageChannelCount } from "./getImageChannelCount";
-import { BufferWithInfo } from "./types";
+import { getAverageColor } from "./getAverageColor.js";
+import { getImageChannelCount } from "./getImageChannelCount.js";
+import { BufferWithInfo } from "./types.js";
 
 function colorDistance(color1: number[], color2: number[]): number {
   let sum = 0;

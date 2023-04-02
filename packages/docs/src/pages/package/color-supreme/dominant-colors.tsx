@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@mantine/core";
-import { AppContainer } from "../../components/AppContainer";
-import { NestedNavbar } from "../../components/NestedNavbar";
 import { getDominantColors, rgbToHex } from "color-supreme";
 import { getImageFromUrl } from "pixel-paradise";
-import { LibraryReadme } from "../../components/LibraryReadme";
+import { PageLayout } from "../../../components/PageLayout";
 
 const getColors = async (url: string, colors = 5) => {
   const pixels = await getImageFromUrl(url);
@@ -14,6 +11,7 @@ const getColors = async (url: string, colors = 5) => {
 type DominantColorsProps = {
   url: string;
 };
+
 function DominantColors({ url }: DominantColorsProps) {
   const [dominantColors, setDominantColors] = useState<String[]>([]);
 
@@ -32,11 +30,5 @@ function DominantColors({ url }: DominantColorsProps) {
 }
 
 export default function ColorSupremeReadme() {
-  return (
-    <AppContainer title="Skulptur - Libraries docs" navbar={<NestedNavbar />}>
-      <Box maw={1200}>
-        <LibraryReadme libraryName="color-supreme" />
-      </Box>
-    </AppContainer>
-  );
+  return <PageLayout />;
 }

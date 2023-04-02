@@ -1,4 +1,4 @@
-import type { BufferWithInfo } from './types'
+import type { BufferWithInfo } from './types.js'
 
 /**
 * Convert an image to a 2D array of pixel values using the browser's Canvas API.
