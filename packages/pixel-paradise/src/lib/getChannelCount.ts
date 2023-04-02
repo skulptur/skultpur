@@ -1,6 +1,6 @@
 import { ChannelCount, BufferWithInfo } from "./types.js";
 
-export function getImageChannelCount({
+export function getChannelCount({
   buffer,
   width,
   height,

@@ -1,3 +1,4 @@
+import { getChannelCount } from "./getChannelCount.js";
 import { BufferWithInfo, PixelsWithInfo, RGBColor } from "./types.js";
 
 /**
@@ -7,11 +8,12 @@ import { BufferWithInfo, PixelsWithInfo, RGBColor } from "./types.js";
  */
 export function bufferToPixels(imageData: BufferWithInfo): PixelsWithInfo {
   const { buffer, width, height } = imageData;
+  const channels = getChannelCount(imageData);
 
   const pixels: RGBColor[] = [];
 
   // TODO: we're always just only using the colors here, not alpha
-  for (let i = 0; i < buffer.length; i += 3) {
+  for (let i = 0; i < buffer.length; i += channels) {
     const r = buffer[i];
     const g = buffer[i + 1];
     const b = buffer[i + 2];

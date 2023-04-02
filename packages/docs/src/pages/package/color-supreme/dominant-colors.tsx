@@ -2,37 +2,36 @@ import React, { useEffect, useState } from "react";
 import { getDominantColors, rgbToHex } from "color-supreme";
 import { getImageFromUrl } from "pixel-paradise";
 import { PageLayout } from "../../../components/PageLayout";
-
-const getColors = async (url: string, colors = 5) => {
-  const pixels = await getImageFromUrl(url);
-  return getDominantColors(pixels, colors).map(rgbToHex);
-};
+import { Swatches } from "../../../components/Swatches";
+import { Group } from "@mantine/core";
 
 type DominantColorsProps = {
   url: string;
 };
 
 function DominantColors({ url }: DominantColorsProps) {
-  const [dominantColors, setDominantColors] = useState<String[]>([]);
+  const [dominantColors, setDominantColors] = useState<string[]>([]);
 
   useEffect(() => {
-    getColors(url).then((colors) => {
-      setDominantColors(colors);
+    getImageFromUrl(url).then((colors) => {
+      console.log(colors);
+      const dominantColors = getDominantColors(colors, 5).map(rgbToHex);
+      setDominantColors(dominantColors);
     });
   }, []);
 
   return (
-    <>
-      <img src={url} width={768 * 0.25} height={768 * 0.25} />
-      {dominantColors.toString()}
-    </>
+    <Group position="center">
+      <img src={url} width={768 * 0.4} height={768 * 0.4} />
+      <Swatches colors={dominantColors} />
+    </Group>
   );
 }
 
 export default function ColorSupremeReadme() {
   return (
     <PageLayout header={"color-supreme: extract dominant colors"}>
-      hello
+      <DominantColors url="/images/0.png" />
     </PageLayout>
   );
 }

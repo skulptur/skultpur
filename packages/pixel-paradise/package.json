@@ -1,45 +1,41 @@
 {
   "name": "pixel-paradise",
+  "private": true,
+  "version": "0.0.0",
   "description": "Image manipulation library.",
   "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/pixel-paradise",
-  "private": false,
-  "version": "0.0.0",
-  "author": "skulptur",
+  "keywords": [
+    "typescript",
+    "cli"
+  ],
   "license": "MIT",
+  "main": "./dist/index.js",
+  "bin": "./dist/cli.js",
+  "files": [
+    "dist/**/*"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/skulptur/skultpur.git"
-  },
-  "type": "module",
-  "keywords": [],
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/pixel-paradise.umd.cjs",
-  "module": "./dist/pixel-paradise.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/pixel-paradise.js",
-      "require": "./dist/pixel-paradise.umd.cjs"
-    }
+    "url": "https://github.com/skulptur/skulptur.git"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "test": "vitest",
-    "script": "node -r ts-node/register -r esm ./script.ts"
+    "dev": "ts-node ./src/cli.ts",
+    "clean": "rimraf ./dist/ ./exec/",
+    "build": "npm run clean && tsc",
+    "bundle": "npm run build && pkg . --out-dir ./exec/",
+    "test": "jest"
   },
   "devDependencies": {
-    "@types/node": "^18.15.10",
-    "esm": "^3.2.25",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.0.2",
-    "vite": "^4.2.0",
-    "vitest": "^0.29.7"
+    "@types/jest": "^29.5.0",
+    "@types/node": "^18.15.5",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.0.5",
+    "pkg": "^5.8.1",
+    "rimraf": "^2.6.3",
+    "ts-node": "^10.9.1"
   },
   "dependencies": {
-    "vite-plugin-dts": "^2.1.0"
+    "commander": "^10.0.0",
+    "typescript": "^5.0.2"
   }
 }

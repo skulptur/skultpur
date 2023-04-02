@@ -1,4 +1,4 @@
-import { getImageChannelCount } from "./getImageChannelCount.js";
+import { getChannelCount } from "./getChannelCount.js";
 import { nearestNeighbor } from "./samplingMethods.js";
 import { BufferWithInfo, SamplingMethod } from "./types.js";
 
@@ -9,7 +9,7 @@ export function scale(
   samplingMethod: SamplingMethod = nearestNeighbor
 ): BufferWithInfo {
   const { buffer, width, height } = bufferWithInfo;
-  const channels = getImageChannelCount(bufferWithInfo) || 0;
+  const channels = getChannelCount(bufferWithInfo) || 0;
   const newWidth = Math.round(targetWidth);
   const newHeight = Math.round(targetHeight);
   const scaleFactorX = newWidth / width;

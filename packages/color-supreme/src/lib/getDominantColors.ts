@@ -9,25 +9,28 @@ export type SkMeansResult<TPoint extends number[]> = {
   test: (x: TPoint, distance?: (x: TPoint, y: TPoint) => number) => void
 }
 
-export type getDominantColorsOptions = KMeansOptions
+export type getDominantColorsOptions = {
+  kmeans?: KMeansOptions
+  maxSize?: number
+}
 
 /**
  * Retrieves the dominant colors from a given set of pixels.
  *
- * @param {BufferWithInfo} imageBufferWithInfo - A 2D array representing the pixel colors as [R, G, B] tuples.
+ * @param {BufferWithInfo} imageBuffer - A 2D array representing the pixel colors as [R, G, B] tuples.
  * @param {number} numberOfColors - The number of dominant colors to extract.
  * @returns {RGBColor[]} An array of dominant colors represented as Color tuples.
  * Returns an empty array if the input pixels array is empty.
  */
 export function getDominantColors(
-  imageBufferWithInfo: BufferWithInfo,
+  imageBuffer: BufferWithInfo,
   numberOfColors: number,
   options: getDominantColorsOptions = {}
 ): RGBColor[] {
-  const resizedImage = scaleToMaxSize(imageBufferWithInfo, 256, 30)
+  const resizedImage = scaleToMaxSize(imageBuffer, options.maxSize || 256, 30)
 
   const pixels = bufferToPixels(resizedImage).pixels
-  console.log({ pixels })
+
   // Return an empty array if the pixels array is empty
   if (pixels.length === 0) return []
 
@@ -35,7 +38,7 @@ export function getDominantColors(
   const result = kmeans(pixels, _numberOfColors, {
     seed: 1,
     initialization: 'kmeans++',
-    ...options,
+    ...(options.kmeans || {}),
   })
 
   // Sort the centroids by cluster size in descending order (most dominant to least dominant)

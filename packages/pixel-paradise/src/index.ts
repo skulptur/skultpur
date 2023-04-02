@@ -3,7 +3,7 @@ export * from "./lib/pixelsToBuffer.js";
 export * from "./lib/canvas.js";
 export * from "./lib/samplingMethods.js";
 export * from "./lib/getImageFromUrl.js";
-export * from "./lib/getImageChannelCount.js";
+export * from "./lib/getChannelCount.js";
 export * from "./lib/symmetryScore.js";
 export * from "./lib/scale.js";
 export * from "./lib/scaleToMaxSize.js";

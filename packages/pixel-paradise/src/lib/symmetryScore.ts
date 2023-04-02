@@ -1,5 +1,5 @@
 import { getAverageColor } from "./getAverageColor.js";
-import { getImageChannelCount } from "./getImageChannelCount.js";
+import { getChannelCount } from "./getChannelCount.js";
 import { BufferWithInfo } from "./types.js";
 
 function colorDistance(color1: number[], color2: number[]): number {
@@ -18,7 +18,7 @@ function calculateSymmetryScore(
   let score = 0;
   let count = 0;
   const { width, height } = bufferWithInfo;
-  const channels = getImageChannelCount(bufferWithInfo) || 0;
+  const channels = getChannelCount(bufferWithInfo) || 0;
   const limit1 = isHorizontal ? height : width;
   const limit2 = (isHorizontal ? width : height) / 2;
 
