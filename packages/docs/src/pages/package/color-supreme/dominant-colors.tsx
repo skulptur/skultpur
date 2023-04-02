@@ -3,6 +3,7 @@ import { getDominantColors, rgbToHex } from "color-supreme";
 import { getImageFromUrl } from "pixel-paradise";
 import { PageLayout } from "../../../components/PageLayout";
 import { Swatches } from "../../../components/Swatches";
+import { testImages } from "../../../data/testImages";
 import { Group } from "@mantine/core";
 
 type DominantColorsProps = {
@@ -14,7 +15,6 @@ function DominantColors({ url }: DominantColorsProps) {
 
   useEffect(() => {
     getImageFromUrl(url).then((colors) => {
-      console.log(colors);
       const dominantColors = getDominantColors(colors, 5).map(rgbToHex);
       setDominantColors(dominantColors);
     });
@@ -31,7 +31,9 @@ function DominantColors({ url }: DominantColorsProps) {
 export default function ColorSupremeReadme() {
   return (
     <PageLayout header={"color-supreme: extract dominant colors"}>
-      <DominantColors url="/images/0.png" />
+      {testImages.map((testImage) => {
+        return <DominantColors key={testImage} url={testImage} />;
+      })}
     </PageLayout>
   );
 }
