@@ -1,15 +1,15 @@
 import { getChannelCount } from "./getChannelCount.js";
 import { nearestNeighbor } from "./samplingMethods.js";
-import { BufferWithInfo, SamplingMethod } from "./types.js";
+import { ImageBuffer, SamplingMethod } from "./types.js";
 
 export function scale(
-  bufferWithInfo: BufferWithInfo,
+  ImageData: ImageBuffer,
   targetWidth: number,
   targetHeight: number,
   samplingMethod: SamplingMethod = nearestNeighbor
-): BufferWithInfo {
-  const { buffer, width, height } = bufferWithInfo;
-  const channels = getChannelCount(bufferWithInfo) || 0;
+): ImageBuffer {
+  const { data: buffer, width, height } = ImageData;
+  const channels = getChannelCount(ImageData);
   const newWidth = Math.round(targetWidth);
   const newHeight = Math.round(targetHeight);
   const scaleFactorX = newWidth / width;
@@ -39,7 +39,7 @@ export function scale(
   }
 
   return {
-    buffer: scaledImageData,
+    data: scaledImageData,
     width: newWidth,
     height: newHeight,
   };

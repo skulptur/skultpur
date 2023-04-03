@@ -1,13 +1,13 @@
 import { getChannelCount } from "./getChannelCount.js";
-import { BufferWithInfo, PixelsWithInfo, RGBColor } from "./types.js";
+import { ImageBuffer, PixelData, RGBColor } from "./types.js";
 
 /**
  * Convert image data to an array of pixels where each pixel is represented as an array of three RGB values.
  * @param {Buffer | Uint8ClampedArray} imageData - The image data to convert along with its width and height.
  * @returns {number[][]} An array of pixels where each pixel is represented as an array of three RGB values.
  */
-export function bufferToPixels(imageData: BufferWithInfo): PixelsWithInfo {
-  const { buffer, width, height } = imageData;
+export function bufferToPixels(imageData: ImageBuffer): PixelData {
+  const { data: buffer, width, height } = imageData;
   const channels = getChannelCount(imageData);
 
   const pixels: RGBColor[] = [];

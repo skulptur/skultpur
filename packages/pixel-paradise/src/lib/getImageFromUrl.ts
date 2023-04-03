@@ -1,4 +1,4 @@
-import type { BufferWithInfo } from './types.js'
+import type { ImageBuffer } from './types.js'
 
 /**
 * Convert an image to a 2D array of pixel values using the browser's Canvas API.
@@ -6,7 +6,7 @@ import type { BufferWithInfo } from './types.js'
 * @returns A Promise that resolves to a an array of Color which represents the pixels of the image
 * @throws Error if the canvas context is not available.
 */
-export const getImageFromUrl = async (imageUrl: string): Promise<BufferWithInfo> => {
+export const getImageFromUrl = async (imageUrl: string): Promise<ImageBuffer> => {
   const image = new Image()
   image.src = imageUrl
   await new Promise((resolve) => (image.onload = resolve))
@@ -31,7 +31,7 @@ export const getImageFromUrl = async (imageUrl: string): Promise<BufferWithInfo>
   image.src = ''
 
   return {
-    buffer: imageData.data,
+    data: imageData.data,
     width: imageData.width,
     height: imageData.height,
   }

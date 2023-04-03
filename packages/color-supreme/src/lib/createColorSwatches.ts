@@ -1,10 +1,10 @@
-import { BufferWithInfo, RGBColor } from 'pixel-paradise'
+import { ImageData, RGBColor } from 'pixel-paradise'
 
 export function createColorSwatches(
   swatches: RGBColor[],
   swatchSize: number = 50,
   swatchesPerRow?: number
-): BufferWithInfo {
+): ImageData {
   const columns = swatchesPerRow ?? swatches.length
   const width = columns * swatchSize
   const height = Math.ceil(swatches.length / columns) * swatchSize

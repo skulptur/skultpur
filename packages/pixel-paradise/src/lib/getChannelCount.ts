@@ -1,10 +1,10 @@
-import { ChannelCount, BufferWithInfo } from "./types.js";
+import { ChannelCount, ImageBuffer } from "./types.js";
 
 export function getChannelCount({
-  buffer,
+  data: buffer,
   width,
   height,
-}: BufferWithInfo): ChannelCount | null {
+}: ImageBuffer): ChannelCount | null {
   const totalPixels = width * height;
   const totalValues = buffer.length;
 

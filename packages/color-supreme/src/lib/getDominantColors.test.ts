@@ -1,11 +1,11 @@
 import sharp from 'sharp'
 import { getDominantColors } from './getDominantColors'
 import path from 'path'
-import { BufferWithInfo } from 'pixel-paradise'
+import { ImageData } from 'pixel-paradise'
 
 const test_image = path.resolve(path.join(__dirname, '..', '..'), './images/0.png')
 describe('getDominantColors with sharp', () => {
-  const imageData: BufferWithInfo = {
+  const imageData: ImageData = {
     buffer: new Uint8ClampedArray([255, 0, 0, 255, 0, 255, 0, 255, 0]),
     width: 3,
     height: 1,
@@ -14,7 +14,7 @@ describe('getDominantColors with sharp', () => {
   let image: sharp.Sharp
   let data: Buffer
   let info: sharp.OutputInfo
-  let imageDataWithInfo: BufferWithInfo
+  let imageDataWithInfo: ImageData
 
   beforeAll(async () => {
     image = await sharp(test_image)
@@ -33,7 +33,7 @@ describe('getDominantColors with sharp', () => {
   })
 
   test('should handle an empty pixel array', () => {
-    const emptyImage: BufferWithInfo = {
+    const emptyImage: ImageData = {
       buffer: new Uint8ClampedArray([]),
       width: 0,
       height: 0,

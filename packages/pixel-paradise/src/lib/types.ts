@@ -7,16 +7,15 @@ export type RGBColor = [number, number, number];
 
 export type ChannelCount = 1 | 2 | 3 | 4;
 
-export type ImageInfo = {
+export type ImageBuffer = {
   width: number;
   height: number;
+  data: Buffer | Uint8ClampedArray;
 };
 
-export type BufferWithInfo = ImageInfo & {
-  buffer: Buffer | Uint8ClampedArray;
-};
-
-export type PixelsWithInfo = ImageInfo & {
+export type PixelData = {
+  width: number;
+  height: number;
   pixels: Array<RGBColor>;
 };
 

@@ -1,4 +1,4 @@
-import { BufferWithInfo, PixelsWithInfo } from "./types.js";
+import { ImageBuffer, PixelData } from "./types.js";
 
 /**
  * Convert an array of pixels to image data where each pixel is represented as an array of three RGB values.
@@ -12,7 +12,7 @@ export function pixelsToBuffer({
   pixels,
   width,
   height,
-}: PixelsWithInfo): BufferWithInfo {
+}: PixelData): ImageBuffer {
   const imageData = new Uint8ClampedArray(width * height * 4);
   // In this implementation, we use two index variables:
   // i for iterating over the pixels array and j for iterating over the imageData array.
@@ -24,7 +24,7 @@ export function pixelsToBuffer({
   }
 
   return {
-    buffer: imageData,
+    data: imageData,
     width,
     height,
   };

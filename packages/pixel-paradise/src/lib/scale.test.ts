@@ -1,11 +1,11 @@
 import { nearestNeighbor } from "./samplingMethods.js";
 import { scale } from "./scale.js";
-import { BufferWithInfo } from "./types.js";
+import { ImageBuffer } from "./types.js";
 
 describe("scaleImage", () => {
   const channels = 3;
-  const imageData: BufferWithInfo = {
-    buffer: new Uint8ClampedArray([
+  const imageData: ImageBuffer = {
+    data: new Uint8ClampedArray([
       255,
       0,
       0,
@@ -61,8 +61,8 @@ describe("scaleImage", () => {
   test("empty input image", () => {
     const newWidth = 6;
     const newHeight = 6;
-    const emptyImageData: BufferWithInfo = {
-      buffer: new Uint8ClampedArray(0),
+    const emptyImageData: ImageBuffer = {
+      data: new Uint8ClampedArray(0),
       width: newWidth,
       height: newHeight,
     };

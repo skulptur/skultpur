@@ -1,8 +1,8 @@
 import sharp from 'sharp'
-import { BufferWithInfo } from 'pixel-paradise'
+import { ImageData } from 'pixel-paradise'
 
 export async function saveImageAsPng(
-  { buffer, width, height }: BufferWithInfo,
+  { buffer, width, height }: ImageData,
   channels: 1 | 2 | 3 | 4,
   outputPath: string
 ) {
@@ -24,7 +24,7 @@ export async function saveImageAsPng(
   }
 }
 
-export const loadImage = async (imagePath: string): Promise<BufferWithInfo> => {
+export const loadImage = async (imagePath: string): Promise<ImageData> => {
   const { data, info } = await sharp(imagePath)
     .toColourspace('srgb')
     .raw()

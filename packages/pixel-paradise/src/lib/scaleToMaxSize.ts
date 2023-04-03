@@ -1,32 +1,27 @@
 import { nearestNeighbor } from "./samplingMethods.js";
 import { scale } from "./scale.js";
-import { BufferWithInfo } from "./types.js";
+import { ImageBuffer } from "./types.js";
 
 export function scaleToMaxSize(
-  bufferWithInfo: BufferWithInfo,
+  ImageData: ImageBuffer,
   targetMaxSize: number,
   tolerance: number = 0
-): BufferWithInfo {
-  const { width, height } = bufferWithInfo;
+): ImageBuffer {
+  const { width, height } = ImageData;
   const longestSide = Math.max(width, height);
 
   if (
     longestSide <= targetMaxSize + tolerance ||
     longestSide <= targetMaxSize - tolerance
   ) {
-    return bufferWithInfo;
+    return ImageData;
   }
 
   const scaleFactor = targetMaxSize / longestSide;
   const newWidth = scaleFactor * width;
   const newHeight = scaleFactor * height;
 
-  const scaledImage = scale(
-    bufferWithInfo,
-    newWidth,
-    newHeight,
-    nearestNeighbor
-  );
+  const scaledImage = scale(ImageData, newWidth, newHeight, nearestNeighbor);
 
   return scaledImage;
 }

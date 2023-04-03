@@ -1,14 +1,14 @@
 import { getChannelCount } from "./getChannelCount.js";
-import { BufferWithInfo } from "./types.js";
+import { ImageBuffer } from "./types.js";
 
 export function getAverageColor(
-  bufferWithInfo: BufferWithInfo,
+  ImageData: ImageBuffer,
   x: number,
   y: number,
   size: number
 ): number[] {
-  const { buffer, width, height } = bufferWithInfo;
-  const channels = getChannelCount(bufferWithInfo) || 0;
+  const { data: buffer, width, height } = ImageData;
+  const channels = getChannelCount(ImageData) || 0;
   const averageColor = new Array(channels).fill(0);
   let count = 0;
 
