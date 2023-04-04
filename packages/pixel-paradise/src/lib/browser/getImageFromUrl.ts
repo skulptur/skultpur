@@ -1,4 +1,4 @@
-import type { ImageBuffer } from './types.js'
+import type { ImageBuffer } from '../core/types.js'
 
 /**
 * Convert an image to a 2D array of pixel values using the browser's Canvas API.

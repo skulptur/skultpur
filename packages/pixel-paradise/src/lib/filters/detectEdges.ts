@@ -1,4 +1,4 @@
-import { ImageBuffer } from "../types";
+import { ImageBuffer } from "../core/types";
 
 type EdgeOperator = keyof typeof kernels;
 

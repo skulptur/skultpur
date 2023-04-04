@@ -1,8 +1,8 @@
-import { ImageBuffer } from "./types";
+import { ImageBuffer } from "../core/types";
 
 // TODO: use native ImageData type? does that work in node?
 // TODO: use other utils to create and remove canvas
-export function imageDataToDataURL(imageData: ImageBuffer): string {
+export function imageToDataUrl(imageData: ImageBuffer): string {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d")!;
   canvas.width = imageData.width;

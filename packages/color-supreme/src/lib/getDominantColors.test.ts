@@ -1,12 +1,12 @@
 import sharp from 'sharp'
 import { getDominantColors } from './getDominantColors'
 import path from 'path'
-import { ImageData } from 'pixel-paradise'
+import { ImageBuffer } from 'pixel-paradise'
 
 const test_image = path.resolve(path.join(__dirname, '..', '..'), './images/0.png')
 describe('getDominantColors with sharp', () => {
-  const imageData: ImageData = {
-    buffer: new Uint8ClampedArray([255, 0, 0, 255, 0, 255, 0, 255, 0]),
+  const ImageBuffer: ImageBuffer = {
+    data: new Uint8ClampedArray([255, 0, 0, 255, 0, 255, 0, 255, 0]),
     width: 3,
     height: 1,
   }
@@ -14,27 +14,27 @@ describe('getDominantColors with sharp', () => {
   let image: sharp.Sharp
   let data: Buffer
   let info: sharp.OutputInfo
-  let imageDataWithInfo: ImageData
+  let ImageBufferWithInfo: ImageBuffer
 
   beforeAll(async () => {
     image = await sharp(test_image)
     const result = await image.raw().toBuffer({ resolveWithObject: true })
     data = result.data
     info = result.info
-    imageDataWithInfo = {
-      buffer: data,
+    ImageBufferWithInfo = {
+      data,
       width: info.width!,
       height: info.height!,
     }
   })
 
   test('should return the correct number of dominant colors', () => {
-    expect(getDominantColors(imageDataWithInfo, 3)).toHaveLength(3)
+    expect(getDominantColors(ImageBufferWithInfo, 3)).toHaveLength(3)
   })
 
   test('should handle an empty pixel array', () => {
-    const emptyImage: ImageData = {
-      buffer: new Uint8ClampedArray([]),
+    const emptyImage: ImageBuffer = {
+      data: new Uint8ClampedArray([]),
       width: 0,
       height: 0,
     }
@@ -47,7 +47,7 @@ describe('getDominantColors with sharp', () => {
   test('should handle when numberOfColors is greater than the pixel array length', () => {
     const numberOfColors = 5
 
-    const result = getDominantColors(imageData, numberOfColors)
+    const result = getDominantColors(ImageBuffer, numberOfColors)
     expect(result).toHaveLength(3)
   })
 })

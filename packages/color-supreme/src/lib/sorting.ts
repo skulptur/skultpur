@@ -1,5 +1,5 @@
 import { SkMeansResult } from './getDominantColors'
-import { RGBColor } from 'pixel-paradise'
+import { RGBColor } from './types'
 
 export const sortByCounts = (
   numberOfColors: number,

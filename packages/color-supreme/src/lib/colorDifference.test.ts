@@ -1,5 +1,5 @@
 import { ciede2000 } from './colorDifference'
-import { LabColor } from 'pixel-paradise'
+import { LabColor } from './types'
 
 /**
  * CIEDE2000 tests the diff.cie2000.

@@ -1,4 +1,4 @@
-import { LabColor } from 'pixel-paradise'
+import { LabColor } from './types'
 
 const sqrt = Math.sqrt
 const pow = Math.pow

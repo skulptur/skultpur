@@ -1,6 +1,6 @@
 export const testImages = [
-  "/images/000.png",
-  "/images/00.png",
+  // "/images/000.png",
+  // "/images/00.png",
   "/images/0.png",
   "/images/1.png",
   "/images/2.png",

@@ -1,4 +1,4 @@
-import { ImageBuffer } from "../types";
+import { ImageBuffer } from "../core/types";
 
 interface VectorBlurOptions {
   blurStrength: number;

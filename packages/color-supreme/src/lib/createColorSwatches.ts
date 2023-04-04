@@ -1,14 +1,15 @@
-import { ImageData, RGBColor } from 'pixel-paradise'
+import { ImageBuffer } from 'pixel-paradise'
+import { RGBColor } from './types'
 
 export function createColorSwatches(
   swatches: RGBColor[],
   swatchSize: number = 50,
   swatchesPerRow?: number
-): ImageData {
+): ImageBuffer {
   const columns = swatchesPerRow ?? swatches.length
   const width = columns * swatchSize
   const height = Math.ceil(swatches.length / columns) * swatchSize
-  const imageData = new Uint8ClampedArray(width * height * 4)
+  const ImageBuffer = new Uint8ClampedArray(width * height * 4)
 
   for (let i = 0; i < swatches.length; i++) {
     const color = swatches[i]
@@ -23,16 +24,16 @@ export function createColorSwatches(
       for (let x = startX; x < startX + swatchSize; x++) {
         // TODO: don't use 4 channels?
         const index = (y * width + x) * 4
-        imageData[index] = color[0] // R
-        imageData[index + 1] = color[1] // G
-        imageData[index + 2] = color[2] // B
-        imageData[index + 3] = 255 // A
+        ImageBuffer[index] = color[0] // R
+        ImageBuffer[index + 1] = color[1] // G
+        ImageBuffer[index + 2] = color[2] // B
+        ImageBuffer[index + 3] = 255 // A
       }
     }
   }
 
   return {
-    buffer: imageData,
+    data: ImageBuffer,
     width,
     height,
   }

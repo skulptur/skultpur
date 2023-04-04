@@ -1,5 +1,7 @@
 import { kmeans, Options as KMeansOptions } from 'ml-kmeans'
-import { bufferToPixels, scaleToMaxSize, ImageData, RGBColor } from 'pixel-paradise'
+import { scaleToMaxSize, ImageBuffer } from 'pixel-paradise'
+import { RGBColor } from './types'
+import { bufferToPixels } from './bufferToPixels'
 
 export type SkMeansResult<TPoint extends number[]> = {
   it: number
@@ -17,13 +19,13 @@ export type getDominantColorsOptions = {
 /**
  * Retrieves the dominant colors from a given set of pixels.
  *
- * @param {ImageData} imageBuffer - A 2D array representing the pixel colors as [R, G, B] tuples.
+ * @param {ImageBuffer} imageBuffer - A 2D array representing the pixel colors as [R, G, B] tuples.
  * @param {number} numberOfColors - The number of dominant colors to extract.
  * @returns {RGBColor[]} An array of dominant colors represented as Color tuples.
  * Returns an empty array if the input pixels array is empty.
  */
 export function getDominantColors(
-  imageBuffer: ImageData,
+  imageBuffer: ImageBuffer,
   numberOfColors: number,
   options: getDominantColorsOptions = {}
 ): RGBColor[] {
