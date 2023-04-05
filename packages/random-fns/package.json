@@ -1,14 +1,9 @@
 {
   "name": "random-fns",
-  "version": "0.1.8",
-  "description": "All your random needs in one place.",
+  "private": true,
+  "version": "0.0.0",
   "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/random-fns",
-  "author": "skulptur",
-  "private": false,
-  "license": "MIT",
-  "module": "dist/random-fns.esm.js",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "description": "All your random needs in one place.",
   "keywords": [
     "functional",
     "random",
@@ -16,53 +11,36 @@
     "probability",
     "chance"
   ],
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "bin": "./dist/cli.js",
   "files": [
-    "dist",
-    "src"
+    "dist/**/*"
   ],
-  "engines": {
-    "node": ">=10"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skulptur/skulptur.git"
   },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "tsdx test --passWithNoTests",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build",
-    "size": "size-limit",
-    "analyze": "size-limit --why"
+    "dev": "ts-node ./src/cli.ts",
+    "clean": "rimraf ./dist/ ./exec/",
+    "build": "npm run clean && tsc",
+    "bundle": "npm run build && pkg . --out-dir ./exec/",
+    "test": "jest"
   },
-  "prettier": {
-    "printWidth": 100,
-    "tabWidth": 2,
-    "useTabs": false,
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "bracketSpacing": true,
-    "jsxBracketSameLine": false,
-    "jsxSingleQuote": true,
-    "arrowParens": "always"
-  },
-  "size-limit": [
-    {
-      "path": "dist/random-fns.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/random-fns.esm.js",
-      "limit": "10 KB"
-    }
-  ],
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^4.10.2",
-    "size-limit": "^4.10.2",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.2.0",
-    "typescript": "^4.2.4"
+    "@types/jest": "^29.5.0",
+    "@types/node": "^18.15.5",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.0.5",
+    "pkg": "^5.8.1",
+    "rimraf": "^2.6.3",
+    "ts-node": "^10.9.1"
   },
   "dependencies": {
+    "commander": "^10.0.0",
+    "typescript": "^5.0.2",
     "open-simplex-noise": "^2.5.0",
-    "unit-fns": "^0.1.7"
+    "unit-fns": "*"
   }
 }
