@@ -1,15 +1,41 @@
-import {RgbColor} from "./types";
-import {tint} from "./tint";
-import {mix} from "./mix";
+import { tint } from './tint'
 
 describe('tint', () => {
-    it('should mix the color with white by the specified factor', () => {
-        const color: RgbColor = { red: 128, green: 128, blue: 128 };
-        const factor = 0.5;
-        const white: RgbColor = { red: 255, green: 255, blue: 255 };
-        const expected: RgbColor = { red: 192, green: 192, blue: 192 };
+  it('should return the first color if ratio is 0', () => {
+    const color1 = { red: 255, green: 0, blue: 0 }
+    const color2 = { red: 0, green: 255, blue: 0 }
+    const ratio = 0
+    expect(tint(color1, color2, ratio)).toEqual(color1)
+  })
 
-        expect(tint(color, factor)).toEqual(mix(color, white, factor));
-        expect(tint(color, factor)).toEqual(expected);
-    });
-});
+  it('should return the second color if ratio is 1', () => {
+    const color1 = { red: 255, green: 0, blue: 0 }
+    const color2 = { red: 0, green: 255, blue: 0 }
+    const ratio = 1
+    expect(tint(color1, color2, ratio)).toEqual(color2)
+  })
+
+  it('should return a mix of the two colors if ratio is between 0 and 1', () => {
+    const color1 = { red: 255, green: 0, blue: 0 }
+    const color2 = { red: 0, green: 255, blue: 0 }
+    const ratio = 0.5
+    const expected = { red: 128, green: 128, blue: 0 }
+    expect(tint(color1, color2, ratio)).toEqual(expected)
+  })
+
+  it('should return black if both colors are black', () => {
+    const color1 = { red: 0, green: 0, blue: 0 }
+    const color2 = { red: 0, green: 0, blue: 0 }
+    const ratio = 0.5
+    const expected = { red: 0, green: 0, blue: 0 }
+    expect(tint(color1, color2, ratio)).toEqual(expected)
+  })
+
+  it('should return white if both colors are white', () => {
+    const color1 = { red: 255, green: 255, blue: 255 }
+    const color2 = { red: 255, green: 255, blue: 255 }
+    const ratio = 0.5
+    const expected = { red: 255, green: 255, blue: 255 }
+    expect(tint(color1, color2, ratio)).toEqual(expected)
+  })
+})

@@ -1,12 +1,7 @@
+import { tint } from './tint'
 import { RgbColor } from './types'
 
-export function darken(color: RgbColor, percentage: number): RgbColor {
-  const factor = (100 - percentage) / 100
-  const newColor: RgbColor = {
-    red: Math.round(color.red * factor),
-    green: Math.round(color.green * factor),
-    blue: Math.round(color.blue * factor),
-    alpha: color.alpha,
-  }
-  return newColor
+const black: RgbColor = { red: 0, green: 0, blue: 0, alpha: 1 }
+export function darken(color: RgbColor, factor: number): RgbColor {
+  return tint(color, black, factor)
 }

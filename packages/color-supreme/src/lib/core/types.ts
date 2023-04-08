@@ -1,39 +1,39 @@
-export interface CmykColor {
-  alpha?: number;
-  cyan: number;
-  magenta: number;
-  yellow: number;
-  key: number;
+export type CmykColor = {
+  alpha?: number
+  cyan: number
+  magenta: number
+  yellow: number
+  key: number
 }
 
-export interface HexColor {
-  alpha?: string;
-  red: string;
-  green: string;
-  blue: string;
+export type HexColor = {
+  alpha?: string
+  red: string
+  green: string
+  blue: string
 }
 
-export interface HslColor {
-  hue: number;
-  lum: number;
-  sat: number;
-  alpha?: number;
+export type HslColor = {
+  hue: number
+  lum: number
+  sat: number
+  alpha?: number
 }
 
-export interface HsvColor {
-  hue: number;
-  val: number;
-  sat: number;
-  alpha?: number;
+export type HsvColor = {
+  hue: number
+  val: number
+  sat: number
+  alpha?: number
 }
 
-export interface RgbColor {
-  alpha?: number;
-  red: number;
-  green: number;
-  blue: number;
+export type RgbColor = {
+  alpha?: number
+  red: number
+  green: number
+  blue: number
 }
 
-export interface ColorNameLookup {
-  [k: string]: string;
+export type ColorNameLookup = {
+  [k: string]: string
 }

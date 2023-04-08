@@ -1,12 +1,7 @@
+import { tint } from './tint'
 import { RgbColor } from './types'
 
-export function lighten(color: RgbColor, percentage: number): RgbColor {
-  const factor = (100 + percentage) / 100
-  const newColor: RgbColor = {
-    red: Math.min(Math.round(color.red * factor), 255),
-    green: Math.min(Math.round(color.green * factor), 255),
-    blue: Math.min(Math.round(color.blue * factor), 255),
-    alpha: color.alpha,
-  }
-  return newColor
+const white: RgbColor = { red: 255, green: 255, blue: 255, alpha: 1 }
+export function lighten(color: RgbColor, factor: number): RgbColor {
+  return tint(color, white, factor)
 }
