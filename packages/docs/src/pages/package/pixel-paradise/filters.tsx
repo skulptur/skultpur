@@ -7,20 +7,6 @@ type FilteredImageProps = {
   imageUrl: string;
 };
 export function FilteredImage({ imageUrl }: FilteredImageProps) {
-  // const [url, setUrl] = useState<string>();
-
-  // useEffect(() => {
-  //   getImageFromUrl(imageUrl).then((image) => {
-  //     const edgeImage = canny(image);
-
-  //     setUrl(
-  //       imageToDataUrl(
-  //         edgeImage
-  //       )
-  //     );
-  //   });
-  // }, []);
-
   return <img src={imageUrl} style={{ width: "100%" }} />;
 }
 

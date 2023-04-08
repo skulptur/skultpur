@@ -1,18 +1,18 @@
 import sharp from 'sharp'
-import { getDominantColors, rgbToHex } from 'color-supreme'
+import { getDominantColors } from 'color-supreme'
 
 export const getColors = async (imagePath: string, colors = 5) => {
   const { data, info } = await sharp(imagePath)
     .raw()
     .toBuffer({ resolveWithObject: true })
 
-  const ImageData = {
-    buffer: data,
+  const image = {
+    data,
     width: info.width,
     height: info.height,
   }
 
-  return getDominantColors(ImageData, colors).map(rgbToHex)
+  return getDominantColors(image, colors)
 }
 
 // getColors("your image path").then(console.log);

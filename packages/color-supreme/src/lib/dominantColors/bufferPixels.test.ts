@@ -1,4 +1,4 @@
-import { bufferToPixels } from './bufferToPixels.js'
+import { bufferToPixels } from './bufferToPixels'
 import { ImageBuffer } from 'pixel-paradise'
 import { PixelData } from './types'
 

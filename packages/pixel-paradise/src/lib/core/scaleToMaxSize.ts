@@ -5,15 +5,13 @@ import { ImageBuffer } from "./types.js";
 export function scaleToMaxSize(
   ImageData: ImageBuffer,
   targetMaxSize: number,
-  tolerance: number = 0
+  tolerance: number = 0 // useful if you don't actually need the image but want to use for analysis... then it is faster to not downscale within a tolerance
 ): ImageBuffer {
   const { width, height } = ImageData;
   const longestSide = Math.max(width, height);
 
-  if (
-    longestSide <= targetMaxSize + tolerance ||
-    longestSide <= targetMaxSize - tolerance
-  ) {
+  // skip if we don't need to process
+  if (longestSide <= targetMaxSize + tolerance) {
     return ImageData;
   }
 
