@@ -1,6 +1,6 @@
 {
   "name": "lightcast",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "author": "skulptur",
   "description": "The Pub/Sub pattern is needed every now and then and this library is a no dependency, tiny and typesafe solution.",
   "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/lightcast",

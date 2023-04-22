@@ -2,6 +2,11 @@ export type SubscribeFn<Payload> = (callback: (payload: Payload) => void) => () 
 export type DispatchFn<Payload> = (payload: Payload) => void
 export type DisposeFn = () => void
 
+// When you have an object where the values are PubSub types and you want to extract the callbacks from all of them
+export type CallbacksFromEvents<T extends Record<any, PubSub<any>>> = {
+  [K in keyof T]: T[K] extends PubSub<infer U> ? (payload: U) => void : never
+}
+
 export type PubSub<Payload> = {
   subscribe: SubscribeFn<Payload>
   dispatch: DispatchFn<Payload>

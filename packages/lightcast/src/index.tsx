@@ -1,1 +1,1 @@
-export { PubSub, SubscribeFn, DispatchFn, DisposeFn, createPubSub, groupByAction } from './lib/pubSub'
+export * from './lib/pubSub'
