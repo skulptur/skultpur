@@ -158,7 +158,10 @@ describe('Queue', () => {
       status: 'pending',
       data: 'testData2',
     })
-    expect(queue.queue).toContain(newItem)
+    expect(queue.queue).toEqual([
+      { data: 'testData1', id: 'testId', status: 'in progress' },
+      { data: 'testData2', id: 'testId', status: 'in progress' },
+    ])
   })
 
   it('should continue processing with the next item after a successful completion', async () => {

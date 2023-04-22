@@ -1,16 +1,19 @@
 {
-  "name": "task-stack",
+  "name": "schlange",
   "private": false,
   "version": "0.0.1",
-  "description": "Async queue library written in Typescript",
-  "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/task-stack",
+  "description": "Async queue library 🐍",
+  "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/schlange",
   "author": "skulptur",
   "license": "MIT",
-  "module": "dist/task-stack.esm.js",
+  "module": "dist/schlange.esm.js",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "keywords": [
-    "functional"
+    "queue",
+    "async",
+    "task",
+    "promise"
   ],
   "files": [
     "dist",
@@ -47,11 +50,11 @@
   },
   "size-limit": [
     {
-      "path": "dist/task-stack.cjs.production.min.js",
+      "path": "dist/schlange.cjs.production.min.js",
       "limit": "10 KB"
     },
     {
-      "path": "dist/task-stack.esm.js",
+      "path": "dist/schlange.esm.js",
       "limit": "10 KB"
     }
   ],

@@ -77,6 +77,6 @@
     "uplifter": "*",
     "docs": "*",
     "note-fns": "*",
-    "task-stack": "*"
+    "schlange": "*"
   }
 }

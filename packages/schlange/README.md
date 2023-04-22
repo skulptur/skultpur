@@ -1,20 +1,20 @@
 <!-- infuser start title -->  
-# task-stack  
+# schlange  
 <!-- infuser end title -->
 
 <!-- infuser start description -->  
-Async queue library written in Typescript  
+Async queue library 🐍  
 <!-- infuser end description -->
 
 <!-- infuser start installation -->  
 ## Installation  
 Yarn  
 ```bash  
-yarn add task-stack  
+yarn add schlange  
 ```  
 NPM  
 ```bash  
-npm install task-stack --save  
+npm install schlange --save  
 ```  
 <!-- infuser end installation -->
 

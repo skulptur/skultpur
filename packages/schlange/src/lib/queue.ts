@@ -19,7 +19,7 @@ export type QueueItem<T> = QueueInput<T> & {
   errorRecovery?: QueueItemErrorRecovery
 }
 
-export type Queue<T> = ReturnType<typeof createQueue<T>>;
+export type Queue = ReturnType<typeof createQueue>
 
 export type RecoveryStrategyProps<T> = {
   item: QueueItem<T>
@@ -128,6 +128,7 @@ export function createQueue<T>(props: QueueProps<T>) {
 
     return newItem
   }
+
   const removeFromQueue = (id: string) => {
     state.queue = state.queue.filter((item) => item.id !== id)
     queueEvents.dispatch.onItemRemoved(id)
@@ -161,12 +162,23 @@ export function createQueue<T>(props: QueueProps<T>) {
 
     try {
       await props.processFunction(item)
+
       updateQueueItem(item.id, { status: 'completed' })
+
       queueEvents.dispatch.onItemCompleted(item.id)
+
+      const nextPendingItem = findItemByStatus('pending')
+
+      if (nextPendingItem) {
+        asyncQueue(nextPendingItem)
+      } else {
+        stopProcessing()
+      }
     } catch (error) {
       updateQueueItem(item.id, { status: 'error' })
 
       const retry = () => asyncQueue(item)
+
       const skip = () => {
         queueEvents.dispatch.onItemError({ id: item.id, error: error as any })
         removeFromQueue(item.id)

@@ -155,7 +155,7 @@ export const packages = {
       "ml-kmeans": "^6.0.0",
       "pixel-paradise": "*"
     },
-    "readme": "<!-- infuser start title -->  \n# color-supreme  \n<!-- infuser end title -->\n<!-- infuser start description -->  \nA powerful library for extracting dominant colors from images. It uses the k-means clustering algorithm to analyze the colors in an image and identify the most dominant ones, making it ideal for a range of applications such as image processing, data visualization, and search algorithms.  \n<!-- infuser end description -->\n\n<!-- infuser start installation -->  \n## Installation  \nYarn  \n```bash  \nyarn add color-supreme  \n```  \nNPM  \n```bash  \nnpm install color-supreme --save  \n```  \n<!-- infuser end installation -->\n\n<!-- infuser start usage -->  \n## Use  \nBrowser  \n```typescript  \nimport { getDominantColors, rgbToHex } from \"color-supreme\";\nimport { getImageFromUrl } from \"pixel-paradise\";\n\nexport const getColors = async (url: string, colors = 5) => {\n  const pixels = await getImageFromUrl(url);\n  return getDominantColors(pixels, colors).map(rgbToHex);\n};\n\n// getColors('your image url').then(console.log)\n  \n```  \nNode  \n```typescript  \nimport sharp from 'sharp'\nimport { getDominantColors, rgbToHex } from 'color-supreme'\n\nexport const getColors = async (imagePath: string, colors = 5) => {\n  const { data, info } = await sharp(imagePath)\n    .raw()\n    .toBuffer({ resolveWithObject: true })\n\n  const ImageData = {\n    buffer: data,\n    width: info.width,\n    height: info.height,\n  }\n\n  return getDominantColors(ImageData, colors).map(rgbToHex)\n}\n\n// getColors(\"your image path\").then(console.log);\n  \n```  \n<!-- infuser end usage -->\n\n<!-- infuser start development -->\n<!-- infuser end development -->\n\n<!-- infuser start footer -->  \n## Notice  \nThis library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.  \n<!-- infuser end footer -->\n",
+    "readme": "<!-- infuser start title -->  \n# color-supreme  \n<!-- infuser end title -->\n<!-- infuser start description -->  \nA powerful library for extracting dominant colors from images. It uses the k-means clustering algorithm to analyze the colors in an image and identify the most dominant ones, making it ideal for a range of applications such as image processing, data visualization, and search algorithms.  \n<!-- infuser end description -->\n\n<!-- infuser start installation -->  \n## Installation  \nYarn  \n```bash  \nyarn add color-supreme  \n```  \nNPM  \n```bash  \nnpm install color-supreme --save  \n```  \n<!-- infuser end installation -->\n\n<!-- infuser start usage -->  \n## Use  \nBrowser  \n```typescript  \nimport { getDominantColors } from 'color-supreme'\nimport { getImageFromUrl } from 'pixel-paradise'\n\nexport const getColors = async (url: string, colors = 5) => {\n  const pixels = await getImageFromUrl(url)\n  return getDominantColors(pixels, colors)\n}\n\n// getColors('your image url').then(console.log)\n  \n```  \nNode  \n```typescript  \nimport sharp from 'sharp'\nimport { getDominantColors } from 'color-supreme'\n\nexport const getColors = async (imagePath: string, colors = 5) => {\n  const { data, info } = await sharp(imagePath)\n    .raw()\n    .toBuffer({ resolveWithObject: true })\n\n  const image = {\n    data,\n    width: info.width,\n    height: info.height,\n  }\n\n  return getDominantColors(image, colors)\n}\n\n// getColors(\"your image path\").then(console.log);\n  \n```  \n<!-- infuser end usage -->\n\n<!-- infuser start development -->\n<!-- infuser end development -->\n\n<!-- infuser start footer -->  \n## Notice  \nThis library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.  \n<!-- infuser end footer -->\n",
     "usage": {
       "installYarn": "yarn add color-supreme",
       "installNpm": "npm install color-supreme --save",
@@ -538,7 +538,8 @@ export const packages = {
       "markdown-fns": "*",
       "uplifter": "*",
       "docs": "*",
-      "note-fns": "*"
+      "note-fns": "*",
+      "task-stack": "*"
     },
     "readme": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).\n\n## Getting Started\n\nFirst, run the development server:\n\n```bash\nnpm run dev\n# or\nyarn dev\n# or\npnpm dev\n```\n\nOpen [http://localhost:3000](http://localhost:3000) with your browser to see the result.\n\nYou can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.\n\n[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.\n\nThe `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.\n\nThis project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.\n\n## Learn More\n\nTo learn more about Next.js, take a look at the following resources:\n\n- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.\n- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.\n\nYou can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!\n\n## Deploy on Vercel\n\nThe easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.\n\nCheck out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.\n",
     "usage": {
@@ -1382,6 +1383,82 @@ export const packages = {
       "examples": []
     }
   },
+  "schlange": {
+    "name": "schlange",
+    "private": false,
+    "version": "0.0.1",
+    "description": "Async queue library 🐍",
+    "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/schlange",
+    "author": "skulptur",
+    "license": "MIT",
+    "module": "dist/schlange.esm.js",
+    "main": "dist/index.js",
+    "typings": "dist/index.d.ts",
+    "keywords": [
+      "queue",
+      "async",
+      "task",
+      "promise"
+    ],
+    "files": [
+      "dist",
+      "src"
+    ],
+    "engines": {
+      "node": ">=10"
+    },
+    "scripts": {
+      "start": "tsdx watch",
+      "build": "tsdx build",
+      "test": "tsdx test --passWithNoTests",
+      "lint": "tsdx lint",
+      "prepare": "tsdx build",
+      "size": "size-limit",
+      "analyze": "size-limit --why"
+    },
+    "husky": {
+      "hooks": {
+        "pre-commit": "tsdx lint"
+      }
+    },
+    "prettier": {
+      "printWidth": 100,
+      "tabWidth": 2,
+      "useTabs": false,
+      "semi": false,
+      "singleQuote": true,
+      "trailingComma": "es5",
+      "bracketSpacing": true,
+      "jsxBracketSameLine": false,
+      "jsxSingleQuote": true,
+      "arrowParens": "always"
+    },
+    "size-limit": [
+      {
+        "path": "dist/schlange.cjs.production.min.js",
+        "limit": "10 KB"
+      },
+      {
+        "path": "dist/schlange.esm.js",
+        "limit": "10 KB"
+      }
+    ],
+    "devDependencies": {
+      "@size-limit/preset-small-lib": "^7.0.8",
+      "husky": "^7.0.4",
+      "size-limit": "^7.0.8",
+      "tsdx": "^0.14.1",
+      "tslib": "^2.4.0",
+      "typescript": "^4.6.3"
+    },
+    "dependencies": {},
+    "readme": "<!-- infuser start title -->\n\n# schlange\n\n<!-- infuser end title -->\n\n<!-- infuser start description -->\n\nAsync queue library written in Typescript\n\n<!-- infuser end description -->\n\n<!-- infuser start installation -->\n\n## Installation\n\nYarn\n\n```bash\nyarn add schlange\n```\n\nNPM\n\n```bash\nnpm install schlange --save\n```\n\n<!-- infuser end installation -->\n\n<!-- infuser start usage -->\n<!-- infuser end usage -->\n\n<!-- infuser start development -->\n<!-- infuser end development -->\n\n<!-- infuser start footer -->\n\n## Notice\n\nThis library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.\n\n<!-- infuser end footer -->\n",
+    "usage": {
+      "installYarn": "yarn add schlange",
+      "installNpm": "npm install schlange --save",
+      "examples": []
+    }
+  },
   "social-matrix": {
     "name": "social-matrix",
     "private": true,
@@ -1426,79 +1503,6 @@ export const packages = {
     "usage": {
       "installYarn": "yarn add social-matrix",
       "installNpm": "npm install social-matrix --save",
-      "examples": []
-    }
-  },
-  "task-stack": {
-    "name": "task-stack",
-    "private": false,
-    "version": "0.0.1",
-    "description": "Async queue library written in Typescript",
-    "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/task-stack",
-    "author": "skulptur",
-    "license": "MIT",
-    "module": "dist/task-stack.esm.js",
-    "main": "dist/index.js",
-    "typings": "dist/index.d.ts",
-    "keywords": [
-      "functional"
-    ],
-    "files": [
-      "dist",
-      "src"
-    ],
-    "engines": {
-      "node": ">=10"
-    },
-    "scripts": {
-      "start": "tsdx watch",
-      "build": "tsdx build",
-      "test": "tsdx test --passWithNoTests",
-      "lint": "tsdx lint",
-      "prepare": "tsdx build",
-      "size": "size-limit",
-      "analyze": "size-limit --why"
-    },
-    "husky": {
-      "hooks": {
-        "pre-commit": "tsdx lint"
-      }
-    },
-    "prettier": {
-      "printWidth": 100,
-      "tabWidth": 2,
-      "useTabs": false,
-      "semi": false,
-      "singleQuote": true,
-      "trailingComma": "es5",
-      "bracketSpacing": true,
-      "jsxBracketSameLine": false,
-      "jsxSingleQuote": true,
-      "arrowParens": "always"
-    },
-    "size-limit": [
-      {
-        "path": "dist/task-stack.cjs.production.min.js",
-        "limit": "10 KB"
-      },
-      {
-        "path": "dist/task-stack.esm.js",
-        "limit": "10 KB"
-      }
-    ],
-    "devDependencies": {
-      "@size-limit/preset-small-lib": "^7.0.8",
-      "husky": "^7.0.4",
-      "size-limit": "^7.0.8",
-      "tsdx": "^0.14.1",
-      "tslib": "^2.4.0",
-      "typescript": "^4.6.3"
-    },
-    "dependencies": {},
-    "readme": "<!-- infuser start title -->\n<!-- infuser end title -->\n\n<!-- infuser start description -->\n<!-- infuser end description -->\n\n<!-- infuser start installation -->\n<!-- infuser end installation -->\n\n<!-- infuser start usage -->\n<!-- infuser end usage -->\n\n<!-- infuser start development -->\n<!-- infuser end development -->\n\n<!-- infuser start footer -->\n<!-- infuser end footer -->\n",
-    "usage": {
-      "installYarn": "yarn add task-stack",
-      "installNpm": "npm install task-stack --save",
       "examples": []
     }
   },
