@@ -1,3 +1,1 @@
-export async function log(str: string) {
-  return console.log(str);
-}
+export { noop } from './lib/noop'
