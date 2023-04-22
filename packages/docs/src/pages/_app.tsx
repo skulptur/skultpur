@@ -48,7 +48,7 @@ export default function App({ Component, pageProps }: AppProps) {
             withNormalizeCSS
           theme={{
             
-              colors: modifyThemeColors(DEFAULT_THEME.colors, (rgbColor) => contrast(rgbColor, -50)),
+              // colors: modifyThemeColors(DEFAULT_THEME.colors, (rgbColor) => contrast(rgbColor, -50)),
               colorScheme,
               focusRing: 'never',
             }}

@@ -76,6 +76,7 @@
     "markdown-fns": "*",
     "uplifter": "*",
     "docs": "*",
-    "note-fns": "*"
+    "note-fns": "*",
+    "task-stack": "*"
   }
 }

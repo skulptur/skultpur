@@ -21,13 +21,13 @@ npm install color-supreme --save
 ## Use  
 Browser  
 ```typescript  
-import { getDominantColors, rgbToHex } from "color-supreme";
-import { getImageFromUrl } from "pixel-paradise";
+import { getDominantColors } from 'color-supreme'
+import { getImageFromUrl } from 'pixel-paradise'
 
 export const getColors = async (url: string, colors = 5) => {
-  const pixels = await getImageFromUrl(url);
-  return getDominantColors(pixels, colors).map(rgbToHex);
-};
+  const pixels = await getImageFromUrl(url)
+  return getDominantColors(pixels, colors)
+}
 
 // getColors('your image url').then(console.log)
   
@@ -35,20 +35,20 @@ export const getColors = async (url: string, colors = 5) => {
 Node  
 ```typescript  
 import sharp from 'sharp'
-import { getDominantColors, rgbToHex } from 'color-supreme'
+import { getDominantColors } from 'color-supreme'
 
 export const getColors = async (imagePath: string, colors = 5) => {
   const { data, info } = await sharp(imagePath)
     .raw()
     .toBuffer({ resolveWithObject: true })
 
-  const ImageData = {
-    buffer: data,
+  const image = {
+    data,
     width: info.width,
     height: info.height,
   }
 
-  return getDominantColors(ImageData, colors).map(rgbToHex)
+  return getDominantColors(image, colors)
 }
 
 // getColors("your image path").then(console.log);

@@ -84,7 +84,7 @@ export const packages = {
   },
   "color-supreme": {
     "name": "color-supreme",
-    "version": "0.1.1",
+    "version": "0.1.4",
     "author": "skulptur",
     "description": "A powerful library for extracting dominant colors from images. It uses the k-means clustering algorithm to analyze the colors in an image and identify the most dominant ones, making it ideal for a range of applications such as image processing, data visualization, and search algorithms.",
     "license": "MIT",
@@ -155,18 +155,18 @@ export const packages = {
       "ml-kmeans": "^6.0.0",
       "pixel-paradise": "*"
     },
-    "readme": "<!-- infuser start title -->\n\n# color-supreme\n\n<!-- infuser end title -->\n<!-- infuser start description -->\n\nA powerful library for extracting dominant colors from images. It uses the k-means clustering algorithm to analyze the colors in an image and identify the most dominant ones, making it ideal for a range of applications such as image processing, data visualization, and search algorithms.\n\n<!-- infuser end description -->\n\n<!-- infuser start installation -->\n\n## Installation\n\nYarn\n\n```bash\nyarn add color-supreme\n```\n\nNPM\n\n```bash\nnpm install color-supreme --save\n```\n\n<!-- infuser end installation -->\n\n<!-- infuser start usage -->\n\n## Use\n\nBrowser\n\n```typescript\nimport { getDominantColors, rgbToHex } from 'color-supreme'\nimport { getImageFromUrl } from 'pixel-paradise'\n\nexport const getColors = async (url: string, colors = 5) => {\n  const pixels = await getImageFromUrl(url)\n  return getDominantColors(pixels, colors).map(rgbToHex)\n}\n\n// getColors('your image url').then(console.log)\n```\n\nNode\n\n```typescript\nimport sharp from 'sharp'\nimport { getDominantColors, rgbToHex } from 'color-supreme'\n\nexport const getColors = async (imagePath: string, colors = 5) => {\n  const { data, info } = await sharp(imagePath)\n    .raw()\n    .toBuffer({ resolveWithObject: true })\n\n  const ImageData = {\n    buffer: data,\n    width: info.width,\n    height: info.height,\n  }\n\n  return getDominantColors(ImageData, colors).map(rgbToHex)\n}\n\n// getColors(\"your image path\").then(console.log);\n```\n\n<!-- infuser end usage -->\n\n<!-- infuser start development -->\n<!-- infuser end development -->\n\n<!-- infuser start footer -->\n\n## Notice\n\nThis library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.\n\n<!-- infuser end footer -->\n",
+    "readme": "<!-- infuser start title -->  \n# color-supreme  \n<!-- infuser end title -->\n<!-- infuser start description -->  \nA powerful library for extracting dominant colors from images. It uses the k-means clustering algorithm to analyze the colors in an image and identify the most dominant ones, making it ideal for a range of applications such as image processing, data visualization, and search algorithms.  \n<!-- infuser end description -->\n\n<!-- infuser start installation -->  \n## Installation  \nYarn  \n```bash  \nyarn add color-supreme  \n```  \nNPM  \n```bash  \nnpm install color-supreme --save  \n```  \n<!-- infuser end installation -->\n\n<!-- infuser start usage -->  \n## Use  \nBrowser  \n```typescript  \nimport { getDominantColors, rgbToHex } from \"color-supreme\";\nimport { getImageFromUrl } from \"pixel-paradise\";\n\nexport const getColors = async (url: string, colors = 5) => {\n  const pixels = await getImageFromUrl(url);\n  return getDominantColors(pixels, colors).map(rgbToHex);\n};\n\n// getColors('your image url').then(console.log)\n  \n```  \nNode  \n```typescript  \nimport sharp from 'sharp'\nimport { getDominantColors, rgbToHex } from 'color-supreme'\n\nexport const getColors = async (imagePath: string, colors = 5) => {\n  const { data, info } = await sharp(imagePath)\n    .raw()\n    .toBuffer({ resolveWithObject: true })\n\n  const ImageData = {\n    buffer: data,\n    width: info.width,\n    height: info.height,\n  }\n\n  return getDominantColors(ImageData, colors).map(rgbToHex)\n}\n\n// getColors(\"your image path\").then(console.log);\n  \n```  \n<!-- infuser end usage -->\n\n<!-- infuser start development -->\n<!-- infuser end development -->\n\n<!-- infuser start footer -->  \n## Notice  \nThis library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.  \n<!-- infuser end footer -->\n",
     "usage": {
       "installYarn": "yarn add color-supreme",
       "installNpm": "npm install color-supreme --save",
       "examples": [
         {
           "name": "Browser",
-          "content": "import { getDominantColors, rgbToHex } from \"color-supreme\";\nimport { getImageFromUrl } from \"pixel-paradise\";\n\nexport const getColors = async (url: string, colors = 5) => {\n  const pixels = await getImageFromUrl(url);\n  return getDominantColors(pixels, colors).map(rgbToHex);\n};\n\n// getColors('your image url').then(console.log)\n"
+          "content": "import { getDominantColors } from 'color-supreme'\nimport { getImageFromUrl } from 'pixel-paradise'\n\nexport const getColors = async (url: string, colors = 5) => {\n  const pixels = await getImageFromUrl(url)\n  return getDominantColors(pixels, colors)\n}\n\n// getColors('your image url').then(console.log)\n"
         },
         {
           "name": "Node",
-          "content": "import sharp from 'sharp'\nimport { getDominantColors, rgbToHex } from 'color-supreme'\n\nexport const getColors = async (imagePath: string, colors = 5) => {\n  const { data, info } = await sharp(imagePath)\n    .raw()\n    .toBuffer({ resolveWithObject: true })\n\n  const ImageData = {\n    buffer: data,\n    width: info.width,\n    height: info.height,\n  }\n\n  return getDominantColors(ImageData, colors).map(rgbToHex)\n}\n\n// getColors(\"your image path\").then(console.log);\n"
+          "content": "import sharp from 'sharp'\nimport { getDominantColors } from 'color-supreme'\n\nexport const getColors = async (imagePath: string, colors = 5) => {\n  const { data, info } = await sharp(imagePath)\n    .raw()\n    .toBuffer({ resolveWithObject: true })\n\n  const image = {\n    data,\n    width: info.width,\n    height: info.height,\n  }\n\n  return getDominantColors(image, colors)\n}\n\n// getColors(\"your image path\").then(console.log);\n"
         }
       ]
     }
@@ -823,7 +823,7 @@ export const packages = {
   },
   "lightcast": {
     "name": "lightcast",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "author": "skulptur",
     "description": "The Pub/Sub pattern is needed every now and then and this library is a no dependency, tiny and typesafe solution.",
     "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/lightcast",
@@ -1183,8 +1183,8 @@ export const packages = {
   },
   "pixel-paradise": {
     "name": "pixel-paradise",
-    "private": true,
-    "version": "0.0.0",
+    "private": false,
+    "version": "0.0.1",
     "description": "Image manipulation library.",
     "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/pixel-paradise",
     "keywords": [
@@ -1221,7 +1221,7 @@ export const packages = {
       "commander": "^10.0.0",
       "typescript": "^5.0.2"
     },
-    "readme": "<!-- infuser start title -->\n<!-- infuser end title -->\n\n<!-- infuser start description -->\n<!-- infuser end description -->\n\n<!-- infuser start installation -->\n<!-- infuser end installation -->\n\n<!-- infuser start usage -->\n<!-- infuser end usage -->\n\n<!-- infuser start development -->\n<!-- infuser end development -->\n\n<!-- infuser start footer -->\n<!-- infuser end footer -->\n",
+    "readme": "<!-- infuser start title -->  \n# pixel-paradise  \n<!-- infuser end title -->\n\n<!-- infuser start description -->  \nImage manipulation library.  \n<!-- infuser end description -->\n\n<!-- infuser start installation -->  \n## Installation  \nYarn  \n```bash  \nyarn add pixel-paradise  \n```  \nNPM  \n```bash  \nnpm install pixel-paradise --save  \n```  \n<!-- infuser end installation -->\n\n<!-- infuser start usage -->\n<!-- infuser end usage -->\n\n<!-- infuser start development -->\n<!-- infuser end development -->\n\n<!-- infuser start footer -->  \n## Notice  \nThis library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.  \n<!-- infuser end footer -->\n",
     "usage": {
       "installYarn": "yarn add pixel-paradise",
       "installNpm": "npm install pixel-paradise --save",
@@ -1273,7 +1273,7 @@ export const packages = {
       "open-simplex-noise": "^2.5.0",
       "unit-fns": "*"
     },
-    "readme": "<!-- infuser start title -->\n<!-- infuser end title -->\n\n<!-- infuser start description -->\n<!-- infuser end description -->\n\n<!-- infuser start installation -->\n<!-- infuser end installation -->\n\n<!-- infuser start usage -->\n<!-- infuser end usage -->\n\n<!-- infuser start development -->\n<!-- infuser end development -->\n\n<!-- infuser start footer -->\n<!-- infuser end footer -->\n",
+    "readme": "<!-- infuser start title -->  \n# random-fns  \n<!-- infuser end title -->\n\n<!-- infuser start description -->  \nAll your random needs in one place.  \n<!-- infuser end description -->\n\n<!-- infuser start installation -->  \n## Installation  \nYarn  \n```bash  \nyarn add random-fns  \n```  \nNPM  \n```bash  \nnpm install random-fns --save  \n```  \n<!-- infuser end installation -->\n\n<!-- infuser start usage -->\n<!-- infuser end usage -->\n\n<!-- infuser start development -->\n<!-- infuser end development -->\n\n<!-- infuser start footer -->  \n## Notice  \nThis library is open source software released under the MIT license. See the LICENSE file for more information. This code is provided as-is, without any warranty or guarantee of any kind. Use at your own risk. I cannot be held responsible for any issues or damages that may arise from the use of this code. However, I have done my best to ensure that it is well-written and thoroughly tested, and I am always open to feedback and suggestions for improvement. Thank you for your understanding. I hope you enjoy using it and find it useful in your projects. If you have any questions or feedback, please don't hesitate to reach out.  \n<!-- infuser end footer -->\n",
     "usage": {
       "installYarn": "yarn add random-fns",
       "installNpm": "npm install random-fns --save",
@@ -1426,6 +1426,79 @@ export const packages = {
     "usage": {
       "installYarn": "yarn add social-matrix",
       "installNpm": "npm install social-matrix --save",
+      "examples": []
+    }
+  },
+  "task-stack": {
+    "name": "task-stack",
+    "private": false,
+    "version": "0.0.1",
+    "description": "Async queue library written in Typescript",
+    "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/task-stack",
+    "author": "skulptur",
+    "license": "MIT",
+    "module": "dist/task-stack.esm.js",
+    "main": "dist/index.js",
+    "typings": "dist/index.d.ts",
+    "keywords": [
+      "functional"
+    ],
+    "files": [
+      "dist",
+      "src"
+    ],
+    "engines": {
+      "node": ">=10"
+    },
+    "scripts": {
+      "start": "tsdx watch",
+      "build": "tsdx build",
+      "test": "tsdx test --passWithNoTests",
+      "lint": "tsdx lint",
+      "prepare": "tsdx build",
+      "size": "size-limit",
+      "analyze": "size-limit --why"
+    },
+    "husky": {
+      "hooks": {
+        "pre-commit": "tsdx lint"
+      }
+    },
+    "prettier": {
+      "printWidth": 100,
+      "tabWidth": 2,
+      "useTabs": false,
+      "semi": false,
+      "singleQuote": true,
+      "trailingComma": "es5",
+      "bracketSpacing": true,
+      "jsxBracketSameLine": false,
+      "jsxSingleQuote": true,
+      "arrowParens": "always"
+    },
+    "size-limit": [
+      {
+        "path": "dist/task-stack.cjs.production.min.js",
+        "limit": "10 KB"
+      },
+      {
+        "path": "dist/task-stack.esm.js",
+        "limit": "10 KB"
+      }
+    ],
+    "devDependencies": {
+      "@size-limit/preset-small-lib": "^7.0.8",
+      "husky": "^7.0.4",
+      "size-limit": "^7.0.8",
+      "tsdx": "^0.14.1",
+      "tslib": "^2.4.0",
+      "typescript": "^4.6.3"
+    },
+    "dependencies": {},
+    "readme": "<!-- infuser start title -->\n<!-- infuser end title -->\n\n<!-- infuser start description -->\n<!-- infuser end description -->\n\n<!-- infuser start installation -->\n<!-- infuser end installation -->\n\n<!-- infuser start usage -->\n<!-- infuser end usage -->\n\n<!-- infuser start development -->\n<!-- infuser end development -->\n\n<!-- infuser start footer -->\n<!-- infuser end footer -->\n",
+    "usage": {
+      "installYarn": "yarn add task-stack",
+      "installNpm": "npm install task-stack --save",
       "examples": []
     }
   },
