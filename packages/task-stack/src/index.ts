@@ -6,10 +6,10 @@ export type QueueInput<T> = {
   data: T;
 };
 
-type QueueItemStatus = "completed" | "in progress" | "pending" | "error";
+export type QueueItemStatus = "completed" | "in progress" | "pending" | "error";
 
 // For error recovery properties
-type QueueItemErrorRecovery = {
+export type QueueItemErrorRecovery = {
   retryCount: number;
 };
 
@@ -21,7 +21,7 @@ export type QueueItem<T> = QueueInput<T> & {
 
 export type Queue<T> = ReturnType<typeof createQueue>;
 
-type RecoveryStrategyProps<T> = {
+export type RecoveryStrategyProps<T> = {
   item: QueueItem<any>;
   error: Error;
   retry: () => void;
@@ -50,11 +50,11 @@ export const createDefaultRecoveryStrategy = <T>(config: {
   };
 };
 
-const defaultRecoveryStrategy = createDefaultRecoveryStrategy({
+export const defaultRecoveryStrategy = createDefaultRecoveryStrategy({
   maxRetries: 3,
 });
 
-const createCallbacks = () => {
+export const createCallbacks = () => {
   const callbackEvents = {
     onItemAdded: createPubSub<QueueItem<any>>(),
     onItemRemoved: createPubSub<string>(),
@@ -72,7 +72,9 @@ const createCallbacks = () => {
   return callbackEvents;
 };
 
-type QueueCallbacks = CallbacksFromEvents<ReturnType<typeof createCallbacks>>;
+export type QueueCallbacks = CallbacksFromEvents<
+  ReturnType<typeof createCallbacks>
+>;
 
 export type QueueProps<T> = {
   processFunction: (values: QueueItem<T>) => Promise<any>;
@@ -80,7 +82,7 @@ export type QueueProps<T> = {
   recoveryStrategy?: RecoveryStrategy<T>;
 } & Partial<QueueCallbacks>;
 
-const getDefaultState = <T>() => ({
+export const getDefaultState = <T>() => ({
   queue: [] as QueueItem<T>[],
   isProcessing: false,
 });
