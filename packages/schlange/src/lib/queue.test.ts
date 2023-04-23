@@ -29,7 +29,7 @@ describe('Queue', () => {
     it('should create a new queue', () => {
       const queue = createQueue(queueProps)
       expect(queue).toBeDefined()
-      expect(queue.queue.length).toBe(0)
+      expect(queue.items.length).toBe(0)
       expect(queue.isProcessing).toBe(false)
     })
 
@@ -88,7 +88,7 @@ describe('Queue', () => {
         status: 'pending',
         data: 'testData',
       })
-      expect(queue.queue[0]).toEqual({ ...newItem, status: 'in progress' })
+      expect(queue.items[0]).toEqual({ ...newItem, status: 'processing' })
       expect(queue.isProcessing).toBe(true)
     })
   })
@@ -98,10 +98,10 @@ describe('Queue', () => {
       const queue = createQueue(queueProps)
       queue.addItem('testData')
 
-      expect(queue.queue.length).toBe(1)
+      expect(queue.items.length).toBe(1)
 
       queue.removeItem('testId')
-      expect(queue.queue.length).toBe(0)
+      expect(queue.items.length).toBe(0)
     })
   })
 
@@ -111,10 +111,10 @@ describe('Queue', () => {
       queue.addItem('testData1')
       queue.addItem('testData2')
 
-      expect(queue.queue.length).toBe(2)
+      expect(queue.items.length).toBe(2)
 
       queue.clearQueue()
-      expect(queue.queue.length).toBe(0)
+      expect(queue.items.length).toBe(0)
     })
   })
 
@@ -126,7 +126,7 @@ describe('Queue', () => {
       expect(newItem.status).toBe('pending')
 
       queue.updateItem('testId', { status: 'completed' })
-      const updatedItem = queue.queue.find((item) => item.id === 'testId')
+      const updatedItem = queue.items.find((item) => item.id === 'testId')
 
       expect(updatedItem).toBeDefined()
       expect(updatedItem?.status).toBe('completed')
@@ -160,9 +160,9 @@ describe('Queue', () => {
       status: 'pending',
       data: 'testData2',
     })
-    expect(queue.queue).toEqual([
-      { data: 'testData1', id: 'testId', status: 'in progress' },
-      { data: 'testData2', id: 'testId', status: 'in progress' },
+    expect(queue.items).toEqual([
+      { data: 'testData1', id: 'testId', status: 'processing' },
+      { data: 'testData2', id: 'testId', status: 'processing' },
     ])
   })
 

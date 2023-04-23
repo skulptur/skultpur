@@ -6,7 +6,7 @@ export type QueueInput<T> = {
   data: T
 }
 
-export type QueueItemStatus = 'completed' | 'in progress' | 'pending' | 'error'
+export type QueueItemStatus = 'completed' | 'processing' | 'pending' | 'error'
 
 // For error recovery properties
 export type QueueItemErrorRecovery = {
@@ -20,10 +20,10 @@ export type QueueItem<T> = QueueInput<T> & {
 }
 
 export type Queue<T> = {
-  queue: QueueItem<T>[]
+  items: QueueItem<T>[]
   isProcessing: boolean
   onItemAdded: (callback: (item: QueueItem<T>) => void) => void
-  onQueueChange: (callback: (queue: QueueItem<T>[]) => void) => void
+  onQueueChange: (callback: (items: QueueItem<T>[]) => void) => void
   onItemRemoved: (callback: (id: string) => void) => void
   onQueueCleared: (callback: () => void) => void
   onItemUpdated: (
@@ -100,16 +100,17 @@ export type QueueProps<T> = {
   processFunction: (item: QueueItem<T>, queue: Queue<T>) => Promise<any>
   idGenerator: () => string
   recoveryStrategy?: RecoveryStrategy<T>
+  items?: QueueItem<T>[]
 } & Partial<QueueCallbacks>
 
-export const getDefaultState = <T>() => ({
-  queue: [] as QueueItem<T>[],
+export const getDefaultState = <T>(items: QueueItem<T>[] = []) => ({
+  items,
   isProcessing: false,
 })
 
 export function createQueue<T>(props: QueueProps<T>): Queue<T> {
   // state
-  const state = getDefaultState<T>()
+  const state = getDefaultState<T>(props.items)
 
   // events
   const queueEvents = groupByAction(createCallbacks())
@@ -121,7 +122,7 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
   })
 
   const dispatchQueueChange = () => {
-    queueEvents.dispatch.onQueueChange(state.queue)
+    queueEvents.dispatch.onQueueChange(state.items)
   }
 
   // subscribe to the events passed in the props object
@@ -151,7 +152,7 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
       status: 'pending',
       data,
     }
-    state.queue.push(newItem)
+    state.items.push(newItem)
     queueEvents.dispatch.onItemAdded(newItem)
     dispatchQueueChange()
 
@@ -165,19 +166,19 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
   }
 
   const removeItem = (id: string) => {
-    state.queue = state.queue.filter((item) => item.id !== id)
+    state.items = state.items.filter((item) => item.id !== id)
     queueEvents.dispatch.onItemRemoved(id)
     dispatchQueueChange()
   }
 
   const clearQueue = () => {
-    state.queue = []
+    state.items = []
     queueEvents.dispatch.onQueueCleared()
     dispatchQueueChange()
   }
 
   const updateItem = (id: string, updatedItem: Partial<QueueItem<T>>) => {
-    state.queue = state.queue.map((item) => (item.id === id ? { ...item, ...updatedItem } : item))
+    state.items = state.items.map((item) => (item.id === id ? { ...item, ...updatedItem } : item))
     queueEvents.dispatch.onItemUpdated({ id, updatedItem })
     dispatchQueueChange()
   }
@@ -194,12 +195,12 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
   }
 
   const findItemByStatus = (status: QueueItemStatus) => {
-    return state.queue.find((item) => item.status === status)
+    return state.items.find((item) => item.status === status)
   }
 
   const queue = {
-    get queue() {
-      return state.queue
+    get items() {
+      return state.items
     },
     get isProcessing() {
       return state.isProcessing
@@ -217,7 +218,7 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
   const asyncQueue = async (item: QueueItem<T>) => {
     if (!state.isProcessing) return
 
-    updateItem(item.id, { status: 'in progress' })
+    updateItem(item.id, { status: 'processing' })
 
     try {
       await props.processFunction(item, queue)

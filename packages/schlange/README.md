@@ -79,14 +79,14 @@ The `createQueue` function takes a `QueueProps` object and returns a new `Queue`
 
 The `Queue` instance provides the following methods and properties:
 
-- `queue`: An array of `QueueItem<T>` objects.
+- `items`: An array of `QueueItem<T>` objects.
 - `isProcessing`: A boolean that indicates if the queue is currently being processed.
 
 Event subscription methods:
 
 - `onItemAdded(callback: (item: QueueItem<T>) => void)`
 - `onItemRemoved(callback: (id: string) => void)`
-- `onQueueChange: (callback: (queue: QueueItem<T>[]) => void) => void`
+- `onQueueChange: (callback: (items: QueueItem<T>[]) => void) => void`
 - `onQueueCleared(callback: () => void)`
 - `onItemUpdated(callback: (args: { id: string; updatedItem: Partial<QueueItem<T>> }) => void)`
 - `onProcessingStarted(callback: () => void)`

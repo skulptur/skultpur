@@ -1,7 +1,7 @@
 {
   "name": "schlange",
   "private": false,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A lightweight and flexible queue management library written in TypeScript. It provides a simple way to create and manage queues, with built-in error recovery and support for custom recovery strategies. Event-driven with event subscriptions.",
   "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/schlange",
   "author": "skulptur",
