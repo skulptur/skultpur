@@ -23,9 +23,9 @@ export type Queue<T> = {
   items: QueueItem<T>[]
   isProcessing: boolean
   onItemAdded: (callback: (item: QueueItem<T>) => void) => void
-  onQueueChange: (callback: (items: QueueItem<T>[]) => void) => void
+  onItemsChange: (callback: (items: QueueItem<T>[]) => void) => void
   onItemRemoved: (callback: (id: string) => void) => void
-  onQueueCleared: (callback: () => void) => void
+  onItemsCleared: (callback: () => void) => void
   onItemUpdated: (
     callback: (args: { id: string; updatedItem: Partial<QueueItem<T>> }) => void
   ) => void
@@ -33,13 +33,13 @@ export type Queue<T> = {
   onProcessingStopped: (callback: () => void) => void
   onItemCompleted: (callback: (id: string) => void) => void
   onItemError: (callback: (args: { id: string; error: Error }) => void) => void
-  onQueueCompleted: (callback: () => void) => void
+  onProcessingCompleted: (callback: () => void) => void
   addItem: (data: T) => QueueItem<T>
   removeItem: (id: string) => void
   updateItem: (id: string, updatedItem: Partial<QueueItem<T>>) => void
   startProcessing: () => void
   stopProcessing: () => void
-  clearQueue: () => void
+  clearItems: () => void
   dispose: () => void
 }
 
@@ -78,8 +78,8 @@ export const createCallbacks = <T>() => {
   const callbackEvents = {
     onItemAdded: createPubSub<QueueItem<T>>(),
     onItemRemoved: createPubSub<string>(),
-    onQueueCleared: createPubSub<void>(),
-    onQueueChange: createPubSub<QueueItem<T>[]>(),
+    onItemsCleared: createPubSub<void>(),
+    onItemsChange: createPubSub<QueueItem<T>[]>(),
     onItemUpdated: createPubSub<{
       id: string
       updatedItem: Partial<QueueItem<T>>
@@ -88,7 +88,7 @@ export const createCallbacks = <T>() => {
     onProcessingStopped: createPubSub<void>(),
     onItemCompleted: createPubSub<string>(),
     onItemError: createPubSub<{ id: string; error: Error }>(),
-    onQueueCompleted: createPubSub<void>(),
+    onProcessingCompleted: createPubSub<void>(),
   }
 
   return callbackEvents
@@ -117,12 +117,12 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
 
   queueEvents.subscribe.onItemCompleted(() => {
     if (!!findItemByStatus('pending')) {
-      queueEvents.dispatch.onQueueCompleted()
+      queueEvents.dispatch.onProcessingCompleted()
     }
   })
 
   const dispatchQueueChange = () => {
-    queueEvents.dispatch.onQueueChange(state.items)
+    queueEvents.dispatch.onItemsChange(state.items)
   }
 
   // subscribe to the events passed in the props object
@@ -171,9 +171,9 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
     dispatchQueueChange()
   }
 
-  const clearQueue = () => {
+  const clearItems = () => {
     state.items = []
-    queueEvents.dispatch.onQueueCleared()
+    queueEvents.dispatch.onItemsCleared()
     dispatchQueueChange()
   }
 
@@ -211,7 +211,7 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
     updateItem,
     startProcessing,
     stopProcessing,
-    clearQueue,
+    clearItems,
     dispose,
   } as Queue<T>
 

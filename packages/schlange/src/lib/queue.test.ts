@@ -36,7 +36,7 @@ describe('Queue', () => {
     it('should subscribe to provided event callbacks', () => {
       const onItemAdded = jest.fn()
       const onItemRemoved = jest.fn()
-      const onQueueCleared = jest.fn()
+      const onItemsCleared = jest.fn()
       const onItemUpdated = jest.fn()
       const onProcessingStarted = jest.fn()
       const onProcessingStopped = jest.fn()
@@ -45,7 +45,7 @@ describe('Queue', () => {
 
       queueProps.onItemAdded = onItemAdded
       queueProps.onItemRemoved = onItemRemoved
-      queueProps.onQueueCleared = onQueueCleared
+      queueProps.onItemsCleared = onItemsCleared
       queueProps.onItemUpdated = onItemUpdated
       queueProps.onProcessingStarted = onProcessingStarted
       queueProps.onProcessingStopped = onProcessingStopped
@@ -61,8 +61,8 @@ describe('Queue', () => {
       queue.removeItem('testId')
       expect(onItemRemoved).toHaveBeenCalledWith('testId')
 
-      queue.clearQueue()
-      expect(onQueueCleared).toHaveBeenCalled()
+      queue.clearItems()
+      expect(onItemsCleared).toHaveBeenCalled()
 
       queue.updateItem('testId', { status: 'completed' })
       expect(onItemUpdated).toHaveBeenCalledWith({
@@ -105,7 +105,7 @@ describe('Queue', () => {
     })
   })
 
-  describe('clearQueue', () => {
+  describe('clearItems', () => {
     it('should clear the queue', () => {
       const queue = createQueue(queueProps)
       queue.addItem('testData1')
@@ -113,7 +113,7 @@ describe('Queue', () => {
 
       expect(queue.items.length).toBe(2)
 
-      queue.clearQueue()
+      queue.clearItems()
       expect(queue.items.length).toBe(0)
     })
   })

@@ -53,7 +53,7 @@ const queue = createQueue(queueProps)
 // Subscribe to events
 queue.onItemAdded((item) => console.log(`Item added: ${item.data}`))
 queue.onItemCompleted((id) => console.log(`Item completed: ${id}`))
-queue.onQueueCompleted(() => console.log(`All done!`))
+queue.onProcessingCompleted(() => console.log(`All done!`))
 
 // Add items to the queue
 queue.addItem('Item 1')
@@ -86,14 +86,14 @@ Event subscription methods:
 
 - `onItemAdded(callback: (item: QueueItem<T>) => void)`
 - `onItemRemoved(callback: (id: string) => void)`
-- `onQueueChange: (callback: (items: QueueItem<T>[]) => void) => void`
-- `onQueueCleared(callback: () => void)`
+- `onItemsChange: (callback: (items: QueueItem<T>[]) => void) => void`
+- `onItemsCleared(callback: () => void)`
 - `onItemUpdated(callback: (args: { id: string; updatedItem: Partial<QueueItem<T>> }) => void)`
 - `onProcessingStarted(callback: () => void)`
 - `onProcessingStopped(callback: () => void)`
 - `onItemCompleted(callback: (id: string) => void)`
 - `onItemError(callback: (args: { id: string; error: Error }) => void)`
-- `onQueueCompleted(callback: () => void)`
+- `onProcessingCompleted(callback: () => void)`
 
 Queue manipulation methods:
 
@@ -102,7 +102,7 @@ Queue manipulation methods:
 - `updateItem(id: string, updatedItem: Partial<QueueItem<T>>)`: Update an item in the queue.
 - `startProcessing()`: Start processing the queue.
 - `stopProcessing()`: Stop processing the queue.
-- `clearQueue()`: Clear the entire queue.
+- `clearItems()`: Clear the entire queue.
 - `dispose()`: Dispose the queue instance and clean up resources.
 
 ---
