@@ -121,6 +121,11 @@ describe('Queue', () => {
       queue.removeItem('test-id')
       expect(queue.items.length).toBe(0)
     })
+
+    it("should not throw an error when removing an item that doesn't exist", () => {
+      const queue = createQueue(queueProps)
+      expect(() => queue.removeItem('non-existent-id')).not.toThrow()
+    })
   })
 
   describe('clearItems', () => {
@@ -148,6 +153,13 @@ describe('Queue', () => {
 
       expect(updatedItem).toBeDefined()
       expect(updatedItem?.status).toBe('completed')
+    })
+
+    it("should not update an item that doesn't exist in the queue", () => {
+      const queue = createQueue(queueProps)
+      queue.updateItem('non-existent-id', { status: 'completed' })
+
+      expect(queue.items.find((item) => item.id === 'non-existent-id')).toBeUndefined()
     })
   })
 
@@ -210,6 +222,20 @@ describe('Queue', () => {
         { data: 'testData1', id: 'test-id', status: 'processing' },
         { data: 'testData2', id: 'test-id', status: 'processing' },
       ])
+    })
+
+    it('should handle long-running processFunction correctly', async () => {
+      const longRunningFunction = jest.fn(
+        async () => await new Promise((resolve) => setTimeout(resolve, 300))
+      )
+      const queue = createQueue({ processFunction: longRunningFunction, idGenerator })
+      queue.addItem('testData')
+
+      await new Promise((resolve) => setTimeout(resolve, 150)) // Halfway through processing
+      expect(queue.items[0].status).toBe('processing')
+
+      await new Promise((resolve) => setTimeout(resolve, 300)) // Finish processing
+      expect(queue.items[0].status).toBe('completed')
     })
   })
 
@@ -284,10 +310,14 @@ describe('Queue', () => {
   })
 
   describe('dispose', () => {
-    it('should dispose the queue and clean up resources', () => {
-      const queue = createQueue({ processFunction, idGenerator })
-      queue.addItem({ key: 'value' })
+    it('should dispose the queue and stop processing even when items are being processed', async () => {
+      const longRunningFunction = jest.fn(
+        async () => await new Promise((resolve) => setTimeout(resolve, 1000))
+      )
+      const queue = createQueue({ processFunction: longRunningFunction, idGenerator })
+      queue.addItem('testData')
 
+      await new Promise((resolve) => setTimeout(resolve, 500)) // Halfway through processing
       queue.dispose()
 
       expect(queue.items).toHaveLength(0)
