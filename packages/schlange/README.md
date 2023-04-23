@@ -1,12 +1,12 @@
 <!-- infuser start title -->
 
-# schlange
+# schlange 🐍
 
 <!-- infuser end title -->
 
 <!-- infuser start description -->
 
-Schlange is a lightweight and flexible queue management library in TypeScript. It provides a simple way to create and manage queues, with built-in error recovery and support for custom recovery strategies. Event-driven with event subscriptions. 🐍
+A lightweight and flexible queue management library in written TypeScript. It provides a simple way to create and manage queues, with built-in error recovery and support for custom recovery strategies. Event-driven with event subscriptions.
 
 <!-- infuser end description -->
 
