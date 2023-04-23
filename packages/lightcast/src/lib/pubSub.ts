@@ -45,7 +45,7 @@ export const createPubSub = <Payload>(): PubSub<Payload> => {
   }
 }
 
-type GroupByAction<T extends Record<any, PubSub<any>>> = {
+export type GroupByAction<T extends Record<any, PubSub<any>>> = {
   subscribe: {
     [P in keyof T]: T[P]['subscribe']
   }

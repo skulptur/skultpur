@@ -19,7 +19,28 @@ export type QueueItem<T> = QueueInput<T> & {
   errorRecovery?: QueueItemErrorRecovery
 }
 
-export type Queue = ReturnType<typeof createQueue>
+export type Queue<T> = {
+  queue: QueueItem<T>[]
+  isProcessing: boolean
+  onItemAdded: (callback: (item: QueueItem<T>) => void) => void
+  onItemRemoved: (callback: (id: string) => void) => void
+  onQueueCleared: (callback: () => void) => void
+  onItemUpdated: (
+    callback: (args: { id: string; updatedItem: Partial<QueueItem<T>> }) => void
+  ) => void
+  onProcessingStarted: (callback: () => void) => void
+  onProcessingStopped: (callback: () => void) => void
+  onItemCompleted: (callback: (id: string) => void) => void
+  onItemError: (callback: (args: { id: string; error: Error }) => void) => void
+  onQueueCompleted: (callback: () => void) => void
+  addToQueue: (data: T) => QueueItem<T>
+  removeFromQueue: (id: string) => void
+  updateQueueItem: (id: string, updatedItem: Partial<QueueItem<T>>) => void
+  startProcessing: () => void
+  stopProcessing: () => void
+  clearQueue: () => void
+  dispose: () => void
+}
 
 export type RecoveryStrategyProps<T> = {
   item: QueueItem<T>
@@ -84,7 +105,7 @@ export const getDefaultState = <T>() => ({
   isProcessing: false,
 })
 
-export function createQueue<T>(props: QueueProps<T>) {
+export function createQueue<T>(props: QueueProps<T>): Queue<T> {
   // state
   const state = getDefaultState<T>()
 

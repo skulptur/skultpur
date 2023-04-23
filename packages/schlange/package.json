@@ -1,7 +1,7 @@
 {
   "name": "schlange",
   "private": false,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Async queue library 🐍",
   "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/schlange",
   "author": "skulptur",
@@ -30,11 +30,6 @@
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
   },
   "prettier": {
     "printWidth": 100,
