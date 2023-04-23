@@ -1,7 +1,7 @@
 {
   "name": "schlange",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Async queue library 🐍",
   "homepage": "https://github.com/skulptur/skultpur/tree/main/packages/schlange",
   "author": "skulptur",

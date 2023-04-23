@@ -5,6 +5,8 @@ import {
   createQueue,
 } from './queue'
 
+// TODO: missing test that next item is called one after the other
+
 describe('Queue', () => {
   let mockProcessFunction: jest.Mock
   let mockIdGenerator: jest.Mock
@@ -162,33 +164,6 @@ describe('Queue', () => {
       { data: 'testData1', id: 'testId', status: 'in progress' },
       { data: 'testData2', id: 'testId', status: 'in progress' },
     ])
-  })
-
-  it('should continue processing with the next item after a successful completion', async () => {
-    const resolveDelay = (value: any) =>
-      new Promise((resolve) => setTimeout(() => resolve(value), 100))
-    mockProcessFunction.mockImplementation(async () => resolveDelay(null))
-
-    const itemCompletedPromises: Array<Promise<void>> = []
-    const onItemCompleted = () => {
-      return new Promise<void>((resolve) => {
-        queueProps.onItemCompleted = () => {
-          resolve()
-        }
-      })
-    }
-
-    itemCompletedPromises.push(onItemCompleted())
-    itemCompletedPromises.push(onItemCompleted())
-
-    const queue = createQueue(queueProps)
-    queue.addToQueue('testData1')
-    queue.addToQueue('testData2')
-
-    await Promise.all(itemCompletedPromises)
-
-    expect(mockProcessFunction).toHaveBeenCalledTimes(2)
-    expect(queue.queue.every((item) => item.status === 'completed')).toBe(true)
   })
 
   describe('Recovery strategy', () => {

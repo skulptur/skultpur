@@ -77,6 +77,6 @@
     "uplifter": "*",
     "docs": "*",
     "note-fns": "*",
-    "schlange": "*"
+    "schlange": "0.0.3"
   }
 }

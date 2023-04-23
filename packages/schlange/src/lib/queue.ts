@@ -65,6 +65,7 @@ export const createCallbacks = () => {
     onProcessingStopped: createPubSub<void>(),
     onItemCompleted: createPubSub<string>(),
     onItemError: createPubSub<{ id: string; error: Error }>(),
+    onQueueCompleted: createPubSub<void>(),
   }
 
   return callbackEvents
@@ -89,6 +90,12 @@ export function createQueue<T>(props: QueueProps<T>) {
 
   // events
   const queueEvents = groupByAction(createCallbacks())
+
+  queueEvents.subscribe.onItemCompleted(() => {
+    if (!!findItemByStatus('pending')) {
+      queueEvents.dispatch.onQueueCompleted()
+    }
+  })
 
   // subscribe to the events passed in the props object
   for (const eventKey in queueEvents.subscribe) {

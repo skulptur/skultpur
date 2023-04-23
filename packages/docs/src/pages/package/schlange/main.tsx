@@ -1,6 +1,6 @@
 import React from "react";
 import { PageLayout } from "../../../components/PageLayout";
-import { createQueue, QueueProps } from "task-stack";
+import { createQueue, QueueProps } from "schlange";
 
 // Define a processing function for the queue
 async function processData(item) {
@@ -21,22 +21,18 @@ const queueProps: QueueProps<string> = {
 // Create the queue
 const queue = createQueue(queueProps);
 
+// Subscribe to events
+queue.onItemAdded((item) => console.log(`Item added: ${item.data}`));
+queue.onItemCompleted((id) => console.log(`Item completed: ${id}`));
+queue.onQueueCompleted(() => console.log(`All done!`));
+
 // Add items to the queue
 queue.addToQueue("Item 1");
 queue.addToQueue("Item 2");
 
-// Subscribe to events
-queue.onItemAdded((item) => console.log(`Item added: ${item.data}`));
-queue.onItemCompleted((id) => console.log(`Item completed: ${id}`));
-
-// Clean up
-setTimeout(() => {
-  queue.dispose();
-}, 5000);
-
 export default function FilteredImagePage() {
   return (
-    <PageLayout header={"task-stack: basic"}>
+    <PageLayout header={"schlange: basic"}>
       hello
       {/* <SimpleGrid cols={3}>
         {testImages.map((testImage) => {
