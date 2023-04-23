@@ -3,21 +3,23 @@ import {
   createDefaultRecoveryStrategy,
   QueueProps,
   createQueue,
+  getDefaultState,
 } from './queue'
 
-// TODO: missing test that next item is called one after the other
-
 describe('Queue', () => {
-  let mockProcessFunction: jest.Mock
-  let mockIdGenerator: jest.Mock
   let queueProps: QueueProps<any>
 
+  let processFunction: jest.Mock
+  let idGenerator: jest.Mock
+  let recoveryStrategy: jest.Mock
+
   beforeEach(() => {
-    mockProcessFunction = jest.fn()
-    mockIdGenerator = jest.fn().mockReturnValue('testId')
+    processFunction = jest.fn(async () => {})
+    idGenerator = jest.fn(() => 'test-id')
+    recoveryStrategy = jest.fn(({ skip }) => skip())
     queueProps = {
-      processFunction: mockProcessFunction,
-      idGenerator: mockIdGenerator,
+      processFunction,
+      idGenerator,
     }
   })
 
@@ -33,13 +35,30 @@ describe('Queue', () => {
       expect(queue.isProcessing).toBe(false)
     })
 
+    it('should return default state when calling getDefaultState', () => {
+      const state = getDefaultState()
+      expect(state).toEqual({ items: [], isProcessing: false })
+    })
+
+    it('should create a queue with default properties and methods', () => {
+      const queue = createQueue({ processFunction, idGenerator })
+      expect(queue).toHaveProperty('items')
+      expect(queue).toHaveProperty('isProcessing')
+      expect(queue).toHaveProperty('addItem')
+      expect(queue).toHaveProperty('removeItem')
+      expect(queue).toHaveProperty('updateItem')
+      expect(queue).toHaveProperty('startProcessing')
+      expect(queue).toHaveProperty('stopProcessing')
+      expect(queue).toHaveProperty('clearItems')
+      expect(queue).toHaveProperty('dispose')
+    })
+
     it('should subscribe to provided event callbacks', () => {
       const onItemAdded = jest.fn()
       const onItemRemoved = jest.fn()
       const onItemsCleared = jest.fn()
       const onItemUpdated = jest.fn()
-      const onProcessingStarted = jest.fn()
-      const onProcessingStopped = jest.fn()
+      const onProcessingChange = jest.fn()
       const onItemCompleted = jest.fn()
       const onItemError = jest.fn()
 
@@ -47,34 +66,33 @@ describe('Queue', () => {
       queueProps.onItemRemoved = onItemRemoved
       queueProps.onItemsCleared = onItemsCleared
       queueProps.onItemUpdated = onItemUpdated
-      queueProps.onProcessingStarted = onProcessingStarted
-      queueProps.onProcessingStopped = onProcessingStopped
+      queueProps.onProcessingChange = onProcessingChange
       queueProps.onItemCompleted = onItemCompleted
       queueProps.onItemError = onItemError
 
       const queue = createQueue(queueProps)
-      const testItem = { id: 'testId', status: 'pending', data: 'testData' }
+      const testItem = { id: 'test-id', status: 'pending', data: 'testData' }
 
       queue.addItem('testData')
       expect(onItemAdded).toHaveBeenCalledWith(testItem)
 
-      queue.removeItem('testId')
-      expect(onItemRemoved).toHaveBeenCalledWith('testId')
+      queue.removeItem('test-id')
+      expect(onItemRemoved).toHaveBeenCalledWith('test-id')
 
       queue.clearItems()
       expect(onItemsCleared).toHaveBeenCalled()
 
-      queue.updateItem('testId', { status: 'completed' })
+      queue.updateItem('test-id', { status: 'completed' })
       expect(onItemUpdated).toHaveBeenCalledWith({
-        id: 'testId',
+        id: 'test-id',
         updatedItem: { status: 'completed' },
       })
 
       queue.startProcessing()
-      expect(onProcessingStarted).toHaveBeenCalled()
+      expect(onProcessingChange).toHaveBeenCalled()
 
       queue.stopProcessing()
-      expect(onProcessingStopped).toHaveBeenCalled()
+      expect(onProcessingChange).toHaveBeenCalled()
     })
   })
 
@@ -84,7 +102,7 @@ describe('Queue', () => {
       const newItem = queue.addItem('testData')
 
       expect(newItem).toEqual({
-        id: 'testId',
+        id: 'test-id',
         status: 'pending',
         data: 'testData',
       })
@@ -100,7 +118,7 @@ describe('Queue', () => {
 
       expect(queue.items.length).toBe(1)
 
-      queue.removeItem('testId')
+      queue.removeItem('test-id')
       expect(queue.items.length).toBe(0)
     })
   })
@@ -125,15 +143,15 @@ describe('Queue', () => {
 
       expect(newItem.status).toBe('pending')
 
-      queue.updateItem('testId', { status: 'completed' })
-      const updatedItem = queue.items.find((item) => item.id === 'testId')
+      queue.updateItem('test-id', { status: 'completed' })
+      const updatedItem = queue.items.find((item) => item.id === 'test-id')
 
       expect(updatedItem).toBeDefined()
       expect(updatedItem?.status).toBe('completed')
     })
   })
 
-  describe('startProcessing and stopProcessing', () => {
+  describe('start processing and stop processing', () => {
     it('should start and stop processing the queue', () => {
       const queue = createQueue(queueProps)
 
@@ -145,30 +163,59 @@ describe('Queue', () => {
       queue.stopProcessing()
       expect(queue.isProcessing).toBe(false)
     })
-  })
 
-  it('should add an item to the queue while it is processing', async () => {
-    mockProcessFunction.mockResolvedValue(null)
-    const queue = createQueue(queueProps)
-    queue.addItem('testData1')
-    await new Promise((resolve) => setTimeout(resolve, 100))
-    const newItem = queue.addItem('testData2')
+    it('should add an item to the queue and start processing', async () => {
+      const queue = createQueue({ processFunction, idGenerator })
+      queue.addItem(null)
 
-    expect(queue.isProcessing).toBe(true)
-    expect(newItem).toEqual({
-      id: 'testId',
-      status: 'pending',
-      data: 'testData2',
+      expect(queue.items).toEqual([
+        {
+          data: null,
+          id: 'test-id',
+          status: 'processing',
+        },
+      ])
+
+      expect(queue.isProcessing).toBe(true)
+      expect(processFunction).toHaveBeenCalled()
     })
-    expect(queue.items).toEqual([
-      { data: 'testData1', id: 'testId', status: 'processing' },
-      { data: 'testData2', id: 'testId', status: 'processing' },
-    ])
   })
 
-  describe('Recovery strategy', () => {
+  describe('processing', () => {
+    it('should handle empty or null items correctly', async () => {
+      const queue = createQueue({ processFunction, idGenerator })
+      const item1 = queue.addItem(null as any)
+      const item2 = queue.addItem(undefined as any)
+
+      await new Promise((resolve) => setTimeout(resolve, 100)) // Wait for processing to complete
+
+      expect(queue.items.find((i) => i.id === item1.id)?.status).toBe('completed')
+      expect(queue.items.find((i) => i.id === item2.id)?.status).toBe('completed')
+    })
+
+    it('should add an item to the queue while it is processing', async () => {
+      processFunction.mockResolvedValue(null)
+      const queue = createQueue(queueProps)
+      queue.addItem('testData1')
+      await new Promise((resolve) => setTimeout(resolve, 100))
+      const newItem = queue.addItem('testData2')
+
+      expect(queue.isProcessing).toBe(true)
+      expect(newItem).toEqual({
+        id: 'test-id',
+        status: 'pending',
+        data: 'testData2',
+      })
+      expect(queue.items).toEqual([
+        { data: 'testData1', id: 'test-id', status: 'processing' },
+        { data: 'testData2', id: 'test-id', status: 'processing' },
+      ])
+    })
+  })
+
+  describe('recovery strategy', () => {
     it('should use default recovery strategy with retries', async () => {
-      mockProcessFunction.mockRejectedValue(new Error('testError'))
+      processFunction.mockRejectedValue(new Error('testError'))
       queueProps.recoveryStrategy = createDefaultRecoveryStrategy({
         maxRetries: 2,
       })
@@ -179,7 +226,7 @@ describe('Queue', () => {
       // Wait for retries
       await new Promise((resolve) => setTimeout(resolve, 100))
 
-      expect(mockProcessFunction).toHaveBeenCalledTimes(3)
+      expect(processFunction).toHaveBeenCalledTimes(3)
     })
 
     it('should use custom recovery strategy', async () => {
@@ -187,7 +234,7 @@ describe('Queue', () => {
         skip()
       })
 
-      mockProcessFunction.mockRejectedValue(new Error('testError'))
+      processFunction.mockRejectedValue(new Error('testError'))
       queueProps.recoveryStrategy = customRecoveryStrategy
 
       const queue = createQueue(queueProps)
@@ -197,7 +244,54 @@ describe('Queue', () => {
       await new Promise((resolve) => setTimeout(resolve, 100))
 
       expect(customRecoveryStrategy).toHaveBeenCalled()
-      expect(mockProcessFunction).toHaveBeenCalledTimes(1)
+      expect(processFunction).toHaveBeenCalledTimes(1)
+    })
+
+    it('should use defaultRecoveryStrategy when no custom recoveryStrategy is provided', async () => {
+      const queue = createQueue({ processFunction, idGenerator })
+      processFunction.mockRejectedValueOnce(new Error('Error during processing'))
+      queue.addItem(null)
+
+      await new Promise((resolve) => setTimeout(resolve, 100)) // Wait for processing to complete
+
+      expect(queue.items).toEqual([
+        {
+          data: null,
+          id: 'test-id',
+          status: 'completed',
+        },
+      ])
+    })
+
+    it('should use custom recoveryStrategy when provided', async () => {
+      const queue = createQueue({ processFunction, idGenerator, recoveryStrategy })
+      processFunction.mockRejectedValueOnce(new Error('Error during processing'))
+      const item = queue.addItem({ key: 'value' })
+
+      await new Promise((resolve) => setTimeout(resolve, 100)) // Wait for processing to complete
+
+      expect(recoveryStrategy).toHaveBeenCalled()
+      expect(queue.items).toEqual([
+        {
+          data: {
+            key: 'value',
+          },
+          id: 'test-id',
+          status: 'error',
+        },
+      ])
+    })
+  })
+
+  describe('dispose', () => {
+    it('should dispose the queue and clean up resources', () => {
+      const queue = createQueue({ processFunction, idGenerator })
+      queue.addItem({ key: 'value' })
+
+      queue.dispose()
+
+      expect(queue.items).toHaveLength(0)
+      expect(queue.isProcessing).toBe(false)
     })
   })
 })

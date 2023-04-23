@@ -29,8 +29,7 @@ export type Queue<T> = {
   onItemUpdated: (
     callback: (args: { id: string; updatedItem: Partial<QueueItem<T>> }) => void
   ) => () => void
-  onProcessingStarted: (callback: () => void) => () => void
-  onProcessingStopped: (callback: () => void) => () => void
+  onProcessingChange: (callback: (isProcessing: boolean) => void) => () => void
   onItemCompleted: (callback: (id: string) => void) => () => void
   onItemError: (callback: (args: { id: string; error: Error }) => void) => () => void
   onProcessingCompleted: (callback: () => void) => () => void
@@ -84,8 +83,7 @@ export const createCallbacks = <T>() => {
       id: string
       updatedItem: Partial<QueueItem<T>>
     }>(),
-    onProcessingStarted: createPubSub<void>(),
-    onProcessingStopped: createPubSub<void>(),
+    onProcessingChange: createPubSub<boolean>(),
     onItemCompleted: createPubSub<string>(),
     onItemError: createPubSub<{ id: string; error: Error }>(),
     onProcessingCompleted: createPubSub<void>(),
@@ -186,12 +184,13 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
   const startProcessing = () => {
     if (state.isProcessing) return
     state.isProcessing = true
-    queueEvents.dispatch.onProcessingStarted()
+    queueEvents.dispatch.onProcessingChange(true)
   }
 
   const stopProcessing = () => {
+    if (!state.isProcessing) return
     state.isProcessing = false
-    queueEvents.dispatch.onProcessingStopped()
+    queueEvents.dispatch.onProcessingChange(false)
   }
 
   const findItemByStatus = (status: QueueItemStatus) => {
@@ -241,7 +240,7 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
 
       const skip = () => {
         queueEvents.dispatch.onItemError({ id: item.id, error: error as any })
-        removeItem(item.id)
+        updateItem(item.id, { ...item, status: 'error' })
         const pendingItem = findItemByStatus('pending')
         if (pendingItem) {
           asyncQueue(pendingItem)

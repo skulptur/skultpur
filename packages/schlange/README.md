@@ -89,8 +89,7 @@ Event subscription methods:
 - `onItemsChange: (callback: (items: QueueItem<T>[]) => void) => void`
 - `onItemsCleared(callback: () => void)`
 - `onItemUpdated(callback: (args: { id: string; updatedItem: Partial<QueueItem<T>> }) => void)`
-- `onProcessingStarted(callback: () => void)`
-- `onProcessingStopped(callback: () => void)`
+- `onProcessingChange(callback: () => void)`
 - `onItemCompleted(callback: (id: string) => void)`
 - `onItemError(callback: (args: { id: string; error: Error }) => void)`
 - `onProcessingCompleted(callback: () => void)`
