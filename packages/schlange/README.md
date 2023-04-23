@@ -6,7 +6,7 @@
 
 <!-- infuser start description -->
 
-A lightweight and flexible queue management library in written TypeScript. It provides a simple way to create and manage queues, with built-in error recovery and support for custom recovery strategies. Event-driven with event subscriptions.
+A lightweight and flexible queue management library written in TypeScript. It provides a simple way to create and manage queues, with built-in error recovery and support for custom recovery strategies. Event-driven with event subscriptions.
 
 <!-- infuser end description -->
 
@@ -56,8 +56,8 @@ queue.onItemCompleted((id) => console.log(`Item completed: ${id}`))
 queue.onQueueCompleted(() => console.log(`All done!`))
 
 // Add items to the queue
-queue.addToQueue('Item 1')
-queue.addToQueue('Item 2')
+queue.addItem('Item 1')
+queue.addItem('Item 2')
 ```
 
 <!-- infuser start usage -->
@@ -84,21 +84,22 @@ The `Queue` instance provides the following methods and properties:
 
 Event subscription methods:
 
-- `onItemAdded(callback: (item: QueueItem<T>) => void)`: Subscribe to the `itemAdded` event.
-- `onItemRemoved(callback: (id: string) => void)`: Subscribe to the `itemRemoved` event.
-- `onQueueCleared(callback: () => void)`: Subscribe to the `queueCleared` event.
-- `onItemUpdated(callback: (args: { id: string; updatedItem: Partial<QueueItem<T>> }) => void)`: Subscribe to the `itemUpdated` event.
-- `onProcessingStarted(callback: () => void)`: Subscribe to the `processingStarted` event.
-- `onProcessingStopped(callback: () => void)`: Subscribe to the `processingStopped` event.
-- `onItemCompleted(callback: (id: string) => void)`: Subscribe to the `itemCompleted` event.
-- `onItemError(callback: (args: { id: string; error: Error }) => void)`: Subscribe to the `itemError` event.
-- `onQueueCompleted(callback: () => void)`: Subscribe to the `queueCompleted` event.
+- `onItemAdded(callback: (item: QueueItem<T>) => void)`
+- `onItemRemoved(callback: (id: string) => void)`
+- `onQueueChange: (callback: (queue: QueueItem<T>[]) => void) => void`
+- `onQueueCleared(callback: () => void)`
+- `onItemUpdated(callback: (args: { id: string; updatedItem: Partial<QueueItem<T>> }) => void)`
+- `onProcessingStarted(callback: () => void)`
+- `onProcessingStopped(callback: () => void)`
+- `onItemCompleted(callback: (id: string) => void)`
+- `onItemError(callback: (args: { id: string; error: Error }) => void)`
+- `onQueueCompleted(callback: () => void)`
 
 Queue manipulation methods:
 
-- `addToQueue(data: T)`: Add an item to the queue.
-- `removeFromQueue(id: string)`: Remove an item from the queue by its ID.
-- `updateQueueItem(id: string, updatedItem: Partial<QueueItem<T>>)`: Update an item in the queue.
+- `addItem(data: T)`: Add an item to the queue.
+- `removeItem(id: string)`: Remove an item from the queue by its ID.
+- `updateItem(id: string, updatedItem: Partial<QueueItem<T>>)`: Update an item in the queue.
 - `startProcessing()`: Start processing the queue.
 - `stopProcessing()`: Stop processing the queue.
 - `clearQueue()`: Clear the entire queue.

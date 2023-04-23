@@ -34,9 +34,9 @@ export type Queue<T> = {
   onItemCompleted: (callback: (id: string) => void) => void
   onItemError: (callback: (args: { id: string; error: Error }) => void) => void
   onQueueCompleted: (callback: () => void) => void
-  addToQueue: (data: T) => QueueItem<T>
-  removeFromQueue: (id: string) => void
-  updateQueueItem: (id: string, updatedItem: Partial<QueueItem<T>>) => void
+  addItem: (data: T) => QueueItem<T>
+  removeItem: (id: string) => void
+  updateItem: (id: string, updatedItem: Partial<QueueItem<T>>) => void
   startProcessing: () => void
   stopProcessing: () => void
   clearQueue: () => void
@@ -145,7 +145,7 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
     }
   }
 
-  const addToQueue = (data: T): QueueItem<T> => {
+  const addItem = (data: T): QueueItem<T> => {
     const newItem: QueueItem<T> = {
       id: props.idGenerator(),
       status: 'pending',
@@ -164,7 +164,7 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
     return newItem
   }
 
-  const removeFromQueue = (id: string) => {
+  const removeItem = (id: string) => {
     state.queue = state.queue.filter((item) => item.id !== id)
     queueEvents.dispatch.onItemRemoved(id)
     dispatchQueueChange()
@@ -176,7 +176,7 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
     dispatchQueueChange()
   }
 
-  const updateQueueItem = (id: string, updatedItem: Partial<QueueItem<T>>) => {
+  const updateItem = (id: string, updatedItem: Partial<QueueItem<T>>) => {
     state.queue = state.queue.map((item) => (item.id === id ? { ...item, ...updatedItem } : item))
     queueEvents.dispatch.onItemUpdated({ id, updatedItem })
     dispatchQueueChange()
@@ -205,9 +205,9 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
       return state.isProcessing
     },
     ...queueEvents.subscribe,
-    addToQueue,
-    removeFromQueue,
-    updateQueueItem,
+    addItem,
+    removeItem,
+    updateItem,
     startProcessing,
     stopProcessing,
     clearQueue,
@@ -217,12 +217,12 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
   const asyncQueue = async (item: QueueItem<T>) => {
     if (!state.isProcessing) return
 
-    updateQueueItem(item.id, { status: 'in progress' })
+    updateItem(item.id, { status: 'in progress' })
 
     try {
       await props.processFunction(item, queue)
 
-      updateQueueItem(item.id, { status: 'completed' })
+      updateItem(item.id, { status: 'completed' })
 
       queueEvents.dispatch.onItemCompleted(item.id)
 
@@ -234,13 +234,13 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
         stopProcessing()
       }
     } catch (error) {
-      updateQueueItem(item.id, { status: 'error' })
+      updateItem(item.id, { status: 'error' })
 
       const retry = () => asyncQueue(item)
 
       const skip = () => {
         queueEvents.dispatch.onItemError({ id: item.id, error: error as any })
-        removeFromQueue(item.id)
+        removeItem(item.id)
         const pendingItem = findItemByStatus('pending')
         if (pendingItem) {
           asyncQueue(pendingItem)

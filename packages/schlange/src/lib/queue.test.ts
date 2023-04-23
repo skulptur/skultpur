@@ -55,16 +55,16 @@ describe('Queue', () => {
       const queue = createQueue(queueProps)
       const testItem = { id: 'testId', status: 'pending', data: 'testData' }
 
-      queue.addToQueue('testData')
+      queue.addItem('testData')
       expect(onItemAdded).toHaveBeenCalledWith(testItem)
 
-      queue.removeFromQueue('testId')
+      queue.removeItem('testId')
       expect(onItemRemoved).toHaveBeenCalledWith('testId')
 
       queue.clearQueue()
       expect(onQueueCleared).toHaveBeenCalled()
 
-      queue.updateQueueItem('testId', { status: 'completed' })
+      queue.updateItem('testId', { status: 'completed' })
       expect(onItemUpdated).toHaveBeenCalledWith({
         id: 'testId',
         updatedItem: { status: 'completed' },
@@ -78,10 +78,10 @@ describe('Queue', () => {
     })
   })
 
-  describe('addToQueue', () => {
+  describe('addItem', () => {
     it('should add an item to the queue and start processing', () => {
       const queue = createQueue(queueProps)
-      const newItem = queue.addToQueue('testData')
+      const newItem = queue.addItem('testData')
 
       expect(newItem).toEqual({
         id: 'testId',
@@ -93,14 +93,14 @@ describe('Queue', () => {
     })
   })
 
-  describe('removeFromQueue', () => {
+  describe('removeItem', () => {
     it('should remove an item from the queue', () => {
       const queue = createQueue(queueProps)
-      queue.addToQueue('testData')
+      queue.addItem('testData')
 
       expect(queue.queue.length).toBe(1)
 
-      queue.removeFromQueue('testId')
+      queue.removeItem('testId')
       expect(queue.queue.length).toBe(0)
     })
   })
@@ -108,8 +108,8 @@ describe('Queue', () => {
   describe('clearQueue', () => {
     it('should clear the queue', () => {
       const queue = createQueue(queueProps)
-      queue.addToQueue('testData1')
-      queue.addToQueue('testData2')
+      queue.addItem('testData1')
+      queue.addItem('testData2')
 
       expect(queue.queue.length).toBe(2)
 
@@ -118,14 +118,14 @@ describe('Queue', () => {
     })
   })
 
-  describe('updateQueueItem', () => {
+  describe('updateItem', () => {
     it('should update an item in the queue', () => {
       const queue = createQueue(queueProps)
-      const newItem = queue.addToQueue('testData')
+      const newItem = queue.addItem('testData')
 
       expect(newItem.status).toBe('pending')
 
-      queue.updateQueueItem('testId', { status: 'completed' })
+      queue.updateItem('testId', { status: 'completed' })
       const updatedItem = queue.queue.find((item) => item.id === 'testId')
 
       expect(updatedItem).toBeDefined()
@@ -150,9 +150,9 @@ describe('Queue', () => {
   it('should add an item to the queue while it is processing', async () => {
     mockProcessFunction.mockResolvedValue(null)
     const queue = createQueue(queueProps)
-    queue.addToQueue('testData1')
+    queue.addItem('testData1')
     await new Promise((resolve) => setTimeout(resolve, 100))
-    const newItem = queue.addToQueue('testData2')
+    const newItem = queue.addItem('testData2')
 
     expect(queue.isProcessing).toBe(true)
     expect(newItem).toEqual({
@@ -174,7 +174,7 @@ describe('Queue', () => {
       })
 
       const queue = createQueue(queueProps)
-      queue.addToQueue('testData')
+      queue.addItem('testData')
 
       // Wait for retries
       await new Promise((resolve) => setTimeout(resolve, 100))
@@ -191,7 +191,7 @@ describe('Queue', () => {
       queueProps.recoveryStrategy = customRecoveryStrategy
 
       const queue = createQueue(queueProps)
-      queue.addToQueue('testData')
+      queue.addItem('testData')
 
       // Wait for retries
       await new Promise((resolve) => setTimeout(resolve, 100))
