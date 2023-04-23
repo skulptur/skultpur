@@ -1,4 +1,4 @@
-import { createPubSub, groupByAction, CallbacksFromEvents } from 'lightcast'
+import { createPubSub, groupByAction, SubscribeFns } from 'lightcast'
 
 export type QueueInput<T> = {
   id: string
@@ -33,6 +33,7 @@ export type Queue<T> = {
   onItemCompleted: (callback: (id: string) => void) => () => void
   onItemError: (callback: (args: { id: string; error: Error }) => void) => () => void
   onProcessingCompleted: (callback: () => void) => () => void
+  onAnyEvent: (callback: () => void) => () => void
   addItem: (data: T) => QueueItem<T>
   removeItem: (id: string) => void
   updateItem: (id: string, updatedItem: Partial<QueueItem<T>>) => void
@@ -73,8 +74,8 @@ export const defaultRecoveryStrategy = createDefaultRecoveryStrategy({
   maxRetries: 3,
 })
 
-export const createCallbacks = <T>() => {
-  const callbackEvents = {
+export const createPubSubs = <T>() => {
+  return {
     onItemAdded: createPubSub<QueueItem<T>>(),
     onItemRemoved: createPubSub<string>(),
     onItemsCleared: createPubSub<void>(),
@@ -88,11 +89,9 @@ export const createCallbacks = <T>() => {
     onItemError: createPubSub<{ id: string; error: Error }>(),
     onProcessingCompleted: createPubSub<void>(),
   }
-
-  return callbackEvents
 }
 
-export type QueueCallbacks = CallbacksFromEvents<ReturnType<typeof createCallbacks>>
+export type QueueCallbacks = SubscribeFns<ReturnType<typeof createPubSubs>>
 
 export type QueueProps<T> = {
   processFunction: (item: QueueItem<T>, queue: Queue<T>) => Promise<any>
@@ -111,7 +110,7 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
   const state = getDefaultState<T>(props.items)
 
   // events
-  const queueEvents = groupByAction(createCallbacks())
+  const queueEvents = groupByAction(createPubSubs<T>())
 
   queueEvents.subscribe.onItemCompleted(() => {
     if (!!findItemByStatus('pending')) {
@@ -124,13 +123,7 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
   }
 
   // subscribe to the events passed in the props object
-  for (const eventKey in queueEvents.subscribe) {
-    const eventName = eventKey as keyof QueueCallbacks
-    const callback = props[eventName]
-    if (callback) {
-      queueEvents.subscribe[eventName](callback as any)
-    }
-  }
+  queueEvents.subscribeWith(props as any)
 
   // cleanup
   const dispose = () => {
@@ -138,10 +131,7 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
     Object.assign(state, getDefaultState())
 
     // dispose events
-    for (const eventKey in queueEvents.dispose) {
-      const eventName = eventKey as keyof QueueCallbacks
-      queueEvents.dispose[eventName]()
-    }
+    queueEvents.dispose.all()
   }
 
   const addItem = (data: T): QueueItem<T> => {

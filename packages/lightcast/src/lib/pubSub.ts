@@ -44,17 +44,23 @@ export const createPubSub = <Payload>(): PubSub<Payload> => {
     dispose,
   }
 }
-
 type AllEventPayload<T extends Record<any, PubSub<any>>> = {
   [K in keyof T]: [K, T[K] extends PubSub<infer U> ? U : never]
 }[keyof T]
+
+type Subscriptions<T extends Record<any, PubSub<any>>> = {
+  [K in keyof T]: T[K] extends PubSub<infer U> ? (payload: U) => void : never
+} & {
+  all?: (payload: AllEventPayload<T>) => void
+}
 
 export type GroupByAction<T extends Record<any, PubSub<any>>> = {
   subscribe: {
     [P in keyof T]: T[P]['subscribe']
   } & {
-    all: SubscribeFn<AllEventPayload<T>>
+    onAnyEvent: SubscribeFn<AllEventPayload<T>>
   }
+  subscribeWith: (subscriptions: Subscriptions<T>) => () => void
   dispatch: {
     [P in keyof T]: T[P]['dispatch']
   }
@@ -67,7 +73,7 @@ export type GroupByAction<T extends Record<any, PubSub<any>>> = {
 
 export const groupByAction = <T extends Record<any, PubSub<any>>>(obj: T): GroupByAction<T> => {
   const entries = Object.entries(obj)
-  const allEvents = createPubSub<any>()
+  const anyEvents = createPubSub<AllEventPayload<T>>()
 
   const subscribeObj = Object.fromEntries(entries.map(([key, val]) => [key, val.subscribe])) as any
   const dispatchObj = Object.fromEntries(
@@ -75,23 +81,40 @@ export const groupByAction = <T extends Record<any, PubSub<any>>>(obj: T): Group
       key,
       (payload: any) => {
         val.dispatch(payload)
-        allEvents.dispatch([key as keyof T, payload])
+        anyEvents.dispatch([key as keyof T, payload])
       },
     ])
   ) as any
   const disposeObj = Object.fromEntries(entries.map(([key, val]) => [key, val.dispose])) as any
 
+  const subscribeWith = (subscriptions: Subscriptions<T>): (() => void) => {
+    const unsubscribeFns: Array<() => void> = []
+
+    for (const key in subscriptions) {
+      if (key === 'all') {
+        unsubscribeFns.push(anyEvents.subscribe(subscriptions[key]!))
+      } else if (key in obj) {
+        unsubscribeFns.push(obj[key].subscribe(subscriptions[key]))
+      }
+    }
+
+    return () => {
+      unsubscribeFns.forEach((unsubscribe) => unsubscribe())
+    }
+  }
+
   return {
     subscribe: {
       ...subscribeObj,
-      all: allEvents.subscribe,
+      onAnyEvent: anyEvents.subscribe,
     },
+    subscribeWith,
     dispatch: dispatchObj,
     dispose: {
       ...disposeObj,
       all: () => {
         entries.forEach(([, val]) => val.dispose())
-        allEvents.dispose()
+        anyEvents.dispose()
       },
     },
   }
