@@ -6,7 +6,7 @@
 
 <!-- infuser start description -->
 
-Async queue library 🐍
+Schlange is a lightweight and flexible queue management library in TypeScript. It provides a simple way to create and manage queues, with built-in error recovery and support for custom recovery strategies. Event-driven with event subscriptions. 🐍
 
 <!-- infuser end description -->
 
@@ -62,6 +62,49 @@ queue.addToQueue('Item 2')
 
 <!-- infuser start usage -->
 <!-- infuser end usage -->
+
+### API
+
+#### createQueue<T>(props: QueueProps<T>): Queue<T>
+
+The `createQueue` function takes a `QueueProps` object and returns a new `Queue` instance.
+
+`QueueProps` properties:
+
+- `processFunction`: A function that will process the queue items. It should return a Promise.
+- `idGenerator`: A function that generates unique IDs for queue items.
+- `recoveryStrategy` (optional): A custom recovery strategy. By default, the library uses the `defaultRecoveryStrategy`.
+
+#### Queue
+
+The `Queue` instance provides the following methods and properties:
+
+- `queue`: An array of `QueueItem<T>` objects.
+- `isProcessing`: A boolean that indicates if the queue is currently being processed.
+
+Event subscription methods:
+
+- `onItemAdded(callback: (item: QueueItem<T>) => void)`: Subscribe to the `itemAdded` event.
+- `onItemRemoved(callback: (id: string) => void)`: Subscribe to the `itemRemoved` event.
+- `onQueueCleared(callback: () => void)`: Subscribe to the `queueCleared` event.
+- `onItemUpdated(callback: (args: { id: string; updatedItem: Partial<QueueItem<T>> }) => void)`: Subscribe to the `itemUpdated` event.
+- `onProcessingStarted(callback: () => void)`: Subscribe to the `processingStarted` event.
+- `onProcessingStopped(callback: () => void)`: Subscribe to the `processingStopped` event.
+- `onItemCompleted(callback: (id: string) => void)`: Subscribe to the `itemCompleted` event.
+- `onItemError(callback: (args: { id: string; error: Error }) => void)`: Subscribe to the `itemError` event.
+- `onQueueCompleted(callback: () => void)`: Subscribe to the `queueCompleted` event.
+
+Queue manipulation methods:
+
+- `addToQueue(data: T)`: Add an item to the queue.
+- `removeFromQueue(id: string)`: Remove an item from the queue by its ID.
+- `updateQueueItem(id: string, updatedItem: Partial<QueueItem<T>>)`: Update an item in the queue.
+- `startProcessing()`: Start processing the queue.
+- `stopProcessing()`: Stop processing the queue.
+- `clearQueue()`: Clear the entire queue.
+- `dispose()`: Dispose the queue instance and clean up resources.
+
+---
 
 <!-- infuser start development -->
 <!-- infuser end development -->
