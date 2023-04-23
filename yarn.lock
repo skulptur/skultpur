@@ -14512,7 +14512,9 @@ schema-utils@^3.0.0:
     ajv-keywords "^3.5.2"
 
 schlange@0.0.3:
-  version "0.0.2"
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/schlange/-/schlange-0.0.3.tgz#6a0a391e441d1f7540b8f64da557b46a4709f81f"
+  integrity sha512-5PnVcx9dZ0R/nZgb6E+t8cklKQbUCK6w4+bBFNzoIzjhAVq+7i+MqNCREvLg43lQkfy3pZL1TarU2JBZ00XC1A==
 
 semver-compare@^1.0.0:
   version "1.0.0"
@@ -16091,6 +16093,11 @@ typescript@^3.7.3, typescript@^3.8.3, typescript@^3.9.6, typescript@^3.9.7:
   version "3.9.10"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.10.tgz#70f3910ac7a51ed6bef79da7800690b19bf778b8"
   integrity sha512-w6fIxVE/H1PkLKcCPsFqKE7Kv7QUwhU8qQY2MueZXWx5cPZdwFupLgKK3vntcK98BtNHZtAF4LA/yl2a7k8R6Q==
+
+typescript@^5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.0.4.tgz#b217fd20119bd61a94d4011274e0ab369058da3b"
+  integrity sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==
 
 typical@^4.0.0:
   version "4.0.0"

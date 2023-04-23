@@ -3,7 +3,7 @@ export type DispatchFn<Payload> = (payload: Payload) => void
 export type DisposeFn = () => void
 
 // When you have an object where the values are PubSub types and you want to extract the callbacks from all of them
-export type CallbacksFromEvents<T extends Record<any, PubSub<any>>> = {
+export type SubscribeFns<T extends Record<any, PubSub<any>>> = {
   [K in keyof T]: T[K] extends PubSub<infer U> ? (payload: U) => void : never
 }
 
@@ -45,23 +45,54 @@ export const createPubSub = <Payload>(): PubSub<Payload> => {
   }
 }
 
+type AllEventPayload<T extends Record<any, PubSub<any>>> = {
+  [K in keyof T]: [K, T[K] extends PubSub<infer U> ? U : never]
+}[keyof T]
+
 export type GroupByAction<T extends Record<any, PubSub<any>>> = {
   subscribe: {
     [P in keyof T]: T[P]['subscribe']
+  } & {
+    all: SubscribeFn<AllEventPayload<T>>
   }
   dispatch: {
     [P in keyof T]: T[P]['dispatch']
   }
   dispose: {
     [P in keyof T]: T[P]['dispose']
+  } & {
+    all: DisposeFn
   }
 }
 
 export const groupByAction = <T extends Record<any, PubSub<any>>>(obj: T): GroupByAction<T> => {
   const entries = Object.entries(obj)
+  const allEvents = createPubSub<any>()
+
+  const subscribeObj = Object.fromEntries(entries.map(([key, val]) => [key, val.subscribe])) as any
+  const dispatchObj = Object.fromEntries(
+    entries.map(([key, val]) => [
+      key,
+      (payload: any) => {
+        val.dispatch(payload)
+        allEvents.dispatch([key as keyof T, payload])
+      },
+    ])
+  ) as any
+  const disposeObj = Object.fromEntries(entries.map(([key, val]) => [key, val.dispose])) as any
+
   return {
-    subscribe: Object.fromEntries(entries.map(([key, val]) => [key, val.subscribe])) as any,
-    dispatch: Object.fromEntries(entries.map(([key, val]) => [key, val.dispatch])) as any,
-    dispose: Object.fromEntries(entries.map(([key, val]) => [key, val.dispose])) as any,
+    subscribe: {
+      ...subscribeObj,
+      all: allEvents.subscribe,
+    },
+    dispatch: dispatchObj,
+    dispose: {
+      ...disposeObj,
+      all: () => {
+        entries.forEach(([, val]) => val.dispose())
+        allEvents.dispose()
+      },
+    },
   }
 }
