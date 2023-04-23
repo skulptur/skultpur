@@ -23,6 +23,7 @@ export type Queue<T> = {
   queue: QueueItem<T>[]
   isProcessing: boolean
   onItemAdded: (callback: (item: QueueItem<T>) => void) => void
+  onQueueChange: (callback: (queue: QueueItem<T>[]) => void) => void
   onItemRemoved: (callback: (id: string) => void) => void
   onQueueCleared: (callback: () => void) => void
   onItemUpdated: (
@@ -73,14 +74,15 @@ export const defaultRecoveryStrategy = createDefaultRecoveryStrategy({
   maxRetries: 3,
 })
 
-export const createCallbacks = () => {
+export const createCallbacks = <T>() => {
   const callbackEvents = {
-    onItemAdded: createPubSub<QueueItem<any>>(),
+    onItemAdded: createPubSub<QueueItem<T>>(),
     onItemRemoved: createPubSub<string>(),
     onQueueCleared: createPubSub<void>(),
+    onQueueChange: createPubSub<QueueItem<T>[]>(),
     onItemUpdated: createPubSub<{
       id: string
-      updatedItem: Partial<QueueItem<any>>
+      updatedItem: Partial<QueueItem<T>>
     }>(),
     onProcessingStarted: createPubSub<void>(),
     onProcessingStopped: createPubSub<void>(),
@@ -95,7 +97,7 @@ export const createCallbacks = () => {
 export type QueueCallbacks = CallbacksFromEvents<ReturnType<typeof createCallbacks>>
 
 export type QueueProps<T> = {
-  processFunction: (values: QueueItem<T>) => Promise<any>
+  processFunction: (item: QueueItem<T>, queue: Queue<T>) => Promise<any>
   idGenerator: () => string
   recoveryStrategy?: RecoveryStrategy<T>
 } & Partial<QueueCallbacks>
@@ -117,6 +119,10 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
       queueEvents.dispatch.onQueueCompleted()
     }
   })
+
+  const dispatchQueueChange = () => {
+    queueEvents.dispatch.onQueueChange(state.queue)
+  }
 
   // subscribe to the events passed in the props object
   for (const eventKey in queueEvents.subscribe) {
@@ -147,6 +153,7 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
     }
     state.queue.push(newItem)
     queueEvents.dispatch.onItemAdded(newItem)
+    dispatchQueueChange()
 
     // Start processing the queue if not already processing
     if (!state.isProcessing) {
@@ -160,16 +167,19 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
   const removeFromQueue = (id: string) => {
     state.queue = state.queue.filter((item) => item.id !== id)
     queueEvents.dispatch.onItemRemoved(id)
+    dispatchQueueChange()
   }
 
   const clearQueue = () => {
     state.queue = []
     queueEvents.dispatch.onQueueCleared()
+    dispatchQueueChange()
   }
 
   const updateQueueItem = (id: string, updatedItem: Partial<QueueItem<T>>) => {
     state.queue = state.queue.map((item) => (item.id === id ? { ...item, ...updatedItem } : item))
     queueEvents.dispatch.onItemUpdated({ id, updatedItem })
+    dispatchQueueChange()
   }
 
   const startProcessing = () => {
@@ -183,13 +193,34 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
     queueEvents.dispatch.onProcessingStopped()
   }
 
+  const findItemByStatus = (status: QueueItemStatus) => {
+    return state.queue.find((item) => item.status === status)
+  }
+
+  const queue = {
+    get queue() {
+      return state.queue
+    },
+    get isProcessing() {
+      return state.isProcessing
+    },
+    ...queueEvents.subscribe,
+    addToQueue,
+    removeFromQueue,
+    updateQueueItem,
+    startProcessing,
+    stopProcessing,
+    clearQueue,
+    dispose,
+  } as Queue<T>
+
   const asyncQueue = async (item: QueueItem<T>) => {
     if (!state.isProcessing) return
 
     updateQueueItem(item.id, { status: 'in progress' })
 
     try {
-      await props.processFunction(item)
+      await props.processFunction(item, queue)
 
       updateQueueItem(item.id, { status: 'completed' })
 
@@ -229,24 +260,5 @@ export function createQueue<T>(props: QueueProps<T>): Queue<T> {
     }
   }
 
-  const findItemByStatus = (status: QueueItemStatus) => {
-    return state.queue.find((item) => item.status === status)
-  }
-
-  return {
-    get queue() {
-      return state.queue
-    },
-    get isProcessing() {
-      return state.isProcessing
-    },
-    ...queueEvents.subscribe,
-    addToQueue,
-    removeFromQueue,
-    updateQueueItem,
-    startProcessing,
-    stopProcessing,
-    clearQueue,
-    dispose,
-  }
+  return queue
 }
