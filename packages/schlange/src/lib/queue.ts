@@ -22,18 +22,18 @@ export type QueueItem<T> = QueueInput<T> & {
 export type Queue<T> = {
   items: QueueItem<T>[]
   isProcessing: boolean
-  onItemAdded: (callback: (item: QueueItem<T>) => void) => void
-  onItemsChange: (callback: (items: QueueItem<T>[]) => void) => void
-  onItemRemoved: (callback: (id: string) => void) => void
-  onItemsCleared: (callback: () => void) => void
+  onItemAdded: (callback: (item: QueueItem<T>) => void) => () => {}
+  onItemsChange: (callback: (items: QueueItem<T>[]) => void) => () => {}
+  onItemRemoved: (callback: (id: string) => void) => () => {}
+  onItemsCleared: (callback: () => void) => () => {}
   onItemUpdated: (
     callback: (args: { id: string; updatedItem: Partial<QueueItem<T>> }) => void
-  ) => void
-  onProcessingStarted: (callback: () => void) => void
-  onProcessingStopped: (callback: () => void) => void
-  onItemCompleted: (callback: (id: string) => void) => void
-  onItemError: (callback: (args: { id: string; error: Error }) => void) => void
-  onProcessingCompleted: (callback: () => void) => void
+  ) => () => {}
+  onProcessingStarted: (callback: () => void) => () => {}
+  onProcessingStopped: (callback: () => void) => () => {}
+  onItemCompleted: (callback: (id: string) => void) => () => {}
+  onItemError: (callback: (args: { id: string; error: Error }) => void) => () => {}
+  onProcessingCompleted: (callback: () => void) => () => {}
   addItem: (data: T) => QueueItem<T>
   removeItem: (id: string) => void
   updateItem: (id: string, updatedItem: Partial<QueueItem<T>>) => void
